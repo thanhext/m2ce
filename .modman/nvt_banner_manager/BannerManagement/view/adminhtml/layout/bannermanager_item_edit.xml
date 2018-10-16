@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="NVT_BannerManagement::css/banner-manager.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="NVT\BannerManagement\Block\Adminhtml\Item\Edit\Tabs"
+                   name="bannermanager.item.edit.tabs"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="NVT\BannerManagement\Block\Adminhtml\Item\Edit"
+                   name="bannermanager.item.edit"/>
+
+            <block class="Magento\Framework\View\Element\Template"
+                   name="design.block" template="NVT_BannerManagement::design.phtml" after="-"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,169 @@
+<?php
+$menu = $this->getMenu();
+$items = $menu->getItems();
+?>
+<?php if($items->count()): ?>
+<nav class="__nav_mainmenu_content">
+    <div class="__nav_mainmenu_box">
+        <ul class="__nav_mainmenu">
+            <?php foreach($items as $item): ?>
+            
+                <li class="__nav_item">
+                    <a class="__item_link" href="<?php echo $this->getMenuUrl($item); ?>">
+                        <?php echo $item->getTitle(); ?>
+                    </a>
+                </li>
+        
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</nav>
+<?php endif; ?>
+
+<?php
+$menu = $this->getMenu();
+var_dump($menu->getData());
+var_dump($menu->getItems()->getData());
+?>
+<h1>This is my template, there are many like it, but this one is mine.</h1>
+<nav class="__nav_mainmenu_content">
+    <div class="__nav_mainmenu_box">
+        <ul class="__nav_mainmenu">
+            <li class="__nav_item">
+                <a class="__item_link" href="#">
+                    Home
+                </a>
+            </li>
+            <li class="__nav_item">
+                <a class="__item_link" href="#">
+                    Link
+                </a>
+                <div class="__item_icon">&laquo;</div>
+                <div class="__item_sub_bg"></div>
+                <div class="__item_sub_box">
+                    <ul class="__items_sub">
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link A
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link B
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link C
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="__nav_item">
+                <a class="__item_link disabled" href="#">Download</a>
+                <div class="__item_icon">&laquo;</div>
+                <div class="__item_sub_bg"></div>
+                <div class="__item_sub_box">
+                    <ul class="__items_sub">
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link A
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link B
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link C
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="__nav_item">
+                <a class="__item_link disabled" href="#">Download</a>
+                <div class="__item_icon">&laquo;</div>
+                <div class="__item_sub_bg"></div>
+                <div class="__item_sub_box">
+                    <ul class="__items_sub">
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link A
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link B
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link C
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="__nav_item">
+                <a class="__item_link disabled" href="#">Download</a>
+                <div class="__item_icon">&laquo;</div>
+                <div class="__item_sub_bg"></div>
+                <div class="__item_sub_box">
+                    <ul class="__items_sub">
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link A
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link B
+                            </a>
+                        </li>
+                        <li class="__nav_item">
+                            <div class="__item_icon">&raquo;</div>
+                            <a class="__item_link" href="#">
+                                Link C
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="__nav_item">
+                <a class="__item_link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script>
+require(['jquery', 'menuDelay'], function($, menuDelay){
+    $(document).ready(function() {
+        $('.__nav_mainmenu li').menuDelay({
+            sensitivity: 3, // number = sensitivity threshold (must be 1 or higher)
+            interval: 100, // number = milliseconds for onMouseOver polling interval
+            timeout: 100, // number = milliseconds delay before onMouseOut
+            over:function(){
+                $(this).addClass("active");
+            },
+            out: function(){
+                $(this).removeClass("active");
+            }
+        });
+    });
+});
+</script>

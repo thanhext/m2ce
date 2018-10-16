@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="NVT\BannerManagement\Block\Widget\Slider" id="bannermanager">
+        <label>Banner Slider</label>
+        <description></description>
+        <parameters>
+            <parameter name="slider" xsi:type="select" visible="true" required="true"
+                       source_model="NVT\BannerManagement\Model\System\Config\ItemBanner">
+                <label translate="true">Select Banner Slider...</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

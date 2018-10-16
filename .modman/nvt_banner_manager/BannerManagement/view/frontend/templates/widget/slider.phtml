@@ -1,0 +1,36 @@
+<?php
+$sliderData = $block->getSliderData();
+$items = $sliderData->getBannerItemsCollection();
+$helper = $this->helper('NVT\BannerManagement\Helper\Item');
+$sliderId = $sliderData->getId();
+?>
+
+<?php if($items->count()): ?>
+<div class="slider-<?php echo $sliderId; ?>">
+    <div class="banner-management banner-slider">
+        <?php foreach ($items as $i=>$item) : ?>
+        <div class="item">
+            <?php echo $helper->init($item)->toHtml(); ?>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <!-- Add Pagination -->
+    <div class="pagination pagination-white"></div>
+    <!-- Navigation -->
+    <div class="button-next button-white"></div>
+    <div class="button-prev button-white"></div>
+</div>
+    <!-- Initialize Slider -->
+    <script>
+    require(['jquery','swiper', 'domReady!'], function($, Swiper){
+        var swiper = new Swiper('.slider-<?php echo $sliderId; ?>', {
+            nextButton: '.slider-<?php echo $sliderId; ?> .button-next',
+            prevButton: '.slider-<?php echo $sliderId; ?> .button-prev',
+            pagination: '.slider-<?php echo $sliderId; ?> .pagination',
+            paginationClickable: true,
+            preloadImages: false,
+            lazyLoading: true
+        });
+    });
+    </script>
+<?php endif; ?>

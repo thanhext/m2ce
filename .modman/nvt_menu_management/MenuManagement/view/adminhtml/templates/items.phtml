@@ -1,0 +1,15 @@
+<?php
+$menu = $this->getMenu();
+?>
+<ul class="menu-management menu-<?php echo $menu->getMenuId(); ?>" title="<?php echo $menu->getTitle(); ?>" >
+    <?php if($items = $menu->getItems()): ?>
+    <?php foreach($items as $item): ?>
+            <?php var_dump($item->getData()); ?>
+        <li class="menu-item item-<?php echo $item->getItemId() .' '. $item->getClass(); ?>">
+            <a href="<?php echo $item->getLink(); ?>">
+                <?php echo $item->getTitle(); ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+    <?php endif; ?>
+</ul>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="NVT_MenuManagement::menu_manager" title="Menu" module="NVT_MenuManagement" parent="Magento_Backend::content" sortOrder="100" resource="NVT_MenuManagement::menu_manager"/>
+        <add id="NVT_MenuManagement::menu_management" title="Menu Manager" module="NVT_MenuManagement" parent="NVT_MenuManagement::menu_manager" sortOrder="1" action="menumanager/menu" resource="NVT_MenuManagement::menu_management"/>
+        <add id="NVT_MenuManagement::item_management" title="Item Manager" module="NVT_MenuManagement" parent="NVT_MenuManagement::menu_manager" sortOrder="0" action="menumanager/item" resource="NVT_MenuManagement::item_management"/>
+    </menu>
+</config>

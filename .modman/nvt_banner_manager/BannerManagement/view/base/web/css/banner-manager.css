@@ -1,0 +1,47 @@
+.item-wrapper .caption:hover{
+    border: 1px solid #3d3d3d;
+    background-color: white;
+    cursor: move;
+    opacity: 0.8;
+    z-index:99;
+}
+
+.item-wrapper.active .caption {
+    position: relative;
+    -webkit-animation-name: fadeOut; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: 1; /* Safari 4.0 - 8.0 */
+    -webkit-animation-direction: reverse; /* Safari 4.0 - 8.0 */
+    animation-name: fadeOut;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-direction: reverse;
+}
+/* Standard syntax */
+@keyframes fadeOut {
+    0%   {opacity: 0;}
+    15%  {opacity: 0.1;}
+    25%  {opacity: 0.2;}
+    35%  {opacity: 0.3;}
+    45%  {opacity: 0.4;}
+    55%  {opacity: 0.5;}
+    65%  {opacity: 0.6;}
+    75%  {opacity: 0.7;}
+    85%  {opacity: 0.8;}
+    95%  {opacity: 0.9;}
+    100% {opacity: 1;}
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes fadeOut {
+    0%   {opacity: 0;}
+    15%  {opacity: 0.1;}
+    25%  {opacity: 0.2;}
+    35%  {opacity: 0.3;}
+    45%  {opacity: 0.4;}
+    55%  {opacity: 0.5;}
+    65%  {opacity: 0.6;}
+    75%  {opacity: 0.7;}
+    85%  {opacity: 0.8;}
+    95%  {opacity: 0.9;}
+    100% {opacity: 1;}
+}

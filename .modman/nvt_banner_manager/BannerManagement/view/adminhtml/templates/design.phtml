@@ -1,0 +1,23 @@
+<?php
+$helper = $this->helper('NVT\BannerManagement\Helper\Banner');
+$item = $helper->init();
+?>
+<div id="__wrapper_design" class="__wrapper_design">
+    <div class="__header">
+        <button id="__add" type="button"><span class="__icon-add __wd_h_a" title="<?php echo __('add item'); ?>"></span></button>
+        <button id="__edit" type="button"><span class="__icon-edit __wd_h_e" title="<?php echo __('edit item'); ?>"></span></button>
+        <button id="__remove" type="button"><span class="__icon-remove __wd_h_r" title="<?php echo __('remove item'); ?>"></span></button>
+    </div>
+    <div class="__content __hide">
+        <?php echo $item->getImageToHtml(); ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#__wrapper_design":
+    {
+        "NVT_BannerManagement/js/design": { }
+    }
+}
+</script>

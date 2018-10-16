@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="NVT_BannerManagement::banner_manager" title="Banner" module="NVT_BannerManagement" parent="Magento_Backend::content" sortOrder="150" resource="NVT_BannerManagement::banner_manager"/>
+        <add id="NVT_BannerManagement::banner_management" title="Banner Manager" module="NVT_BannerManagement" parent="NVT_BannerManagement::banner_manager" sortOrder="1" action="bannermanager/banner" resource="NVT_BannerManagement::banner_management"/>
+        <add id="NVT_BannerManagement::item_management" title="Item Manager" module="NVT_BannerManagement" parent="NVT_BannerManagement::banner_manager" sortOrder="0" action="bannermanager/item" resource="NVT_BannerManagement::item_management"/>
+    </menu>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <head>
+        <css src="NVT_MenuManagement::css/menu-manager.css"/>
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <block class="NVT\MenuManagement\Block\Adminhtml\Item\Edit\Tabs"
+                   name="menumanager.item.edit.tabs"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="NVT\MenuManagement\Block\Adminhtml\Item\Edit"
+                   name="menumanager.item.edit"/>
+        </referenceContainer>
+    </body>
+</page>
