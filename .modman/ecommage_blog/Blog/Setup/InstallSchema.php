@@ -1,6 +1,7 @@
 <?php
 namespace Ecommage\Blog\Setup;
 
+use Ecommage\Blog\Helper\Data;
 use Magento\Framework\DB\Ddl\Table;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 /**
@@ -21,13 +22,13 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
         $table = $installer->getConnection()->newTable(
             $installer->getTable('ecommage_post')
         )->addColumn(
-            'post_id',
+            Data::FIELD_ID,
             Table::TYPE_INTEGER,
             null,
             [ 'identity' => true, 'nullable' => false, 'primary' => true, 'unsigned' => true, ],
             'Entity ID'
         )->addColumn(
-            'identifier',
+            Data::FIELD_URL_KEY,
             Table::TYPE_TEXT,
             255,
             ['nullable' => false],
@@ -63,6 +64,12 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             [],
             'Post Content'
         )->addColumn(
+            'meta_title',
+            Table::TYPE_TEXT,
+            255,
+            [ 'nullable' => false, ],
+            'Meta Title'
+        )->addColumn(
             'meta_keywords',
             Table::TYPE_TEXT,
             '64k',
@@ -87,11 +94,11 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
             [ 'nullable' => false, 'default' => Table::TIMESTAMP_INIT_UPDATE, ],
             'Modification Time'
         )->addColumn(
-            'is_active',
+            Data::FIELD_STATUS,
             Table::TYPE_SMALLINT,
             null,
             [ 'nullable' => false, 'default' => '1', ],
-            'Is Active'
+            'Status'
         )->addIndex(
             $installer->getIdxName('ecommage_post', ['identifier']),
             ['identifier']

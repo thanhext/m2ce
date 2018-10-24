@@ -2,7 +2,7 @@
 namespace Ecommage\Blog\Model;
 class Post extends \Magento\Framework\Model\AbstractModel implements \Ecommage\Blog\Api\Data\PostInterface, \Magento\Framework\DataObject\IdentityInterface
 {
-    const CACHE_TAG = 'ecommage_blog_post';
+    const CACHE_TAG = 'post';
 
     protected function _construct()
     {

@@ -9,7 +9,7 @@
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string">Add New</item>
+                <item name="label" xsi:type="string">Add New Post</item>
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">*/post/new</item>
             </item>
@@ -50,6 +50,7 @@
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
                     <item name="resizeDefaultWidth" xsi:type="string">55</item>
                     <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="add_field" xsi:type="boolean">true</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                 </item>
             </argument>
@@ -61,6 +62,7 @@
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
                     <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="add_field" xsi:type="boolean">true</item>
                 </item>
             </argument>
         </column>
@@ -107,7 +109,7 @@
                 </item>
             </argument>
         </column>
-        <actionsColumn name="actions" class="Ecommage\Blog\Ui\Component\Listing\Column\Bloglisting\PageActions">
+        <actionsColumn name="actions" class="Ecommage\Blog\Ui\Component\Listing\Column\Post\PageActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>
