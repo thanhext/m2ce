@@ -10,9 +10,10 @@ use Magento\Store\Model\ScopeInterface;
  */
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    const FIELD_ID      = 'post_id';
-    const FIELD_STATUS  = 'is_active';
-    const FIELD_URL_KEY = 'identifier';
+    const FIELD_ID          = 'post_id';
+    const FIELD_STATUS      = 'is_active';
+    const FIELD_URL_KEY     = 'identifier';
+    const FIELD_IMAGE_SRC   = 'featured_src';
 
     /**
      * Data constructor.
