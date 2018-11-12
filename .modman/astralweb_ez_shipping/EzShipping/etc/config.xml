@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <convenientstore>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>AstralWeb\EzShipping\Model\Carrier\ConvenientStore</model>
+                <name>Pick-up at convenient store</name>
+                <price>60.00</price>
+                <title>Pick-up at convenient store</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <gateway_url>http://map.ezship.com.tw/ezship_map_web.jsp</gateway_url>
+                <gateway_xml_url>https://www.ezship.com.tw/emap/ezship_xml_order_api_ex.jsp</gateway_xml_url>
+                <handling_type>F</handling_type>
+            </convenientstore>
+
+            <delivertohome>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>AstralWeb\EzShipping\Model\Carrier\DeliverToHome</model>
+                <name>Deliver to home</name>
+                <price>70.00</price>
+                <title>Deliver to home</title>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <handling_type>F</handling_type>
+            </delivertohome>
+        </carriers>
+    </default>
+</config>

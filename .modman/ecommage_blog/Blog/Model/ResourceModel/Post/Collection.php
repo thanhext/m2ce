@@ -1,5 +1,9 @@
 <?php
 namespace Ecommage\Blog\Model\ResourceModel\Post;
+/**
+ * Class Collection
+ * @package Ecommage\Blog\Model\ResourceModel\Post
+ */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     protected function _construct()
