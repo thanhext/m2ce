@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="AstralWeb_Banner::banner" title="Banner Manager" module="AstralWeb_Banner" sortOrder="700" resource="AstralWeb_Banner::banner" parent="Magento_Backend::content" />
+        <add id="AstralWeb_Banner::banner_gird" title="All Banners" module="AstralWeb_Banner" sortOrder="10" resource="AstralWeb_Banner::banner_gird" parent="AstralWeb_Banner::banner" action="banner/grid" />
+        <add id="AstralWeb_Banner::banner_settings" title="Settings" module="AstralWeb_Banner" sortOrder="30" resource="AstralWeb_Banner::banner_settings" parent="AstralWeb_Banner::banner" action="adminhtml/system_config/edit/section/banner" />
+    </menu>
+</config>
