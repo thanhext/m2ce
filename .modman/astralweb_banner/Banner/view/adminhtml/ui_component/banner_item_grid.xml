@@ -41,7 +41,6 @@
             <sticky>true</sticky>
         </settings>
         <paging name="listing_paging"/>
-        <filters name="listing_filters"/>
     </listingToolbar>
     <columns name="banner_item_grid_columns">
         <selectionsColumn name="ids">

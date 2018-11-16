@@ -1,0 +1,7 @@
+<button type="button" class="action action-apply-item">
+    <span><?= __('Apply Banner Item') ?></span>
+</button>
+<?= $this->getUrl('mui/index/render', ['_query' => [
+        'namespace' => 'banner_item_grid',
+        'isAjax' => 'true'
+]]); ?>

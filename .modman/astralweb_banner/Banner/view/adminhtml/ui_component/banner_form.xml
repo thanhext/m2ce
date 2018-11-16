@@ -181,6 +181,11 @@
                 <item name="opened" xsi:type="boolean">false</item>
             </item>
         </argument>
+        <container name="apply_item_to_banner" sortOrder="10">
+            <htmlContent name="html_content">
+                <block template="AstralWeb_Banner::apply-item.phtml" class="AstralWeb\Banner\Block\Adminhtml\Banner\Edit\Buttons\ApplyItem" name="apply_item_to_banner"/>
+            </htmlContent>
+        </container>
         <insertListing>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
