@@ -6,6 +6,7 @@
                 <resource id="Magento_Backend::content">
                     <resource id="AstralWeb_Banner::banner" title="Banner Manager">
                         <resource id="AstralWeb_Banner::banner_gird" title="All Banners" sortOrder="10" />
+                        <resource id="AstralWeb_Banner::item_gird" title="All Items" sortOrder="20" />
                     </resource>
                 </resource>
                 <resource id="Magento_Backend::stores">

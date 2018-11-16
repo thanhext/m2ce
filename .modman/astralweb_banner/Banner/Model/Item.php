@@ -1,20 +1,16 @@
 <?php
 namespace AstralWeb\Banner\Model;
 
-use Magento\Framework\Model\AbstractModel;
-use AstralWeb\Banner\Api\Data\BannerInterface;
-use Magento\Framework\DataObject\IdentityInterface;
-
 /**
- * Class Banner
+ * Class Item
  * @package AstralWeb\Banner\Model
  */
-class Banner extends AbstractModel implements BannerInterface, IdentityInterface
+class Item extends \Magento\Framework\Model\AbstractModel implements \AstralWeb\Banner\Api\Data\ItemInterface, \Magento\Framework\DataObject\IdentityInterface
 {
-    const CACHE_TAG = 'banner_b';
+    const CACHE_TAG = 'banner_item_p';
 
     /**#@+
-     * banner's statuses
+     * item's statuses
      */
     const STATUS_ENABLED = 1;
     const STATUS_DISABLED = 0;
@@ -36,18 +32,12 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      */
     protected function _construct()
     {
-        $this->_init(\AstralWeb\Banner\Model\ResourceModel\Banner::class);
+        $this->_init('AstralWeb\Banner\Model\ResourceModel\Item');
     }
 
-
-    /**
-     * Get identities
-     *
-     * @return array
-     */
     public function getIdentities()
     {
-        return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG . '_' . $this->getIdentifier()];
+        return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
     /**
@@ -57,7 +47,7 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      */
     public function getId()
     {
-        return $this->getData(self::BANNER_ID);
+        return $this->getData(self::ITEM_ID);
     }
 
     /**
@@ -118,7 +108,7 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      */
     public function setId($id)
     {
-        return $this->setData(self::BANNER_ID, $id);
+        return $this->setData(self::ITEM_ID, $id);
     }
 
     /**

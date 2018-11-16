@@ -1,13 +1,13 @@
 <?php
 namespace AstralWeb\Banner\Model\ResourceModel;
 /**
- * Class Banner
+ * Class Item
  * @package AstralWeb\Banner\Model\ResourceModel
  */
-class Banner extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Item extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('banner','banner_id');
+        $this->_init('banner_item','item_id');
     }
 }

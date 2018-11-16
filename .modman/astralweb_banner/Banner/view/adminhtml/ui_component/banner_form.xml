@@ -123,7 +123,56 @@
             </settings>
         </field>
 
+
+        <field name="type" formElement="select">
+            <settings>
+                <notice translate="true">Email template chosen based on theme fallback, when the "Default" option is selected.</notice>
+                <dataType>text</dataType>
+                <label translate="true">Banner Type</label>
+                <dataScope>type</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="AstralWeb\Banner\Model\System\Config\Type"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+
+        <field name="sort_order" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-digits" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>number</dataType>
+                <label translate="true">Sort Order</label>
+                <dataScope>sort_order</dataScope>
+            </settings>
+        </field>
+
+        <field name="suffix_class" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Suffix Class</label>
+                <dataScope>suffix_class</dataScope>
+            </settings>
+        </field>
+
     </fieldset>
+
+
     <fieldset name="items">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
@@ -132,6 +181,101 @@
                 <item name="opened" xsi:type="boolean">false</item>
             </item>
         </argument>
+        <insertListing>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="ns" xsi:type="string">item_grid</item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+
+
+
+    <fieldset name="display">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Banner Display</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+
+        <field name="page_display" formElement="textarea" component="AstralWeb_Banner/js/form/element/textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">block</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <!--<elementTmpl>AstralWeb_Banner/form/element/textarea</elementTmpl>-->
+                <dataType>text</dataType>
+                <tooltip>
+                    <description translate="true">Comma-separated list of synonyms. The terms entered (separated by commas) will be used as an “OR” search query to search your entire store. For example, if you enter “shoes,footwear”, and user were to search for "shoes", the search results will include any product or content with term “shoes" or "footwear.”</description>
+                </tooltip>
+                <label translate="true">Page Display</label>
+                <dataScope>page_display</dataScope>
+            </settings>
+            <!--<formElements>-->
+                <!--<multiselect>-->
+                    <!--<settings>-->
+                        <!--<options class="Magento\CatalogRule\Model\Rule\CustomerGroupsOptionsProvider"/>-->
+                    <!--</settings>-->
+                <!--</multiselect>-->
+            <!--</formElements>-->
+        </field>
+
+
+
+
+
+        <field name="sendemail_store_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">customer</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">Send Welcome Email From</label>
+                <imports>
+                    <link name="value">${ $.provider }:data.customer.store_id</link>
+                </imports>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Store\Model\System\Store"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <!--<field name="sendemail_store_ids" formElement="my_select" component="Magento_Ui/js/form/element/select" >-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="source" xsi:type="string">customer</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+            <!--<settings>-->
+                <!--<dataType>number</dataType>-->
+                <!--<label translate="true">Send Welcome Email From</label>-->
+                <!--<imports>-->
+                    <!--<link name="value">${ $.provider }:data.customer.store_id</link>-->
+                <!--</imports>-->
+            <!--</settings>-->
+            <!--<formElements>-->
+                <!--<my_select>-->
+                    <!--<settings>-->
+                        <!--<options class="Magento\Config\Model\Config\Source\Yesno"/>-->
+                    <!--</settings>-->
+                <!--</my_select>-->
+            <!--</formElements>-->
+        <!--</field>-->
 
 
     </fieldset>

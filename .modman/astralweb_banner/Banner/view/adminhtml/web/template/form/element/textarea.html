@@ -1,0 +1,34 @@
+<!--
+/**
+ * Copyright © Ecommage, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<textarea class="admin__control-textarea" data-bind="
+    value: value,
+    valueUpdate: valueUpdate,
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        cols: cols,
+        rows: rows,
+        'aria-describedby': noticeId,
+        placeholder: placeholder,
+        id: uid,
+        disabled: disabled
+    }"
+/>
+<table>
+    <thead>
+        <tr>
+            <th collapse="2">
+                <button type="button" class="action-select" data-bind="click: addLayoutUpdate();" >
+                    <span data-bind="i18n: 'Add Layout Update'"></span>
+                </button>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
