@@ -126,7 +126,7 @@
 
         <field name="type" formElement="select">
             <settings>
-                <notice translate="true">Email template chosen based on theme fallback, when the "Default" option is selected.</notice>
+                <notice translate="true">Banner type is the banner display, when the "Slides" option is selected.</notice>
                 <dataType>text</dataType>
                 <label translate="true">Banner Type</label>
                 <dataScope>type</dataScope>
@@ -185,7 +185,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="autoRender" xsi:type="boolean">true</item>
-                    <item name="ns" xsi:type="string">item_grid</item>
+                    <item name="ns" xsi:type="string">banner_item_grid</item>
                 </item>
             </argument>
         </insertListing>
