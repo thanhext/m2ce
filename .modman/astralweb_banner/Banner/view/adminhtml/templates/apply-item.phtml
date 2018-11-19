@@ -1,7 +1,16 @@
-<button type="button" class="action action-apply-item">
+<button type="button" class="action action-apply-item" id="apply-banner-item">
     <span><?= __('Apply Banner Item') ?></span>
 </button>
-<?= $this->getUrl('mui/index/render', ['_query' => [
-        'namespace' => 'banner_item_grid',
-        'isAjax' => 'true'
-]]); ?>
+<div class="form-apply-item hide">
+        <?= $this->getChildBlock('banner.edit.item') ?>
+</div>
+<?= $this->getConfig(); ?>
+<script>
+    require(
+        [
+            "jquery",
+            "applyBannerItem"
+        ], function($,applyBannerItem) {
+            $("#apply-banner-item").applyBannerItem(<?= $this->getConfig() ?>);
+        });
+</script>

@@ -207,7 +207,8 @@
             </item>
         </argument>
 
-        <field name="page_display" formElement="textarea" component="AstralWeb_Banner/js/form/element/textarea">
+        <field name="page_display" formElement="textarea">
+        <!--<field name="page_display" formElement="textarea" component="AstralWeb_Banner/js/form/element/textarea">-->
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">block</item>
