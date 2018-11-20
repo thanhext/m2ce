@@ -12,9 +12,9 @@ class Delete extends \AstralWeb\Banner\Controller\Adminhtml\Banner
         $indexField = $this->getIndexField();
         $id = $this->getRequest()->getParam($indexField);
         if($id) {
-            $model = $this->_postFactory->create();
+            $model = $this->_bannerFactory->create();
             $model->load($id);
-            if (!$model->getPostId()) {
+            if (!$model->getId()) {
                 $this->messageManager->addError(__('Banner is no longer exist'));
             } else {
                 try {

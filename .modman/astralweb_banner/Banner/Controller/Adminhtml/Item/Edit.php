@@ -12,7 +12,7 @@ class Edit extends \AstralWeb\Banner\Controller\Adminhtml\Item
     {
         $indexField = $this->getIndexField();
         $id = $this->getRequest()->getParam($indexField);
-        $model = $this->_postFactory->create();
+        $model = $this->_itemFactory->create();
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {
@@ -26,7 +26,7 @@ class Edit extends \AstralWeb\Banner\Controller\Adminhtml\Item
             $model->setData($data);
         }
 
-        $this->_coreRegistry->register('current_post', $model);
+        $this->_coreRegistry->register('current_banner_item', $model);
 
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();

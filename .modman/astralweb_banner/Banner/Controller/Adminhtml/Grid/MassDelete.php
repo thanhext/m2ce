@@ -10,7 +10,7 @@ class MassDelete extends \AstralWeb\Banner\Controller\Adminhtml\Banner
     public function execute()
     {
         $ids = $this->getRequest()->getParam('selected');
-        $model = $this->_postFactory->create();
+        $model = $this->_bannerFactory->create();
         foreach ($ids as $id) {
             try {
                 $model->load($id)->delete();

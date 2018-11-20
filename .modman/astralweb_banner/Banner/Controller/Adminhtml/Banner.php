@@ -16,11 +16,11 @@ abstract class Banner extends \Magento\Backend\App\Action
     /**
      * @var \AstralWeb\Banner\Model\BannerFactory
      */
-    protected $_postFactory;
+    protected $_bannerFactory;
     /**
      * @var BannerRepositoryInterface
      */
-    protected $_postRepository;
+    protected $_bannerRepository;
     /**
      * @var \Magento\Framework\Registry
      */
@@ -39,14 +39,14 @@ abstract class Banner extends \Magento\Backend\App\Action
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \AstralWeb\Banner\Model\BannerFactory $postFactory,
-        \AstralWeb\Banner\Api\BannerRepositoryInterface $postRepository,
+        \AstralWeb\Banner\Model\BannerFactory $bannerFactory,
+        \AstralWeb\Banner\Api\BannerRepositoryInterface $bannerRepository,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
 
-        $this->_postFactory         = $postFactory;
-        $this->_postRepository      = $postRepository;
+        $this->_bannerFactory         = $bannerFactory;
+        $this->_bannerRepository      = $bannerRepository;
         $this->_coreRegistry        = $coreRegistry;
         $this->_resultPageFactory   = $resultPageFactory;
 

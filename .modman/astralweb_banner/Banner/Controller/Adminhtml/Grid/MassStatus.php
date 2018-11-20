@@ -17,7 +17,7 @@ class MassStatus extends \AstralWeb\Banner\Controller\Adminhtml\Banner
         if(is_array($ids)) {
             foreach ($ids as $id) {
                 try {
-                    $model = $this->_postFactory->create();
+                    $model = $this->_bannerFactory->create();
                     $model->setData(array($indexField => $id, 'is_active' => $status));
                     $model->save();
                 } catch (\Exception $e) {

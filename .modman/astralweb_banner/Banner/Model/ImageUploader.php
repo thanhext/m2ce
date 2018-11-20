@@ -92,13 +92,6 @@ class ImageUploader
         $this->allowedExtensions = $allowedExtensions;
     }
 
-    public function initImageField($fieldId)
-    {
-        $this->setAllowedExtensions('jpg jpeg gif png');
-        $this->setBasePath('banner');
-        $this->setBaseTmpPath('tmp/banner');
-    }
-
     /**
      * Set base tmp path
      *
@@ -224,7 +217,6 @@ class ImageUploader
      */
     public function saveFileToTmpDir($fileId)
     {
-        $this->initImageField($fileId);
         $baseTmpPath = $this->getBaseTmpPath();
         /** @var \Magento\MediaStorage\Model\File\Uploader $uploader */
         $uploader = $this->uploaderFactory->create(['fileId' => $fileId]);
