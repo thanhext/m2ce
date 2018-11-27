@@ -27,17 +27,18 @@ class Save extends \AstralWeb\Banner\Controller\Adminhtml\Banner
      * @param \Magento\Framework\Serialize\Serializer\Json $serialize
      */
     public function __construct(
+        \AstralWeb\Banner\Helper\Data $helper,
+        \Magento\Framework\Registry $coreRegistry,
         \Magento\Backend\App\Action\Context $context,
         \AstralWeb\Banner\Model\BannerFactory $bannerFactory,
         \AstralWeb\Banner\Api\BannerRepositoryInterface $bannerRepository,
-        \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor,
         \Magento\Framework\Serialize\Serializer\Json $serialize
     ) {
         $this->serialize = $serialize;
         $this->dataPersistor = $dataPersistor;
-        parent::__construct($context, $bannerFactory, $bannerRepository, $coreRegistry, $resultPageFactory);
+        parent::__construct($helper, $coreRegistry, $context, $bannerFactory, $bannerRepository, $resultPageFactory);
     }
     public function execute()
     {

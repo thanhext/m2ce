@@ -1,10 +1,8 @@
 <?php
 namespace AstralWeb\Banner\Controller\Adminhtml;
 
-
 use AstralWeb\Banner\Api\Data\BannerInterface;
 use AstralWeb\Banner\Api\BannerRepositoryInterface;
-use AstralWeb\Banner\Helper\Data;
 
 /**
  * Class Banner
@@ -15,7 +13,7 @@ abstract class Banner extends \Magento\Backend\App\Action
 
     const ADMIN_RESOURCE = 'AstralWeb_Banner::banner_grid';
     /**
-     * @var Data
+     * @var \AstralWeb\Banner\Helper\Data
      */
     protected $helper;
     /**
@@ -38,16 +36,18 @@ abstract class Banner extends \Magento\Backend\App\Action
     /**
      * Banner constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \AstralWeb\Banner\Model\BannerFactory $postFactory
+     * @param \AstralWeb\Banner\Helper\Data $helper
+     * @param \AstralWeb\Banner\Model\BannerFactory $bannerFactory
+     * @param BannerRepositoryInterface $bannerRepository
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
         \AstralWeb\Banner\Helper\Data $helper,
+        \Magento\Framework\Registry $coreRegistry,
+        \Magento\Backend\App\Action\Context $context,
         \AstralWeb\Banner\Model\BannerFactory $bannerFactory,
         \AstralWeb\Banner\Api\BannerRepositoryInterface $bannerRepository,
-        \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         $this->helper               = $helper;
