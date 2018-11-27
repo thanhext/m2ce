@@ -206,83 +206,10 @@
                 <item name="opened" xsi:type="boolean">false</item>
             </item>
         </argument>
-
-        <field name="page_display" formElement="textarea">
-        <!--<field name="page_display" formElement="textarea" component="AstralWeb_Banner/js/form/element/textarea">-->
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">block</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <!--<elementTmpl>AstralWeb_Banner/form/element/textarea</elementTmpl>-->
-                <dataType>text</dataType>
-                <tooltip>
-                    <description translate="true">Comma-separated list of synonyms. The terms entered (separated by commas) will be used as an “OR” search query to search your entire store. For example, if you enter “shoes,footwear”, and user were to search for "shoes", the search results will include any product or content with term “shoes" or "footwear.”</description>
-                </tooltip>
-                <label translate="true">Page Display</label>
-                <dataScope>page_display</dataScope>
-            </settings>
-            <!--<formElements>-->
-                <!--<multiselect>-->
-                    <!--<settings>-->
-                        <!--<options class="Magento\CatalogRule\Model\Rule\CustomerGroupsOptionsProvider"/>-->
-                    <!--</settings>-->
-                <!--</multiselect>-->
-            <!--</formElements>-->
-        </field>
-
-
-
-
-
-        <field name="sendemail_store_id" formElement="select">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">customer</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>number</dataType>
-                <label translate="true">Send Welcome Email From</label>
-                <imports>
-                    <link name="value">${ $.provider }:data.customer.store_id</link>
-                </imports>
-            </settings>
-            <formElements>
-                <select>
-                    <settings>
-                        <options class="Magento\Store\Model\System\Store"/>
-                    </settings>
-                </select>
-            </formElements>
-        </field>
-
-        <!--<field name="sendemail_store_ids" formElement="my_select" component="Magento_Ui/js/form/element/select" >-->
-            <!--<argument name="data" xsi:type="array">-->
-                <!--<item name="config" xsi:type="array">-->
-                    <!--<item name="source" xsi:type="string">customer</item>-->
-                <!--</item>-->
-            <!--</argument>-->
-            <!--<settings>-->
-                <!--<dataType>number</dataType>-->
-                <!--<label translate="true">Send Welcome Email From</label>-->
-                <!--<imports>-->
-                    <!--<link name="value">${ $.provider }:data.customer.store_id</link>-->
-                <!--</imports>-->
-            <!--</settings>-->
-            <!--<formElements>-->
-                <!--<my_select>-->
-                    <!--<settings>-->
-                        <!--<options class="Magento\Config\Model\Config\Source\Yesno"/>-->
-                    <!--</settings>-->
-                <!--</my_select>-->
-            <!--</formElements>-->
-        <!--</field>-->
-
-
+        <container name="add_layout_update" sortOrder="10">
+            <htmlContent name="html_content">
+                <block template="AstralWeb_Banner::add-layout-update.phtml" class="AstralWeb\Banner\Block\Adminhtml\Banner\Edit\Buttons\AddLayoutUpdate" name="add_layout_to_banner"/>
+            </htmlContent>
+        </container>
     </fieldset>
 </form>

@@ -1,6 +1,7 @@
 <?php
 namespace AstralWeb\Banner\Controller\Adminhtml\Grid;
 
+use Magento\Theme\Helper\Storage;
 /**
  * Class Edit
  * @package AstralWeb\Banner\Controller\Adminhtml\Grid
@@ -12,6 +13,12 @@ class Edit extends \AstralWeb\Banner\Controller\Adminhtml\Banner
     {
         $indexField = $this->getIndexField();
         $id = $this->getRequest()->getParam($indexField);
+        $themeId = $this->getRequest()->getParam(Storage::PARAM_THEME_ID);
+
+        if (!$themeId) {
+            return $this->_redirect('*/*/', [Storage::PARAM_THEME_ID => $this->getThemeId()]);
+        }
+
         $model = $this->_bannerFactory->create();
         if ($id) {
             $model->load($id);

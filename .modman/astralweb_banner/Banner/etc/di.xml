@@ -1,7 +1,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="AstralWeb\Banner\Api\BannerRepositoryInterface" type="AstralWeb\Banner\Model\BannerRepository" />
     <preference for="AstralWeb\Banner\Api\ItemRepositoryInterface" type="AstralWeb\Banner\Model\ItemRepository" />
-    <virtualType name="AstralWebBannerModelImageUploader" type="Magento\Catalog\Model\ImageUploader">
+    <virtualType name="itemImageUploader" type="Magento\Catalog\Model\ImageUploader">
         <arguments>
             <argument name="baseTmpPath" xsi:type="string">banner/item/tmp</argument>
             <argument name="basePath" xsi:type="string">banner/item</argument>
@@ -13,9 +13,9 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="AstralWeb\Banner\Controller\Adminhtml\Item\Upload">
+    <type name="AstralWeb\Banner\Controller\Adminhtml\Item\Image\Upload">
         <arguments>
-            <argument name="imageUploader" xsi:type="object">AstralWebBannerModelImageUploader</argument>
+            <argument name="imageUploader" xsi:type="object">itemImageUploader</argument>
         </arguments>
     </type>
 </config>

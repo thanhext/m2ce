@@ -33,7 +33,7 @@ class Upload extends \Magento\Backend\App\Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('AstralWeb_Banner::item_grid');
+        return $this->_authorization->isAllowed('AstralWeb_Banner::banner_grid');
     }
 
     /**

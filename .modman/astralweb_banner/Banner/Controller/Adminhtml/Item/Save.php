@@ -12,10 +12,6 @@ class Save extends \AstralWeb\Banner\Controller\Adminhtml\Item
      */
     protected $dataPersistor;
     /**
-     * @var \Ecommage\Blog\Helper\Image
-     */
-    protected $imageHelper;
-    /**
      * @var \Magento\Framework\Serialize\Serializer\Json
      */
     protected $serialize;
@@ -23,10 +19,12 @@ class Save extends \AstralWeb\Banner\Controller\Adminhtml\Item
     /**
      * Save constructor.
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Ecommage\Blog\Model\BannerFactory $bannerFactory
-     * @param \Ecommage\Blog\Api\BannerRepositoryInterface $bannerRepository
+     * @param \AstralWeb\Banner\Model\ItemFactory $itemFactory
+     * @param \AstralWeb\Banner\Api\ItemRepositoryInterface $itemRepository
      * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
+     * @param \Magento\Framework\Serialize\Serializer\Json $serialize
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -35,11 +33,9 @@ class Save extends \AstralWeb\Banner\Controller\Adminhtml\Item
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor,
-        \Magento\Framework\Serialize\Serializer\Json $serialize,
-        \AstralWeb\Banner\Helper\Image $imageHelper
+        \Magento\Framework\Serialize\Serializer\Json $serialize
     ) {
         $this->serialize = $serialize;
-        $this->imageHelper = $imageHelper;
         $this->dataPersistor = $dataPersistor;
         parent::__construct($context, $itemFactory, $itemRepository, $coreRegistry, $resultPageFactory);
     }

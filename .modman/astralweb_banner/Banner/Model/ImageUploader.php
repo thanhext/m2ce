@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 namespace AstralWeb\Banner\Model;
 
 /**
@@ -12,6 +16,18 @@ class ImageUploader
      * @var \Magento\MediaStorage\Helper\File\Storage\Database
      */
     protected $coreFileStorageDatabase;
+
+    /**
+     * Core file storage
+     *
+     * @var \Magento\MediaStorage\Helper\File\Storage
+     */
+    protected $coreFileStorage = null;
+
+    /**
+     * @var \Magento\MediaStorage\Model\File\Validator\NotProtectedExtension
+     */
+    protected $validator;
 
     /**
      * Media directory object (writable).
@@ -74,6 +90,8 @@ class ImageUploader
      */
     public function __construct(
         \Magento\MediaStorage\Helper\File\Storage\Database $coreFileStorageDatabase,
+        \Magento\MediaStorage\Helper\File\Storage $coreFileStorage,
+        \Magento\MediaStorage\Model\File\Validator\NotProtectedExtension $validator,
         \Magento\Framework\Filesystem $filesystem,
         \Magento\MediaStorage\Model\File\UploaderFactory $uploaderFactory,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
@@ -83,6 +101,8 @@ class ImageUploader
         $allowedExtensions
     ) {
         $this->coreFileStorageDatabase = $coreFileStorageDatabase;
+        $this->coreFileStorage = $coreFileStorage;
+        $this->validator = $validator;
         $this->mediaDirectory = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
         $this->uploaderFactory = $uploaderFactory;
         $this->storeManager = $storeManager;
@@ -218,6 +238,7 @@ class ImageUploader
     public function saveFileToTmpDir($fileId)
     {
         $baseTmpPath = $this->getBaseTmpPath();
+
         /** @var \Magento\MediaStorage\Model\File\Uploader $uploader */
         $uploader = $this->uploaderFactory->create(['fileId' => $fileId]);
         $uploader->setAllowedExtensions($this->getAllowedExtensions());

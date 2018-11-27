@@ -28,9 +28,10 @@ class Form extends \Magento\Backend\App\Action
 
     public function execute()
     {
-        $blockFrom = $this->_view->getLayout()->createBlock('AstralWeb\Banner\Block\Adminhtml\Item\Edit');
-        $blockFrom->setData('area', 'adminhtml');
-        $html = $blockFrom->toHtml();
+        $layout = $this->_view->getLayout();
+        $layout->getUpdate()->addHandle('banner_item_edit')->load();
+
+        $html = $layout->getBlock('banner_item_form')->toHtml();
 
         return $this->resultJsonFactory->create()->setData([
             'html' => $html
