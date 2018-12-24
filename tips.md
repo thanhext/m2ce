@@ -122,6 +122,7 @@ sudo php bin/magento i18n:collect-phrases -o "/var/www/html/ecommage/niuniu/xx_Y
     * Public Key:_	`5dfd38c338827eab53999e2beeb55de5`
     * Private Key:	`b6b2a585d2f5e1ad8c2982e29f18a8eb`
     * access tokens: `4dab2f7455ce28ec260731727f76b3ec1739977a`
+    * access tokens (git): `e93dd6118f1e6d02b9affa6223e8ece5dffa6400`
 ```bash
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition <installation directory name>
 ```
@@ -129,6 +130,11 @@ composer create-project --repository-url=https://repo.magento.com/ magento/proje
 ```    
 sudo php bin/magento setup:install --base-url=http://m2.bamboo.com/ --db-host=localhost --db-name=ecommage_m2_bamboo --db-user=admin --db-password=1 --admin-firstname=Thanh --admin-lastname=NV --admin-email=thanhnv@ecommage.com --admin-user=ecommage --admin-password=ecommage123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1
 ```
+- Install sample Data
+```magento2
+php <your Magento install dir>/bin/magento sampledata:deploy
+```
+
 - Tools
     *  **pestle**
         * `curl -LO http://pestle.pulsestorm.net/pestle.phar`
@@ -173,9 +179,15 @@ GRANT ALL ON niuniu.* TO 'niuniudb'@'%';
 DROP USER 'niuniudb'@'139.162.38.199';
 FLUSH PRIVILEGES;
 ```
+* Reset AUTO_INCREMENT in MySQL?
+```mysql
+ALTER TABLE cron_schedule AUTO_INCREMENT = 1
+```
 
 # 2. **Ubuntu** #
 ## + zip ignore ##
 ```bash
 zip -r product.zip  product/* --exclude=product/cache/*
+zip -r niuniu_test.zip  niuniu/* --exclude=niuniu/pub/media/catalog/product/cache/*
 ```
+php bin/magento module:disable Plumrocket_SocialLoginFree Plumrocket_Base AstralWeb_FacebookPixel Shopial_Facebook Mirasvit_Blog Mageplaza_SocialLogin
