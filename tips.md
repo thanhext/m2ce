@@ -118,12 +118,7 @@ php bin/magento admin:user:create --admin-user='admin' --admin-password='admin12
 ```
 sudo php bin/magento i18n:collect-phrases -o "/var/www/html/ecommage/niuniu/xx_YY.csv" /var/www/html/ecommage/niuniu/.modman/
 ```
-- Install
-    * Public Key:_	`5dfd38c338827eab53999e2beeb55de5`
-    * Private Key:	`b6b2a585d2f5e1ad8c2982e29f18a8eb`
-    * access tokens: `4dab2f7455ce28ec260731727f76b3ec1739977a`
-    * access tokens (git): `e93dd6118f1e6d02b9affa6223e8ece5dffa6400`
-```bash
+
 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition <installation directory name>
 ```
     
