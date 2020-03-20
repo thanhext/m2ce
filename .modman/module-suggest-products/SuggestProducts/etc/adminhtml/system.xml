@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="general" translate="label" sortOrder="100">
+            <label>General</label>
+        </tab>
+        <section id="web" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Web</label>
+            <tab>general</tab>
+            <resource>Magento_Config::web</resource>
+            <group id="homepage" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Home page</label>
+                <field id="category_id" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category</label>
+                    <source_model>T2N\SuggestProducts\Model\Config\Source\Categories</source_model>
+<!--                    <comment><![CDATA[Specify URL or {{base_url}} placeholder.]]></comment>-->
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
