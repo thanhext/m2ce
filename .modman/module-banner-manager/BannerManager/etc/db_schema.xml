@@ -45,4 +45,31 @@
             <column name="store_id"/>
         </index>
     </table>
+    <table name="banner_item" resource="default" engine="innodb" comment="Customer Address Entity">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+            comment="Entity ID"/>
+        <column xsi:type="varchar" name="path" nullable="true" length="255" comment="Path"/>
+        <column xsi:type="varchar" name="link_title" nullable="true" length="255" comment="Link Title"/>
+        <column xsi:type="varchar" name="link_type" nullable="true" length="50" comment="Link Type"/>
+        <column xsi:type="varchar" name="link_url" nullable="true" length="50" comment="Link Url"/>
+        <column xsi:type="varchar" name="content_title" nullable="true" length="255" comment="Content Title"/>
+        <column xsi:type="varchar" name="content_description" nullable="true" length="255" comment="Content Description"/>
+        <column xsi:type="int" name="banner_id" padding="10" unsigned="true" nullable="true" identity="false"
+            comment="Banner ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+            comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+            comment="Updated At"/>
+        <column xsi:type="smallint" name="is_active" padding="5" unsigned="true" nullable="false" identity="false"
+            default="1" comment="Is Active"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="BANNER_ITEM_BANNER_ID_BANNER_ENTITY_ENTITY_ID"
+            table="banner_item" column="banner_id" referenceTable="banner_entity"
+            referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="BANNER_ITEM_BANNER_ID" indexType="btree">
+            <column name="banner_id"/>
+        </index>
+    </table>
 </schema>

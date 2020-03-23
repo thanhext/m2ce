@@ -444,87 +444,107 @@
         <settings>
             <label translate="true">Banner Items</label>
         </settings>
-        <button name="add_address" component="Magento_Customer/js/address/default-address">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="formElement" xsi:type="string">container</item>
-                    <item name="buttonClasses" xsi:type="string">add-new-address-button</item>
-                    <item name="actions" xsi:type="array">
-                        <item name="0" xsi:type="array">
-                            <item name="targetName" xsi:type="string">${ $.parentName}.customer_address_update_modal.update_customer_address_form_loader</item>
-                            <item name="actionName" xsi:type="string">destroyInserted</item>
-                        </item>
-                        <item name="1" xsi:type="array">
-                            <item name="targetName" xsi:type="string">${ $.parentName}.customer_address_update_modal</item>
-                            <item name="actionName" xsi:type="string">openModal</item>
-                        </item>
-                        <item name="2" xsi:type="array">
-                            <item name="targetName" xsi:type="string">${ $.parentName}.customer_address_update_modal.update_customer_address_form_loader</item>
-                            <item name="actionName" xsi:type="string">render</item>
-                        </item>
-                    </item>
-                </item>
-            </argument>
+        <field name="images" formElement="imageUploader">
             <settings>
-                <title translate="true">Add New Address</title>
-                <imports>
-                    <link name="parentId">${ $.provider}:data.customer_id</link>
-                </imports>
+                <notice translate="true">Not all browsers support all these formats!</notice>
+                <label translate="true">Images</label>
+                <componentType>imageUploader</componentType>
             </settings>
-        </button>
-        <modal name="customer_address_update_modal">
-            <settings>
-                <options>
-                    <option name="title" xsi:type="string">Add/Update Address</option>
-                </options>
-            </settings>
-            <insertForm name="update_customer_address_form_loader" component="Magento_Customer/js/form/components/insert-form">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="addressListingProvider" xsi:type="string">ns = customer_address_listing, index = customer_address_listing</item>
-                        <item name="addressModalProvider" xsi:type="string">${ $.parentName }</item>
-                    </item>
-                </argument>
-                <settings>
-                    <formSubmitType>ajax</formSubmitType>
-                    <renderUrl path="mui/index/render_handle">
-                        <param name="handle">customer_address_edit</param>
-                        <param name="buttons">1</param>
-                    </renderUrl>
-                    <loading>false</loading>
-                    <toolbarContainer>${ $.parentName }</toolbarContainer>
-                    <externalProvider>${ $.ns }.customer_address_form_data_source</externalProvider>
-                    <ns>customer_address_form</ns>
-                    <exports>
-                        <link name="parentId">${ $.externalProvider }:data.parent_id</link>
-                    </exports>
-                    <imports>
-                        <link name="parentId">${ $.provider}:data.customer_id</link>
-                        <link name="onAddressDelete">${ $.ns }.${ $.ns }:deleteAddressAction</link>
-                    </imports>
-                </settings>
-            </insertForm>
-        </modal>
-        <insertListing name="customer_address_listing" component="Magento_Customer/js/form/components/insert-listing">
-            <settings>
-                <dataLinks>
-                    <exports>false</exports>
-                    <imports>true</imports>
-                </dataLinks>
-                <externalProvider>customer_address_listing.customer_address_listing_data_source</externalProvider>
-                <selectionsProvider>customer_address_listing.customer_address_listing.customer_address_listing_columns.ids</selectionsProvider>
-                <autoRender>true</autoRender>
-                <dataScope>customer_address_listing</dataScope>
-                <ns>customer_address_listing</ns>
-                <exports>
-                    <link name="parent_id">${ $.externalProvider }:params.parent_id</link>
-                </exports>
-                <imports>
-                    <link name="parent_id">${ $.provider }:data.customer.entity_id</link>
-                    <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
-                    <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>
-                </imports>
-            </settings>
-        </insertListing>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">banners/banner/upload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+
+
+<!--        <button name="add_address" component="Magento_Customer/js/address/default-address">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="formElement" xsi:type="string">container</item>-->
+<!--                    <item name="buttonClasses" xsi:type="string">add-new-address-button</item>-->
+<!--                    <item name="actions" xsi:type="array">-->
+<!--                        <item name="0" xsi:type="array">-->
+<!--                            <item name="targetName" xsi:type="string">${ $.parentName}.customer_address_update_modal.update_customer_address_form_loader</item>-->
+<!--                            <item name="actionName" xsi:type="string">destroyInserted</item>-->
+<!--                        </item>-->
+<!--                        <item name="1" xsi:type="array">-->
+<!--                            <item name="targetName" xsi:type="string">${ $.parentName}.customer_address_update_modal</item>-->
+<!--                            <item name="actionName" xsi:type="string">openModal</item>-->
+<!--                        </item>-->
+<!--                        <item name="2" xsi:type="array">-->
+<!--                            <item name="targetName" xsi:type="string">${ $.parentName}.customer_address_update_modal.update_customer_address_form_loader</item>-->
+<!--                            <item name="actionName" xsi:type="string">render</item>-->
+<!--                        </item>-->
+<!--                    </item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--            <settings>-->
+<!--                <title translate="true">Add New Address</title>-->
+<!--                <imports>-->
+<!--                    <link name="parentId">${ $.provider}:data.customer_id</link>-->
+<!--                </imports>-->
+<!--            </settings>-->
+<!--        </button>-->
+<!--        <modal name="customer_address_update_modal">-->
+<!--            <settings>-->
+<!--                <options>-->
+<!--                    <option name="title" xsi:type="string">Add/Update Address</option>-->
+<!--                </options>-->
+<!--            </settings>-->
+<!--            <insertForm name="update_customer_address_form_loader" component="Magento_Customer/js/form/components/insert-form">-->
+<!--                <argument name="data" xsi:type="array">-->
+<!--                    <item name="config" xsi:type="array">-->
+<!--                        <item name="addressListingProvider" xsi:type="string">ns = customer_address_listing, index = customer_address_listing</item>-->
+<!--                        <item name="addressModalProvider" xsi:type="string">${ $.parentName }</item>-->
+<!--                    </item>-->
+<!--                </argument>-->
+<!--                <settings>-->
+<!--                    <formSubmitType>ajax</formSubmitType>-->
+<!--                    <renderUrl path="mui/index/render_handle">-->
+<!--                        <param name="handle">customer_address_edit</param>-->
+<!--                        <param name="buttons">1</param>-->
+<!--                    </renderUrl>-->
+<!--                    <loading>false</loading>-->
+<!--                    <toolbarContainer>${ $.parentName }</toolbarContainer>-->
+<!--                    <externalProvider>${ $.ns }.customer_address_form_data_source</externalProvider>-->
+<!--                    <ns>customer_address_form</ns>-->
+<!--                    <exports>-->
+<!--                        <link name="parentId">${ $.externalProvider }:data.parent_id</link>-->
+<!--                    </exports>-->
+<!--                    <imports>-->
+<!--                        <link name="parentId">${ $.provider}:data.customer_id</link>-->
+<!--                        <link name="onAddressDelete">${ $.ns }.${ $.ns }:deleteAddressAction</link>-->
+<!--                    </imports>-->
+<!--                </settings>-->
+<!--            </insertForm>-->
+<!--        </modal>-->
+<!--        <insertListing name="customer_address_listing" component="Magento_Customer/js/form/components/insert-listing">-->
+<!--            <settings>-->
+<!--                <dataLinks>-->
+<!--                    <exports>false</exports>-->
+<!--                    <imports>true</imports>-->
+<!--                </dataLinks>-->
+<!--                <externalProvider>customer_address_listing.customer_address_listing_data_source</externalProvider>-->
+<!--                <selectionsProvider>customer_address_listing.customer_address_listing.customer_address_listing_columns.ids</selectionsProvider>-->
+<!--                <autoRender>true</autoRender>-->
+<!--                <dataScope>customer_address_listing</dataScope>-->
+<!--                <ns>customer_address_listing</ns>-->
+<!--                <exports>-->
+<!--                    <link name="parent_id">${ $.externalProvider }:params.parent_id</link>-->
+<!--                </exports>-->
+<!--                <imports>-->
+<!--                    <link name="parent_id">${ $.provider }:data.customer.entity_id</link>-->
+<!--                    <link name="onAction">ns = ${ $.ns }, index = actions:action</link>-->
+<!--                    <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>-->
+<!--                </imports>-->
+<!--            </settings>-->
+<!--        </insertListing>-->
     </fieldset>
 </form>
