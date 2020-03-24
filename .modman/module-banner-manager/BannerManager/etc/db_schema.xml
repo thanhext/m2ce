@@ -6,20 +6,20 @@
  */
 -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="banner_entity" resource="default" engine="innodb" comment="Banner Entity Table">
         <column xsi:type="smallint" name="entity_id" padding="6" unsigned="false" nullable="false" identity="true"
-                comment="Entity ID"/>
+            comment="Entity ID"/>
         <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Banner Title"/>
         <column xsi:type="varchar" name="identifier" nullable="false" length="255" comment="Banner String Identifier"/>
         <column xsi:type="mediumtext" name="banner_config" nullable="true" comment="Banner Config"/>
         <column xsi:type="mediumtext" name="banner_items" nullable="true" comment="Banner Items"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Banner Creation Time"/>
+            comment="Banner Creation Time"/>
         <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Banner Modification Time"/>
+            comment="Banner Modification Time"/>
         <column xsi:type="smallint" name="is_active" padding="6" unsigned="false" nullable="false" identity="false"
-                default="1" comment="Is Banner Active"/>
+            default="1" comment="Is Banner Active"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
@@ -32,46 +32,46 @@
     <table name="banner_entity_store" resource="default" engine="innodb" comment="Banner Entity To Store Linkage Table">
         <column xsi:type="smallint" name="entity_id" padding="6" unsigned="false" nullable="false" identity="false"/>
         <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
-                comment="Store ID"/>
+            comment="Store ID"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
             <column name="store_id"/>
         </constraint>
         <constraint xsi:type="foreign" referenceId="BANNER_ENTITY_STORE_ENTITY_ID_BANNER_ENTITY_ENTITY_ID"
-                    table="banner_entity_store"
-                    column="entity_id" referenceTable="banner_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+            table="banner_entity_store"
+            column="entity_id" referenceTable="banner_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
         <constraint xsi:type="foreign" referenceId="BANNER_ENTITY_STORE_STORE_ID_STORE_STORE_ID"
-                    table="banner_entity_store"
-                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+            table="banner_entity_store"
+            column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
         <index referenceId="BANNER_ENTITY_STORE_STORE_ID" indexType="btree">
             <column name="store_id"/>
         </index>
     </table>
     <table name="banner_item" resource="default" engine="innodb"
-           comment="Banner Item Table">
+        comment="Banner Item Table">
         <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
-                comment="Entity ID"/>
+            comment="Entity ID"/>
         <column xsi:type="smallint" name="banner_id" padding="6" unsigned="false" nullable="false" identity="false"
-                comment="Banner ID"/>
+            comment="Banner ID"/>
         <column xsi:type="varchar" name="path" nullable="true" length="255" comment="Path"/>
         <column xsi:type="varchar" name="link_title" nullable="true" length="255" comment="Link Title"/>
         <column xsi:type="varchar" name="link_type" nullable="true" length="50" comment="Link Type"/>
         <column xsi:type="varchar" name="link_url" nullable="true" length="50" comment="Link Url"/>
         <column xsi:type="varchar" name="content_title" nullable="true" length="255" comment="Content Title"/>
         <column xsi:type="varchar" name="content_description" nullable="true" length="255"
-                comment="Content Description"/>
+            comment="Content Description"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Created At"/>
+            comment="Created At"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Updated At"/>
+            comment="Updated At"/>
         <column xsi:type="smallint" name="is_active" padding="5" unsigned="true" nullable="false" identity="false"
-                default="1" comment="Is Active"/>
+            default="1" comment="Is Active"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
         <constraint xsi:type="foreign" referenceId="BANNER_ITEM_BANNER_ID_BANNER_ENTITY_ENTITY_ID"
-                    table="banner_item" column="banner_id" referenceTable="banner_entity"
-                    referenceColumn="entity_id" onDelete="CASCADE"/>
+            table="banner_item" column="banner_id" referenceTable="banner_entity"
+            referenceColumn="entity_id" onDelete="CASCADE"/>
         <constraint xsi:type="unique" referenceId="BANNER_ITEM_ENTITY_ID_BANNER_ID">
             <column name="entity_id"/>
             <column name="banner_id"/>
