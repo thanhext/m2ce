@@ -37,15 +37,16 @@
             <column name="entity_id"/>
             <column name="store_id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="BANNER_ENTITY_STORE_ENTITY_ID_BANNER_ENTITY_ENTITY_ID" table="banner_entity_store"
+        <constraint xsi:type="foreign" referenceId="BANNER_ENTITY_STORE_ENTITY_ID_BANNER_ENTITY_ENTITY_ID"
+                    table="banner_entity_store"
                     column="entity_id" referenceTable="banner_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
-        <constraint xsi:type="foreign" referenceId="BANNER_ENTITY_STORE_STORE_ID_STORE_STORE_ID" table="banner_entity_store"
+        <constraint xsi:type="foreign" referenceId="BANNER_ENTITY_STORE_STORE_ID_STORE_STORE_ID"
+                    table="banner_entity_store"
                     column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
         <index referenceId="BANNER_ENTITY_STORE_STORE_ID" indexType="btree">
             <column name="store_id"/>
         </index>
     </table>
-
     <table name="banner_item" resource="default" engine="innodb"
            comment="Banner Item Table">
         <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
@@ -57,7 +58,8 @@
         <column xsi:type="varchar" name="link_type" nullable="true" length="50" comment="Link Type"/>
         <column xsi:type="varchar" name="link_url" nullable="true" length="50" comment="Link Url"/>
         <column xsi:type="varchar" name="content_title" nullable="true" length="255" comment="Content Title"/>
-        <column xsi:type="varchar" name="content_description" nullable="true" length="255" comment="Content Description"/>
+        <column xsi:type="varchar" name="content_description" nullable="true" length="255"
+                comment="Content Description"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
