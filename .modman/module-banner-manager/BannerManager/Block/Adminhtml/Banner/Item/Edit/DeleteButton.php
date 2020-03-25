@@ -7,16 +7,52 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
  */
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
+    /**
+     * Get delete button data.
+     *
+     * @return array
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function getButtonData()
     {
-        if(!$this->getObjectId()) { return []; }
-        return [
-                'label' => __('Delete Object'),
-                'class' => 'delete',
-                'on_click' => 'deleteConfirm( \'' . __(
-                    'Are you sure you want to do this?'
-                ) . '\', \'' . $this->getDeleteUrl() . '\')',
-                'sort_order' => 20,
+        $data = [];
+        if ($this->getItemId()) {
+            $data = [
+                'label' => __('Delete'),
+                'on_click' => '',
+                'data_attribute' => [
+                    'mage-init' => [
+                        'Magento_Ui/js/form/button-adapter' => [
+                            'actions' => [
+                                [
+                                    'targetName' => 'banner_item_form.banner_item_form',
+                                    'actionName' => 'deleteBannerItem',
+                                    'params' => [
+                                        $this->getDeleteUrl(),
+                                    ],
+
+                                ]
+                            ],
+                        ],
+                    ],
+                ],
+                'sort_order' => 20
             ];
+        }
+        return $data;
+    }
+
+    /**
+     * Get delete button url.
+     *
+     * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getDeleteUrl()
+    {
+        return $this->getUrl(
+            'banners/item/delete',
+            ['parent_id' => $this->getBannerId(), 'id' => $this->getItemId()]
+        );
     }
 }

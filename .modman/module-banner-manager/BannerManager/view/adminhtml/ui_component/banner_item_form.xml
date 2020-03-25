@@ -3,71 +3,211 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">banner_item_form.banner_item_form_data_source</item>
-            <item name="deps" xsi:type="string">banner_item_form.banner_item_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Object Information</item>
         <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">banner_item_form</item>
+            <item name="deleteConfirmationMessage" translate="true" xsi:type="string">Are you sure you want to delete this banner item?</item>
         </item>
+        <item name="label" xsi:type="string" translate="true">Update Banner Item</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
-        <item name="buttons" xsi:type="array">
-            <item name="back" xsi:type="string">T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\BackButton</item>
-            <item name="delete" xsi:type="string">T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\DeleteButton</item>
-            <item name="reset" xsi:type="string">T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\ResetButton</item>
-            <item name="save" xsi:type="string">T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\SaveButton</item>
-            <item name="save_and_continue" xsi:type="string">T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\SaveAndContinueButton</item>
-        </item>
     </argument>
+    <settings>
+        <buttons>
+            <button name="cancel" class="T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\CancelButton"/>
+            <button name="delete" class="T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\DeleteButton"/>
+            <button name="save" class="T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit\SaveButton"/>
+        </buttons>
+        <namespace>banner_item_form</namespace>
+        <ajaxSave>true</ajaxSave>
+        <ajaxSaveType>simple</ajaxSaveType>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>banner_item_form.banner_item_form_data_source</dep>
+        </deps>
+    </settings>
     <dataSource name="banner_item_form_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">T2N\BannerManager\Model\Banner\Item\DataProvider</argument>
-            <argument name="name" xsi:type="string">banner_item_form_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
-            <argument name="requestFieldName" xsi:type="string">id</argument>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
-                </item>
-            </argument>
-        </argument>
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
         </argument>
+        <settings>
+            <submitUrl path="banners/banner_item/save"/>
+            <validateUrl path="banners/banner_item/validate"/>
+        </settings>
+        <aclResource>Magento_Customer::manage</aclResource>
+        <dataProvider class="T2N\BannerManager\Model\Banner\Item\DataProvider" name="banner_item_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
+    <container name="messages" component="Magento_Ui/js/form/components/html">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="additionalClasses" xsi:type="string">message message-error</item>
+                <item name="visible" xsi:type="boolean">false</item>
+                <item name="imports" xsi:type="array">
+                    <item name="responseData" xsi:type="string">${ $.parentName }:responseData</item>
+                </item>
+                <item name="listens" xsi:type="array">
+                    <item name="responseData.error" xsi:type="string">visible</item>
+                    <item name="responseData.messages" xsi:type="string">content</item>
+                </item>
+            </item>
+        </argument>
+    </container>
     <fieldset name="general">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" />
-<!--                <item name="collapsible" xsi:type="boolean">true</item>-->
-<!--                <item name="opened" xsi:type="boolean">true</item>-->
+                <item name="is_collection" xsi:type="boolean">true</item>
             </item>
         </argument>
-        <field name="entity_id">
+        <settings>
+            <label/>
+            <dataScope/>
+        </settings>
+        <field name="entity_id" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="visible" xsi:type="boolean">false</item>
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="dataScope" xsi:type="string">entity_id</item>
+                    <item name="source" xsi:type="string">item</item>
                 </item>
             </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>entity_id</dataScope>
+            </settings>
         </field>
-        <field name="title">
+        <field name="image" formElement="imageUploader">
+            <settings>
+                <notice translate="true">Not all browsers support all these formats!</notice>
+                <label translate="true">Image</label>
+                <componentType>imageUploader</componentType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">banners/banner/upload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="is_active" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Title</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="sortOrder" xsi:type="number">20</item>
-                    <item name="dataScope" xsi:type="string">title</item>
-                    <item name="validation" xsi:type="array">
-                        <item name="required-entry" xsi:type="boolean">true</item>
-                    </item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="default" xsi:type="number">1</item>
                 </item>
             </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Block</label>
+                <dataScope>is_active</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="title" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Title</label>
+                <dataScope>title</dataScope>
+            </settings>
+        </field>
+        <field name="link" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-identifier" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Link</label>
+                <dataScope>link</dataScope>
+            </settings>
+        </field>
+        <field name="description" sortOrder="40" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+        <field name="action" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Action</label>
+                <notice translate="true">Leave blank to ignore!</notice>
+                <dataScope>action</dataScope>
+            </settings>
+        </field>
+        <field name="class_action" sortOrder="70" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-identifier" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Class Action</label>
+                <notice translate="true">For example: icon, button, ..</notice>
+                <dataScope>class_action</dataScope>
+            </settings>
+        </field>
+        <field name="class_content" sortOrder="80" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-identifier" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Class Content</label>
+                <notice translate="true">For example: bg-white, ..</notice>
+                <dataScope>class_content</dataScope>
+            </settings>
         </field>
     </fieldset>
 </form>

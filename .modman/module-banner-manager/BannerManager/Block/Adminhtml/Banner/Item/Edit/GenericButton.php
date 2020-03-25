@@ -1,37 +1,90 @@
 <?php
+
 namespace T2N\BannerManager\Block\Adminhtml\Banner\Item\Edit;
 
+use Magento\Backend\Block\Widget\Context;
+use T2N\BannerManager\Model\Banner\Item;
+use T2N\BannerManager\Model\Banner\ItemFactory;
 
 /**
  * Class GenericButton
  */
 class GenericButton
 {
-    //putting all the button methods in here.  No "right", but the whole
-    //button/GenericButton thing seems -- not that great -- to begin with
+    /**
+     * @var Context
+     */
+    protected $context;
+    /**
+     * @var ItemFactory
+     */
+    protected $itemFactory;
+
+    /**
+     * GenericButton constructor.
+     *
+     * @param ItemFactory $itemFactory
+     * @param Context     $context
+     */
     public function __construct(
-        \Magento\Backend\Block\Widget\Context $context
+        ItemFactory $itemFactory,
+        Context $context
     ) {
-        $this->context = $context;
+        $this->itemFactory = $itemFactory;
+        $this->context     = $context;
     }
 
-    public function getBackUrl()
+    /**
+     * @return null
+     */
+    public function getItemId()
     {
-        return $this->getUrl('*/*/');
+        $id   = $this->getParam('id');
+        $item = $this->getItemById($id);
+        return $item->getEntityId() ?: null;
     }
 
-    public function getDeleteUrl()
+    /**
+     * @param      $key
+     * @param null $default
+     *
+     * @return mixed
+     */
+    public function getParam($key, $default = null)
     {
-        return $this->getUrl('*/*/delete', ['object_id' => $this->getObjectId()]);
+        return $this->context->getRequest()->getParam($key, $default);
     }
 
-    public function getUrl($route = '', $params = [])
+    /**
+     * @param $id
+     *
+     * @return Item
+     */
+    protected function getItemById($id)
+    {
+        return $this->itemFactory->create()->load($id);
+    }
+
+    /**
+     * @return null
+     */
+    public function getBannerId()
+    {
+        $id   = $this->getParam('id');
+        $item = $this->getItemById($id);
+        return $item->getBannerId() ?: null;
+    }
+
+    /**
+     * Generate url by route and parameters
+     *
+     * @param string $route
+     * @param array  $params
+     *
+     * @return  string
+     */
+    public function getUrl($route = '', array $params = [])
     {
         return $this->context->getUrlBuilder()->getUrl($route, $params);
-    }
-
-    public function getObjectId()
-    {
-        return $this->context->getRequest()->getParam('banner_item_id');
     }
 }
