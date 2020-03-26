@@ -105,7 +105,7 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-identifier" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Identifier</label>
@@ -147,7 +147,7 @@
         <field name="autoplay" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">1</item>
                 </item>
             </argument>
@@ -171,7 +171,7 @@
         <field name="loop" sortOrder="20" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">1</item>
                 </item>
             </argument>
@@ -196,7 +196,7 @@
         <field name="nav" sortOrder="30" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">0</item>
                 </item>
             </argument>
@@ -220,7 +220,7 @@
         <field name="dots" sortOrder="40" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">0</item>
                 </item>
             </argument>
@@ -244,7 +244,7 @@
         <field name="control_nav_thumbs" sortOrder="50" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">0</item>
                 </item>
             </argument>
@@ -268,7 +268,7 @@
         <field name="lazy_load" sortOrder="60" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">1</item>
                 </item>
             </argument>
@@ -292,7 +292,7 @@
         <field name="autoplay_hover_pause" sortOrder="70" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                     <item name="default" xsi:type="number">1</item>
                 </item>
             </argument>
@@ -316,7 +316,7 @@
         <field name="autoplay_speed" sortOrder="80" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">options</item>
                 </item>
             </argument>
             <settings>
@@ -332,7 +332,7 @@
         <field name="width" sortOrder="90" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                 </item>
             </argument>
             <settings>
@@ -348,7 +348,7 @@
         <field name="height" sortOrder="100" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                 </item>
             </argument>
             <settings>
@@ -394,7 +394,7 @@
         <field name="start_position" sortOrder="140" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner_config</item>
+                    <item name="source" xsi:type="string">banner</item>
                 </item>
             </argument>
             <settings>
@@ -411,7 +411,7 @@
         <!--        <field name="thumb_width" sortOrder="150" formElement="input">-->
         <!--            <argument name="data" xsi:type="array">-->
         <!--                <item name="config" xsi:type="array">-->
-        <!--                    <item name="source" xsi:type="string">banner_config</item>-->
+        <!--                    <item name="source" xsi:type="string">banner</item>-->
         <!--                </item>-->
         <!--            </argument>-->
         <!--            <settings>-->
@@ -427,7 +427,7 @@
         <!--        <field name="thumb_height" sortOrder="160" formElement="input">-->
         <!--            <argument name="data" xsi:type="array">-->
         <!--                <item name="config" xsi:type="array">-->
-        <!--                    <item name="source" xsi:type="string">banner_config</item>-->
+        <!--                    <item name="source" xsi:type="string">banner</item>-->
         <!--                </item>-->
         <!--            </argument>-->
         <!--            <settings>-->
@@ -455,15 +455,15 @@
                     <item name="buttonClasses" xsi:type="string">add-new-address-button</item>
                     <item name="actions" xsi:type="array">
                         <item name="0" xsi:type="array">
-                            <item name="targetName" xsi:type="string">${ $.parentName}.banner_items_update_modal.update_banner_item_form_loader</item>
+                            <item name="targetName" xsi:type="string">${ $.parentName}.banner_item_update_modal.update_banner_item_form_loader</item>
                             <item name="actionName" xsi:type="string">destroyInserted</item>
                         </item>
                         <item name="1" xsi:type="array">
-                            <item name="targetName" xsi:type="string">${ $.parentName}.banner_items_update_modal</item>
+                            <item name="targetName" xsi:type="string">${ $.parentName}.banner_item_update_modal</item>
                             <item name="actionName" xsi:type="string">openModal</item>
                         </item>
                         <item name="2" xsi:type="array">
-                            <item name="targetName" xsi:type="string">${ $.parentName}.banner_items_update_modal.update_banner_item_form_loader</item>
+                            <item name="targetName" xsi:type="string">${ $.parentName}.banner_item_update_modal.update_banner_item_form_loader</item>
                             <item name="actionName" xsi:type="string">render</item>
                         </item>
                     </item>
@@ -476,7 +476,7 @@
                 </imports>
             </settings>
         </button>
-        <modal name="banner_items_update_modal">
+        <modal name="banner_item_update_modal">
             <settings>
                 <options>
                     <option name="title" xsi:type="string">Add/Update Banner Item</option>

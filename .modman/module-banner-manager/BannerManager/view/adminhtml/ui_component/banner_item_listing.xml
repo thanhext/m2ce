@@ -86,7 +86,7 @@
                 </item>
             </argument>
         </column>
-        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\PageActions">
+        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\Item\Actions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="resizeEnabled" xsi:type="boolean">false</item>

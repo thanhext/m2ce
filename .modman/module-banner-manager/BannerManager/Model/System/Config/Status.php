@@ -7,7 +7,7 @@ use Magento\Framework\Option\ArrayInterface;
 class Status implements ArrayInterface
 {
     const STATUS_ENABLED = 1;
-    const STATUS_DISABLE = 2;
+    const STATUS_DISABLED = 0;
 
     /**
      * @return array
@@ -16,7 +16,7 @@ class Status implements ArrayInterface
     {
         return [
             [
-                'value' => self::STATUS_DISABLE,
+                'value' => self::STATUS_DISABLED,
                 'label' => __('Disable')
             ],
             [
@@ -32,7 +32,7 @@ class Status implements ArrayInterface
     public function toArray()
     {
         return [
-            self::STATUS_DISABLE => __('Disable'),
+            self::STATUS_DISABLED => __('Disable'),
             self::STATUS_ENABLED => __('Enable')
         ];
     }
