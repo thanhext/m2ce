@@ -1,5 +1,7 @@
 <?php
+
 namespace T2N\BannerManager\Block\Adminhtml\Banner\Edit;
+
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
@@ -9,16 +11,15 @@ class SaveAndContinueButton extends GenericButton implements ButtonProviderInter
 {
     public function getButtonData()
     {
-        
         return [
-            'label' => __('Save and Continue Edit'),
-            'class' => 'save',
+            'label'          => __('Save and Continue Edit'),
+            'class'          => 'save',
             'data_attribute' => [
                 'mage-init' => [
                     'button' => ['event' => 'saveAndContinueEdit'],
                 ],
             ],
-            'sort_order' => 80,
+            'sort_order'     => 80,
         ];
     }
 }

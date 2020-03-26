@@ -1,8 +1,6 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml\Banner;
-
-use T2N\BannerManager\Controller\Adminhtml\Banner;
+namespace T2N\BannerManager\Controller\Adminhtml\Index;
 
 /**
  * Class NewAction

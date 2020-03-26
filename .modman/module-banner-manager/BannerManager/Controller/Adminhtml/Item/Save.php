@@ -1,9 +1,10 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml\Banner;
+namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
+use T2N\BannerManager\Model\Banner\ItemFactory;
+use T2N\BannerManager\Model\BannerItemRepository;
 use Exception;
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Request\DataPersistorInterface;
@@ -11,22 +12,13 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
-use T2N\BannerManager\Model\Banner;
-use T2N\BannerManager\Model\BannerFactory;
-use T2N\BannerManager\Model\BannerRepository;
 use T2N\BannerManager\Model\System\Config\Status;
 
 /**
  * Class Save
  */
-class Save extends \T2N\BannerManager\Controller\Adminhtml\Banner
+class Save extends BannerItem
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    const ADMIN_RESOURCE = 'T2N_BannerManager:banner';
 
     /**
      * @var DataPersistorInterface
@@ -34,21 +26,21 @@ class Save extends \T2N\BannerManager\Controller\Adminhtml\Banner
     protected $dataPersistor;
 
     /**
-     * @var BannerRepository
+     * @var BannerItemRepository
      */
-    protected $bannerRepository;
+    protected $bannerItemRepository;
 
     public function __construct(
         Context $context,
+        ItemFactory $itemFactory,
         Registry $coreRegistry,
-        BannerFactory $bannerFactory,
-        BannerRepository $bannerRepository,
+        PageFactory $resultPageFactory,
         DataPersistorInterface $dataPersistor,
-        PageFactory $resultPageFactory
+        BannerItemRepository $bannerItemRepository
     ) {
-        $this->dataPersistor    = $dataPersistor;
-        $this->bannerRepository = $bannerRepository;
-        parent::__construct($context, $bannerFactory, $coreRegistry, $resultPageFactory);
+        $this->dataPersistor     = $dataPersistor;
+        $this->bannerItemRepository = $bannerItemRepository;
+        parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
     }
 
     /**
@@ -66,24 +58,23 @@ class Save extends \T2N\BannerManager\Controller\Adminhtml\Banner
             if (isset($data['is_active']) && $data['is_active'] === 'true') {
                 $data['is_active'] = Status::STATUS_ENABLED;
             }
+
             if (empty($data['entity_id'])) {
                 $data['entity_id'] = null;
             }
 
-            /** @var Banner $model */
-            $model = $this->_bannerFactory->create();
-
-            $id = $this->getRequest()->getParam('id');
+            /** @var \T2N\BannerManager\Model\Banner $model */
+            $model = $this->_itemFactory->create();
+            $id    = $this->getRequest()->getParam('id');
             if ($id) {
-                $model = $this->bannerRepository->getById($id);
+                $model = $this->bannerItemRepository->getById($id);
             }
 
             $model->setData($data);
-
             try {
-                $this->bannerRepository->save($model);
+                $this->bannerItemRepository->save($model);
                 $this->messageManager->addSuccess(__('You saved the thing.'));
-                $this->dataPersistor->clear('banner_entity');
+                $this->dataPersistor->clear('banner_item');
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId(), '_current' => true]);
                 }
@@ -94,8 +85,8 @@ class Save extends \T2N\BannerManager\Controller\Adminhtml\Banner
                 $this->messageManager->addException($e, __('Something went wrong while saving the data.'));
             }
 
-            $this->dataPersistor->set('banner_entity', $data);
-            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
+            $this->dataPersistor->set('banner_item', $data);
+            return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
         }
         return $resultRedirect->setPath('*/*/');
     }

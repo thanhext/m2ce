@@ -1,37 +1,62 @@
 <?php
+
 namespace T2N\BannerManager\Block\Adminhtml\Banner\Edit;
 
+use Magento\Backend\Block\Widget\Context;
 
 /**
  * Class GenericButton
  */
 class GenericButton
 {
-    //putting all the button methods in here.  No "right", but the whole
-    //button/GenericButton thing seems -- not that great -- to begin with
+    /**
+     * @var Context
+     */
+    protected $context;
+
+    /**
+     * GenericButton constructor.
+     *
+     * @param Context $context
+     */
     public function __construct(
-        \Magento\Backend\Block\Widget\Context $context
+        Context $context
     ) {
         $this->context = $context;
     }
 
+    /**
+     * @return string
+     */
     public function getBackUrl()
     {
         return $this->getUrl('*/*/');
     }
 
-    public function getDeleteUrl()
-    {
-        return $this->getUrl('*/*/delete', ['object_id' => $this->getObjectId()]);
-    }
-
+    /**
+     * @param string $route
+     * @param array  $params
+     *
+     * @return string
+     */
     public function getUrl($route = '', $params = [])
     {
         return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
 
-    public function getObjectId()
+    /**
+     * @return string
+     */
+    public function getDeleteUrl()
     {
-        return $this->context->getRequest()->getParam('entity_id');
+        return $this->getUrl('*/*/delete', ['id' => $this->getId()]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->context->getRequest()->getParam('id');
     }
 }

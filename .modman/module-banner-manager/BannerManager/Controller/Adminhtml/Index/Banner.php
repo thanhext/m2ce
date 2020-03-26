@@ -1,6 +1,6 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml;
+namespace T2N\BannerManager\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -10,7 +10,7 @@ use T2N\BannerManager\Model\BannerFactory;
 
 abstract class Banner extends Action
 {
-    const ADMIN_RESOURCE = 'T2N_BannerManager::banner';
+    const ADMIN_RESOURCE = 'Ecommage_BannerManager::banner';
     /**
      * @var BannerFactory
      */
@@ -27,10 +27,10 @@ abstract class Banner extends Action
     /**
      * Banner constructor.
      *
-     * @param Context       $context
+     * @param Context        $context
      * @param BannerFactory $bannerFactory
-     * @param Registry      $coreRegistry
-     * @param PageFactory   $resultPageFactory
+     * @param Registry       $coreRegistry
+     * @param PageFactory    $resultPageFactory
      */
     public function __construct(
         Context $context,
@@ -39,7 +39,7 @@ abstract class Banner extends Action
         PageFactory $resultPageFactory
     ) {
 
-        $this->_bannerFactory     = $bannerFactory;
+        $this->_bannerFactory    = $bannerFactory;
         $this->_coreRegistry      = $coreRegistry;
         $this->_resultPageFactory = $resultPageFactory;
         parent::__construct($context);

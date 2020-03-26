@@ -1,23 +1,22 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml\Banner;
+namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
 use Exception;
-use T2N\BannerManager\Controller\Adminhtml\Banner;
 
 /**
  * Class Delete
  */
-class Delete extends Banner
+class Delete extends BannerItem
 {
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
         if ($id) {
-            $model = $this->_bannerFactory->create();
+            $model = $this->_itemFactory->create();
             $model->load($id);
             if (!$model->getId()) {
-                $this->messageManager->addError(__('Banner is no longer exist'));
+                $this->messageManager->addError(__('Banner Item is no longer exist'));
             } else {
                 try {
                     $model->delete();
@@ -31,4 +30,3 @@ class Delete extends Banner
         }
     }
 }
-

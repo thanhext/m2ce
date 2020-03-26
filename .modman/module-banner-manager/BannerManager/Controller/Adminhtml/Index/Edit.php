@@ -1,9 +1,8 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml\Banner;
+namespace T2N\BannerManager\Controller\Adminhtml\Index;
 
 use Magento\Backend\Model\View\Result\Page;
-use T2N\BannerManager\Controller\Adminhtml\Banner;
 
 /**
  * Class Edit
@@ -35,5 +34,4 @@ class Edit extends Banner
         $resultPage->getConfig()->getTitle()->prepend(__('Banner Edit'));
         return $resultPage;
     }
-
 }

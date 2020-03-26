@@ -1,17 +1,17 @@
 <?php
-namespace T2N\BannerManager\Ui\Component\Listing\DataProviders\Banners;
+namespace T2N\BannerManager\Ui\Component\Listing\DataProviders;
 
 
 /**
  * Class Listing
  */
-class Listing extends \Magento\Ui\DataProvider\AbstractDataProvider
-{    
+class BannerItem extends \Magento\Ui\DataProvider\AbstractDataProvider
+{
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-        \T2N\BannerManager\Model\ResourceModel\Banner\CollectionFactory $collectionFactory,
+        \T2N\BannerManager\Model\ResourceModel\Banner\Item\CollectionFactory $collectionFactory,
         array $meta = [],
         array $data = []
     ) {

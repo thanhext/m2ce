@@ -1,12 +1,7 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml\Banner;
+namespace T2N\BannerManager\Controller\Adminhtml\Index;
 
-use T2N\BannerManager\Controller\Adminhtml\Banner;
-
-/**
- * Class Index
- */
 class Index extends Banner
 {
     public function execute()

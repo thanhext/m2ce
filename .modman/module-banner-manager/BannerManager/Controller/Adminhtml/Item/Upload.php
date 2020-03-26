@@ -1,15 +1,13 @@
 <?php
 
-namespace T2N\BannerManager\Controller\Adminhtml\Banner;
+namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Theme\Model\Design\Config\FileUploader\FileProcessor;
-use T2N\BannerManager\Controller\Adminhtml\Banner;
-use T2N\BannerManager\Model\BannerFactory;
+use T2N\BannerManager\Model\Banner\ItemFactory;
 
 /**
  * File Uploads Action Controller
@@ -17,7 +15,7 @@ use T2N\BannerManager\Model\BannerFactory;
  * @api
  * @since 100.1.0
  */
-class Upload extends Banner
+class Upload extends BannerItem
 {
     /**
      * @var FileProcessor
@@ -31,17 +29,17 @@ class Upload extends Banner
      * @param Context       $context
      * @param Registry      $coreRegistry
      * @param FileProcessor $fileProcessor
-     * @param BannerFactory $bannerFactory
+     * @param ItemFactory   $itemFactory
      * @param PageFactory   $resultPageFactory
      */
     public function __construct(
         Context $context,
         Registry $coreRegistry,
         FileProcessor $fileProcessor,
-        BannerFactory $bannerFactory,
+        ItemFactory $itemFactory,
         PageFactory $resultPageFactory
     ) {
-        parent::__construct($context, $bannerFactory, $coreRegistry, $resultPageFactory);
+        parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
         $this->fileProcessor = $fileProcessor;
     }
 

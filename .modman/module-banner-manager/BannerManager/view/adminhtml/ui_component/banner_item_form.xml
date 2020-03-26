@@ -32,8 +32,8 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="banners/banner_item/save"/>
-            <validateUrl path="banners/banner_item/validate"/>
+            <submitUrl path="banner/item/save"/>
+            <validateUrl path="banner/item/validate"/>
         </settings>
         <aclResource>Magento_Customer::manage</aclResource>
         <dataProvider class="T2N\BannerManager\Model\Banner\Item\DataProvider" name="banner_item_form_data_source">
@@ -92,7 +92,7 @@
                         <allowedExtensions>jpg jpeg gif png</allowedExtensions>
                         <maxFileSize>2097152</maxFileSize>
                         <uploaderConfig>
-                            <param xsi:type="string" name="url">banners/banner/upload</param>
+                            <param xsi:type="string" name="url">banner/item/upload</param>
                         </uploaderConfig>
                     </settings>
                 </imageUploader>
@@ -107,7 +107,7 @@
             </argument>
             <settings>
                 <dataType>boolean</dataType>
-                <label translate="true">Enable Block</label>
+                <label translate="true">Enabled</label>
                 <dataScope>is_active</dataScope>
             </settings>
             <formElements>

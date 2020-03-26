@@ -4,7 +4,7 @@ declare(strict_types=1);
  * Copyright © Thomas Nguyen, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace T2N\BannerManager\Controller\Adminhtml\Banner\Item;
+namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Action\HttpGetActionInterface;
