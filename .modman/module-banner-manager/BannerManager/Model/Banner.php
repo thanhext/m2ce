@@ -38,11 +38,16 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      * @param $data
      *
      * @return string
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function jsonEncode($data)
     {
         if (is_array($data)) {
-            return (string)json_encode($data);
+            $result = json_encode($data);
+            if (false === $result) {
+                throw new \Magento\Framework\Exception\LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
+            }
+            return $result;
         }
 
         return $data;
