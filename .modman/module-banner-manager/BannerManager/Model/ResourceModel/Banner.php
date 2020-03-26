@@ -15,7 +15,7 @@ use Magento\Store\Model\StoreManagerInterface;
 /**
  * Class Banner
  */
-class Banner extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Banner extends AbstractDb
 {
     /**
      * Store manager
