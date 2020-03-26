@@ -12,7 +12,7 @@
             comment="Entity ID"/>
         <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Banner Title"/>
         <column xsi:type="varchar" name="identifier" nullable="false" length="255" comment="Banner String Identifier"/>
-        <column xsi:type="mediumtext" name="banner_config" nullable="true" comment="Banner Config"/>
+        <column xsi:type="mediumtext" name="options" nullable="true" comment="Banner Options"/>
         <column xsi:type="mediumtext" name="banner_items" nullable="true" comment="Banner Items"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
             comment="Banner Creation Time"/>

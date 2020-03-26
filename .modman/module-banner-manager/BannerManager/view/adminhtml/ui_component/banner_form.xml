@@ -41,8 +41,9 @@
             </item>
         </argument>
     </dataSource>
-    <fieldset name="banner_general">
+    <fieldset name="general">
         <settings>
+            <dataScope>data</dataScope>
             <label translate="true">Banner Information</label>
         </settings>
         <field name="entity_id" formElement="input">
@@ -139,9 +140,9 @@
             </formElements>
         </field>
     </fieldset>
-    <fieldset name="banner_settings">
+    <fieldset name="options">
         <settings>
-            <label translate="true">Banner Settings</label>
+            <label translate="true">Banner Options</label>
         </settings>
         <field name="autoplay" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
@@ -443,6 +444,9 @@
     <fieldset name="banner_items">
         <settings>
             <label translate="true">Banner Items</label>
+            <imports>
+                <link name="visible">${ $.provider}:data.entity_id</link>
+            </imports>
         </settings>
         <button name="add_banner_id" component="T2N_BannerManager/js/banner/item">
             <argument name="data" xsi:type="array">

@@ -35,7 +35,7 @@
             <submitUrl path="banner/item/save"/>
             <validateUrl path="banner/item/validate"/>
         </settings>
-        <aclResource>Magento_Customer::manage</aclResource>
+        <aclResource>T2N_BannerManager::banner</aclResource>
         <dataProvider class="T2N\BannerManager\Model\Banner\Item\DataProvider" name="banner_item_form_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>

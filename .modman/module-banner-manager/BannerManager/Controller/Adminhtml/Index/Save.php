@@ -19,7 +19,6 @@ use T2N\BannerManager\Model\System\Config\Status;
  */
 class Save extends Banner
 {
-
     /**
      * @var DataPersistorInterface
      */
@@ -71,7 +70,6 @@ class Save extends Banner
             }
 
             $model->setData($data);
-
             try {
                 $this->bannerRepository->save($model);
                 $this->messageManager->addSuccess(__('You saved the thing.'));
