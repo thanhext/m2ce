@@ -314,18 +314,14 @@
             </formElements>
         </field>
         <field name="autoplay_speed" sortOrder="80" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">options</item>
-                </item>
-            </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
                     <rule name="validate-number" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
+                <addAfter>ms</addAfter>
                 <label translate="true">Autoplay Speed</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
                 <dataScope>autoplay_speed</dataScope>
             </settings>
         </field>
@@ -444,9 +440,6 @@
     <fieldset name="banner_items">
         <settings>
             <label translate="true">Banner Items</label>
-            <imports>
-                <link name="visible">${ $.provider}:data.entity_id</link>
-            </imports>
         </settings>
         <button name="add_banner_id" component="T2N_BannerManager/js/banner/item">
             <argument name="data" xsi:type="array">
@@ -470,8 +463,10 @@
                 </item>
             </argument>
             <settings>
+                <visible>false</visible>
                 <title translate="true">Add New Banner Item</title>
                 <imports>
+                    <link name="visible">${ $.provider}:data.banner_id</link>
                     <link name="parentId">${ $.provider}:data.banner_id</link>
                 </imports>
             </settings>
