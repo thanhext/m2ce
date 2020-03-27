@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Backend\Block\Page\Copyright" type="T2N\AdminLogo\Block\Page\Copyright" />
+    <preference for="Magento\Backend\Block\Page\Header" type="T2N\AdminLogo\Block\Page\Header" />
+    <preference for="Magento\Backend\Block\Page\Footer" type="T2N\AdminLogo\Block\Page\Footer" />
+</config>

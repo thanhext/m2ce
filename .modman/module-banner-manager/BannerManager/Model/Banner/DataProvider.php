@@ -69,6 +69,9 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $items = $this->collection->getItems();
 
         foreach ($items as $item) {
+            if (is_string($item->getOptions())) {
+                $item->setData('options', json_decode($item->getOptions(), true));
+            }
             $this->loadedData[$item->getId()] = $item->getData();
         }
 

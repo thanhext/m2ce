@@ -248,8 +248,7 @@ class Banner extends AbstractDb
      */
     public function save(AbstractModel $object)
     {
-        $this->entityManager->save($object);
-        return $this;
+        return parent::save($object);
     }
 
     /**

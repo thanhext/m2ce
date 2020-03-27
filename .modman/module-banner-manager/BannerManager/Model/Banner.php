@@ -53,6 +53,19 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
         return $data;
     }
 
+    protected function jsonDecode($data)
+    {
+        if (is_string($data)) {
+            $result = json_decode($data, true);
+            if (false === $result) {
+                throw new \Magento\Framework\Exception\LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
+            }
+            return $result;
+        }
+
+        return $data;
+    }
+
     /**
      * Prevent banners recursion
      *
@@ -115,6 +128,12 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      */
     public function getOptions()
     {
+        $data = $this->getData(self::OPTIONS);
+        if (is_array($data)) {
+            $data = $this->jsonEncode($data);
+            $this->setData(self::OPTIONS, $data);
+        }
+
         return $this->getData(self::OPTIONS);
     }
 
@@ -125,7 +144,12 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      */
     public function getBannerItems()
     {
-        return $this->getData(self::BANNER_ITEMS);
+        $data = $this->getData(self::BANNER_ITEMS);
+        if (is_string($data)) {
+            return $this->jsonDecode($data);
+        }
+
+        return $data;
     }
 
     /**

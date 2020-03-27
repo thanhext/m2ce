@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Blog
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="amasty_blog_recent_posts" class="Amasty\Blog\Block\Sidebar\Recentpost">
+        <label translate="true">Amasty Blog Recent Posts</label>
+        <description translate="true">Blog Recent Posts</description>
+        <parameters>
+            <parameter name="header_text" xsi:type="text" required="false" visible="true">
+                <label translate="true">Header Text</label>
+            </parameter>
+            <parameter name="posts_limit" xsi:type="text" required="false" visible="true">
+                <label translate="true">Posts Limit</label>
+            </parameter>
+            <parameter name="show_images" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Post Images in the Widget View</label>
+            </parameter>
+            <parameter name="display_date" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Date for Recent Posts</label>
+            </parameter>
+            <parameter name="date_manner" xsi:type="select" required="false" visible="true" source_model="Amasty\Blog\Model\Config\Source\Date">
+                <label translate="true">Date Format</label>
+                <depends>
+                    <parameter name="display_date" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="display_short" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Short Content for Recent Posts</label>
+            </parameter>
+            <parameter name="short_limit" xsi:type="text" required="false" visible="true">
+                <label translate="true">Short Content Limit</label>
+                <depends>
+                    <parameter name="display_short" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="amasty_widget_categories" xsi:type="multiselect" required="false" visible="true" source_model="Amasty\Blog\Model\ResourceModel\Categories\Collection">
+                <label translate="true">Post Categories for the Widget</label>
+            </parameter>
+            <parameter name="amasty_widget_tags" xsi:type="multiselect" required="false" visible="true" source_model="Amasty\Blog\Model\ResourceModel\Tag\Collection">
+                <label translate="true">Post Tags for the Widget</label>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="sidebar.main">
+                <template name="default" value="default" />
+            </container>
+            <container name="sidebar.additional">
+                <template name="default" value="default" />
+            </container>
+        </containers>
+    </widget>
+    <widget id="amasty_blog_category_widget" class="Amasty\Blog\Block\Sidebar\Category">
+        <label translate="true">Amasty Blog Categories</label>
+        <description translate="true">Blog Categories</description>
+        <parameters>
+            <parameter name="header_text" xsi:type="text" required="false" visible="true">
+                <label translate="true">Header Text</label>
+            </parameter>
+            <parameter name="categories_limit" xsi:type="text" required="false" visible="true">
+                <label translate="true">Categories Limit</label>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="sidebar.main">
+                <template name="default" value="default" />
+            </container>
+            <container name="sidebar.additional">
+                <template name="default" value="default" />
+            </container>
+        </containers>
+    </widget>
+    <widget id="amasty_blog_recent_comments_widget" class="Amasty\Blog\Block\Sidebar\Recentcomments">
+        <label translate="true">Amasty Blog Recent Comments</label>
+        <description translate="true">Blog Recent Comments</description>
+        <parameters>
+            <parameter name="header_text" xsi:type="text" required="false" visible="true">
+                <label translate="true">Header Text</label>
+            </parameter>
+            <parameter name="comments_limit" xsi:type="text" required="false" visible="true">
+                <label translate="true">Comments Limit</label>
+            </parameter>
+            <parameter name="display_date" xsi:type="select" required="false" visible="true" source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show Date for Recent Comments</label>
+            </parameter>
+            <parameter name="date_manner" xsi:type="select" required="false" visible="true" source_model="Amasty\Blog\Model\Config\Source\Date">
+                <label translate="true">Date Format</label>
+                <depends>
+                    <parameter name="display_date" value="1" />
+                </depends>
+            </parameter>
+        </parameters>
+        <containers>
+            <container name="sidebar.main">
+                <template name="default" value="default" />
+            </container>
+            <container name="sidebar.additional">
+                <template name="default" value="default" />
+            </container>
+        </containers>
+    </widget>
+    <widget id="amasty_blog_tags_widget" class="Amasty\Blog\Block\Sidebar\Tag">
+        <label translate="true">Amasty Blog Tags</label>
+        <description translate="true">Blog Tags</description>
+        <containers>
+            <container name="sidebar.main">
+                <template name="default" value="default" />
+            </container>
+            <container name="sidebar.additional">
+                <template name="default" value="default" />
+            </container>
+        </containers>
+    </widget>
+    <widget id="amasty_blog_featured_posts_widget" class="Amasty\Blog\Block\Featured">
+        <label translate="true">Amasty Blog Featured Posts</label>
+        <description translate="true">Blog Featured Posts</description>
+    </widget>
+</widgets>

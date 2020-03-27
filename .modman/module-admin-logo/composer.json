@@ -1,0 +1,23 @@
+{
+    "name": "t2n/module-admin-logo",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "camph@ecommage.com",
+            "name": "Phan Ho Cam"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "version": "1.0.1",
+    "autoload": {
+        "psr-4": {
+            "T2N\\AdminLogo\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

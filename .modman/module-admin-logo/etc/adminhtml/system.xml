@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="admin" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+            <resource>T2N_AdminLogo::logo_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Logo Configuration</label>
+                <field id="icon" type="image" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Icon Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">logo/adminicon</upload_dir>
+                    <base_url type="media" scope_info="1">logo/adminicon</base_url>
+                </field>
+                <field id="logo" type="image" sortOrder="112" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Logo Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">logo/adminlogo</upload_dir>
+                    <base_url type="media" scope_info="1">logo/adminlogo</base_url>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

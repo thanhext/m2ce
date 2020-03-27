@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Blog
+ */
+?>
+<?php
+$categories = $block->getCategories();
+$categoriesCount = $categories->getSize();
+?>
+<?php if ($categoriesCount): ?>
+    <div class="amblog-category">
+        <?= $block->escapeHtml(__('Posted in: ')); ?>
+        <?php foreach ($categories as $key => $category): ?>
+            <a class="amblog-ref"
+               href="<?= $block->escapeUrl($category->getUrl()); ?>"
+               title="<?= $block->escapeHtml($category->getName()); ?>"><?= $block->escapeHtml($category->getName()); ?></a><?= $categoriesCount > $key ? ',' : ''; ?>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

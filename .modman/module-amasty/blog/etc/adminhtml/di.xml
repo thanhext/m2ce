@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Blog
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\Blog\Model\Config\Backend\SimpleText">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="escaper" xsi:type="object">Magento\Framework\Escaper</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Blog\Model\Config\Source\EmailTemplate" type="Amasty\Blog\Model\Config\Source\AbstractTemplate">
+        <arguments>
+            <argument name="origTemplateCode" xsi:type="string">amblog_notify_admin_new_comment_email_template</argument>
+        </arguments>
+    </virtualType>
+
+</config>

@@ -21,12 +21,12 @@ class Delete extends Banner
                 try {
                     $model->delete();
                     $this->messageManager->addSuccess(__('Deleted Successfully!'));
-                    $this->_redirect('*/*/');
                 } catch (Exception $e) {
                     $this->messageManager->addError($e->getMessage());
                     $this->_redirect('*/*/edit', ['id' => $model->getId()]);
                 }
             }
         }
+        return $this->_redirect('*/*/');
     }
 }
