@@ -21,7 +21,7 @@ class Upload extends BannerItem
     /**
      * Image uploader
      *
-     * @var \Magento\Catalog\Model\ImageUploader
+     * @var \T2N\BannerManager\Model\ImageUploader
      */
     protected $imageUploader;
 
@@ -54,13 +54,6 @@ class Upload extends BannerItem
     {
         try {
             $result = $this->imageUploader->saveFileToTmpDir('image');
-            $result['cookie'] = [
-                'name' => $this->_getSession()->getName(),
-                'value' => $this->_getSession()->getSessionId(),
-                'lifetime' => $this->_getSession()->getCookieLifetime(),
-                'path' => $this->_getSession()->getCookiePath(),
-                'domain' => $this->_getSession()->getCookieDomain(),
-            ];
         } catch (\Exception $e) {
             $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
         }
