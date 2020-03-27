@@ -8,6 +8,7 @@ use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Theme\Model\Design\Config\FileUploader\FileProcessor;
 use T2N\BannerManager\Model\Banner\ItemFactory;
+use T2N\BannerManager\Model\ImageUploader;
 
 /**
  * File Uploads Action Controller
@@ -18,10 +19,11 @@ use T2N\BannerManager\Model\Banner\ItemFactory;
 class Upload extends BannerItem
 {
     /**
-     * @var FileProcessor
-     * @since 100.1.0
+     * Image uploader
+     *
+     * @var \Magento\Catalog\Model\ImageUploader
      */
-    protected $fileProcessor;
+    protected $imageUploader;
 
     /**
      * Upload constructor.
@@ -37,10 +39,11 @@ class Upload extends BannerItem
         Registry $coreRegistry,
         FileProcessor $fileProcessor,
         ItemFactory $itemFactory,
-        PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        ImageUploader $imageUploader
     ) {
         parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
-        $this->fileProcessor = $fileProcessor;
+        $this->imageUploader = $imageUploader;
     }
 
     /**
@@ -49,7 +52,18 @@ class Upload extends BannerItem
      */
     public function execute()
     {
-        $result = $this->fileProcessor->saveToTmp(key($_FILES));
+        try {
+            $result = $this->imageUploader->saveFileToTmpDir('image');
+            $result['cookie'] = [
+                'name' => $this->_getSession()->getName(),
+                'value' => $this->_getSession()->getSessionId(),
+                'lifetime' => $this->_getSession()->getCookieLifetime(),
+                'path' => $this->_getSession()->getCookiePath(),
+                'domain' => $this->_getSession()->getCookieDomain(),
+            ];
+        } catch (\Exception $e) {
+            $result = ['error' => $e->getMessage(), 'errorcode' => $e->getCode()];
+        }
         return $this->resultFactory->create(ResultFactory::TYPE_JSON)->setData($result);
     }
 }

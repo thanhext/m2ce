@@ -44,31 +44,22 @@
         </arguments>
     </type>
 
-
-    <virtualType name="T2N\BannerManager\Model\Config\MetadataProvider" type="Magento\Theme\Model\Design\Config\MetadataProvider">
+    <virtualType name="T2N\BannerManager\Model\ImageImageUpload" type="T2N\BannerManager\Model\ImageUploader">
         <arguments>
-            <argument name="metadata" xsi:type="array">
-                <item name="image" xsi:type="array">
-                    <item name="path" xsi:type="string">t2n/bannerconfig.xml/image_path</item>
-                    <item name="fieldset" xsi:type="string">general</item>
-                    <item name="backend_model" xsi:type="string">Magento\Theme\Model\Design\Backend\Image</item>
-                    <item name="use_in_grid" xsi:type="boolean">true</item>
-                </item>
+            <argument name="baseTmpPath" xsi:type="string">banner/tmp/item</argument>
+            <argument name="basePath" xsi:type="string">banner/item</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
             </argument>
         </arguments>
     </virtualType>
-
-    <virtualType name="T2N\BannerManager\Model\FileUploader\FileProcessor" type="Magento\Theme\Model\Design\Config\FileUploader\FileProcessor">
+    <type name="T2N\BannerManager\Controller\Adminhtml\Item\Upload">
         <arguments>
-            <argument name="metadata" xsi:type="array">
-                <item name="image" xsi:type="array">
-                    <item name="path" xsi:type="string">t2n/bannerconfig.xml/image_path</item>
-                    <item name="fieldset" xsi:type="string">general</item>
-                    <item name="backend_model" xsi:type="string">Magento\Theme\Model\Design\Backend\Image</item>
-                    <item name="use_in_grid" xsi:type="boolean">true</item>
-                </item>
-            </argument>
+            <argument name="imageUploader" xsi:type="object">T2N\BannerManager\Model\ImageImageUpload</argument>
         </arguments>
-    </virtualType>
+    </type>
 
 </config>
