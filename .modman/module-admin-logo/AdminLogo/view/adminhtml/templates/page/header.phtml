@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
+ * Copyright © Thomas Nguyen, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 
@@ -12,7 +12,7 @@
     case 'logo': ?>
         <?php $edition = $block->hasEdition() ? 'data-edition="' . $block->escapeHtml($block->getEdition()) . '"' : ''; ?>
         <?php if ($block->getCurrentHandle() == "adminhtml_auth_login"): ?>
-            <?php $logoSrc = ($block->getLogoConfig()) ? $block->escapeHtml($block->getLogoUrl($block->getLogoConfig())) : $block->getViewFileUrl('T2N_AdminLogo::images/t2n-logo.png') ?>
+            <?php $logoSrc = ($block->getLogoConfig()) ? $block->escapeHtml($block->getLogoUrl($block->getLogoConfig())) : $block->getViewFileUrl('T2N_AdminLogo::images/stvn-logo.png') ?>
         <?php else: ?>
             <?php $logoSrc = ($block->getIconConfig()) ? $block->escapeHtml($block->getIconUrl($block->getIconConfig())) : $block->getViewFileUrl('T2N_AdminLogo::images/logo.svg') ?>
         <?php endif; ?>

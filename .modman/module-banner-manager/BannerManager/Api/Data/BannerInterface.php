@@ -45,14 +45,14 @@ interface BannerInterface
     /**
      * Get options
      *
-     * @return string|null
+     * @return array|null
      */
     public function getOptions();
 
     /**
      * Get banner items
      *
-     * @return string|null
+     * @return array|null
      */
     public function getBannerItems();
 
@@ -104,18 +104,18 @@ interface BannerInterface
     /**
      * Set options
      *
-     * @param string|array $options
+     * @param null|array $options
      * @return BannerInterface
      */
-    public function setOptions($options);
+    public function setOptions(array $options = null);
 
     /**
      * Set banner items
      *
-     * @param string|array $items
+     * @param null|array $items
      * @return BannerInterface
      */
-    public function setBannerItems($items);
+    public function setBannerItems(array $items = null);
 
     /**
      * Set creation time

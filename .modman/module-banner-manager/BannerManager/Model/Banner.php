@@ -124,23 +124,22 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     /**
      * Retrieve banner options
      *
-     * @return string
+     * @return array|null
      */
     public function getOptions()
     {
         $data = $this->getData(self::OPTIONS);
-        if (is_array($data)) {
-            $data = $this->jsonEncode($data);
-            $this->setData(self::OPTIONS, $data);
+        if (is_string($data)) {
+            return $this->jsonDecode($data);
         }
 
-        return $this->getData(self::OPTIONS);
+        return $data;
     }
 
     /**
      * Retrieve banner items
      *
-     * @return string
+     * @return array|null
      */
     public function getBannerItems()
     {
@@ -221,11 +220,11 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     /**
      * Set options
      *
-     * @param string|array $options
+     * @param null|array $options
      *
      * @return BannerInterface
      */
-    public function setOptions($options)
+    public function setOptions(array $options = null)
     {
         return $this->setData(self::OPTIONS, $this->jsonEncode($options));
     }
@@ -233,11 +232,11 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     /**
      * Set banner items
      *
-     * @param string|array $items
+     * @param null|array $items
      *
      * @return BannerInterface
      */
-    public function setBannerItems($items)
+    public function setBannerItems(array $items = null)
     {
         return $this->setData(self::BANNER_ITEMS, $this->jsonEncode($items));
     }

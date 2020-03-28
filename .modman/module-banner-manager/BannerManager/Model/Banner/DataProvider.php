@@ -66,23 +66,40 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         if (isset($this->loadedData)) {
             return $this->loadedData;
         }
-        $items = $this->collection->getItems();
-
-        foreach ($items as $item) {
-            if (is_string($item->getOptions())) {
-                $item->setData('options', json_decode($item->getOptions(), true));
-            }
-            $this->loadedData[$item->getId()] = $item->getData();
+        $banners = $this->collection->getItems();
+        /** @var \T2N\BannerManager\Model\Banner $item */
+        foreach ($banners as $banner) {
+            $data = $this->_prepareData($banner, ['options', 'banner_items']);
+            $this->loadedData[$banner->getId()] = $data;
         }
 
         $data = $this->dataPersistor->get('banner_entity');
         if (!empty($data)) {
-            $item = $this->collection->getNewEmptyItem();
-            $item->setData($data);
-            $this->loadedData[$item->getId()] = $item->getData();
+            $banner = $this->collection->getNewEmptyItem();
+            $banner->setData($data);
+            $this->loadedData[$banner->getId()] = $banner->getData();
             $this->dataPersistor->clear('banner_entity');
         }
 
         return $this->loadedData;
     }
+
+    /**
+     * @param       $banner
+     * @param array $fields
+     *
+     * @return mixed
+     */
+    private function _prepareData($banner, $fields = [])
+    {
+        foreach ($fields as $field) {
+            $result = $banner->getData($field);
+            if (is_string($result)) {
+                $banner->setData($field, json_decode($result, true));
+            }
+        }
+
+        return $banner->getData();
+    }
+
 }

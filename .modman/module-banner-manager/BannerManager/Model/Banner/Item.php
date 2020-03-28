@@ -18,19 +18,23 @@ use T2N\BannerManager\Api\Data\ItemInterface;
  *
  * @package T2N\BannerManager\Model\Banner
  */
-class Item extends AbstractModel implements
-    ItemInterface,
-    IdentityInterface
+class Item extends AbstractModel implements ItemInterface, IdentityInterface
 {
     const CACHE_TAG = 'banner_item';
-
+    /**
+     * @var string
+     */
     protected $_eventPrefix = self::CACHE_TAG;
-
+    /**
+     * @var string
+     */
     protected $_eventObject = 'banner_item';
-
+    /**
+     * @var string
+     */
     protected $_idFieldName = 'entity_id';
     /**
-     * @var
+     * @var StoreManagerInterface
      */
     protected $_storeManager;
 
@@ -39,6 +43,7 @@ class Item extends AbstractModel implements
      *
      * @param Context               $context
      * @param Registry              $registry
+     * @param StoreManagerInterface $storeManager
      * @param AbstractResource|null $resource
      * @param AbstractDb|null       $resourceCollection
      * @param array                 $data
@@ -100,6 +105,14 @@ class Item extends AbstractModel implements
             }
         }
         return $url;
+    }
+
+    /**
+     * @return bool|\Zend_Validate_Interface
+     */
+    public function validate()
+    {
+        return parent::_createValidatorBeforeSave();
     }
 
     /**

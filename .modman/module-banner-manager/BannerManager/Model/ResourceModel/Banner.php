@@ -81,7 +81,12 @@ class Banner extends AbstractDb
     {
         $options = $object->getOptions();
         if (is_array($options)) {
-            $object->setOptions(json_encode($options));
+            $object->setData('options', json_encode($options));
+        }
+
+        if ($object->getIdentifier()) {
+            $identifier = $this->generateIdentifier($object->getTitle());
+            $object->setIdentifier($identifier);
         }
 
         if (!$this->getIsUniqueBannerToStores($object)) {
@@ -91,6 +96,16 @@ class Banner extends AbstractDb
         }
 
         return $this;
+    }
+
+    /**
+     * @param $title
+     *
+     * @return string|string[]|null
+     */
+    private function generateIdentifier($title)
+    {
+        return preg_replace('#[^0-9a-z]+#i', '-', strtolower($title));
     }
 
     /**

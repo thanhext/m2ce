@@ -477,10 +477,10 @@
                 </item>
             </argument>
             <settings>
-                <visible>false</visible>
+<!--                <visible>false</visible>-->
                 <title translate="true">Add New Banner Item</title>
                 <imports>
-                    <link name="visible">${ $.provider}:data.banner_id</link>
+<!--                    <link name="visible">${ $.provider}:data.banner_id</link>-->
                     <link name="parentId">${ $.provider}:data.banner_id</link>
                 </imports>
             </settings>
@@ -531,9 +531,10 @@
                 <ns>banner_item_listing</ns>
                 <exports>
                     <link name="parent_id">${ $.externalProvider }:params.parent_id</link>
+                    <link name="id">${ $.externalProvider }:params.id</link>
                 </exports>
                 <imports>
-                    <link name="parent_id">${ $.provider }:data.customer.entity_id</link>
+                    <link name="parent_id">${ $.provider }:data.banner.entity_id</link>
                     <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
                     <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>
                 </imports>

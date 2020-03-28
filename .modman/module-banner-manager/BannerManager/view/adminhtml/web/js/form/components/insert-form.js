@@ -26,14 +26,14 @@ define([
          */
         onResponse: function (responseData) {
             var data;
-
+console.log(responseData);
             if (!responseData.error) {
                 this.bannerItemModal().closeModal();
                 this.bannerItemListing().reload({
                     refresh: true
                 });
                 data = this.externalSource().get('data');
-                this.saveAddress(responseData, data);
+                this.saveBannerItem(responseData, data);
             }
         },
 
@@ -43,7 +43,7 @@ define([
          * @param {Object} responseData
          * @param {Object} data - customer address
          */
-        saveAddress: function (responseData, data) {
+        saveBannerItem: function (responseData, data) {
             data['entity_id'] = responseData.data['entity_id'];
 
             if (parseFloat(data['default_billing'])) {
