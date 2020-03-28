@@ -11,16 +11,22 @@ use Magento\Ui\Component\Listing\Columns\Column;
  */
 class PageActions extends Column
 {
+    const BANNER_URL_EDIT = 'banner/index/edit';
+
+    /**
+     * @param array $dataSource
+     *
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource["data"]["items"])) {
             $name       = $this->getData("name");
-            $urlEdit    = $this->getConfig("urlEdit", "*/*/edit");
             $indexField = $this->getConfig("indexField");
             foreach ($dataSource["data"]["items"] as & $item) {
                 $id                  = $item[$indexField] ?? null;
                 $item[$name]["view"] = [
-                    "href"  => $this->getContext()->getUrl($urlEdit, ["id" => $id]),
+                    "href"  => $this->getContext()->getUrl(self::BANNER_URL_EDIT, ["id" => $id]),
                     "label" => __("Edit")
                 ];
             }

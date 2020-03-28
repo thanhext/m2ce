@@ -10,6 +10,17 @@ define([
     'use strict';
 
     return Insert.extend({
+        /**
+         * Invokes initialize method of parent class,
+         * contains initialization logic
+         */
+        initialize: function () {
+            console.log(this);
+            this._super();
+            _.bindAll(this, 'updateValue', 'updateExternalValueByEditableData');
+
+            return this;
+        },
 
         /**
          * On action call
@@ -17,6 +28,7 @@ define([
          * @param {Object} data - banner item and actions
          */
         onAction: function (data) {
+            console.log(data);
             this[data.action + 'Action'].call(this, data.data);
         },
 

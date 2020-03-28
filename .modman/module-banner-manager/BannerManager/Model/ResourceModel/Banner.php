@@ -84,7 +84,7 @@ class Banner extends AbstractDb
             $object->setData('options', json_encode($options));
         }
 
-        if ($object->getIdentifier()) {
+        if (empty($object->getIdentifier())) {
             $identifier = $this->generateIdentifier($object->getTitle());
             $object->setIdentifier($identifier);
         }
