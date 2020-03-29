@@ -51,15 +51,18 @@ class Save extends Banner
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
+        $banner = $this->getRequest()->getParam('banner');
+        $bannerOptions = $this->getRequest()->getParam('options');
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-        if ($data) {
-            if (isset($data['is_active']) && $data['is_active'] === 'true') {
-                $data['is_active'] = Status::STATUS_ENABLED;
+        if ($banner) {
+            $banner['options'] = $bannerOptions;
+            if (isset($banner['is_active']) && $banner['is_active'] === 'true') {
+                $banner['is_active'] = Status::STATUS_ENABLED;
             }
 
-            if (empty($data['entity_id'])) {
-                $data['entity_id'] = null;
+            if (empty($banner['entity_id'])) {
+                $banner['entity_id'] = null;
             }
 
             /** @var \T2N\BannerManager\Model\Banner $model */
@@ -69,7 +72,7 @@ class Save extends Banner
                 $model = $this->bannerRepository->getById($id);
             }
 
-            $model->setData($data);
+            $model->setData($banner);
             try {
                 $this->bannerRepository->save($model);
                 $this->messageManager->addSuccess(__('You saved the thing.'));
@@ -84,7 +87,7 @@ class Save extends Banner
                 $this->messageManager->addException($e, __('Something went wrong while saving the data.'));
             }
 
-            $this->dataPersistor->set('banner_entity', $data);
+            $this->dataPersistor->set('banner_entity', $banner);
             return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
         return $resultRedirect->setPath('*/*/');

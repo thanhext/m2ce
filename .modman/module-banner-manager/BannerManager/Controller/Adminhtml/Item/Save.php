@@ -2,13 +2,16 @@
 
 namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
+use Magento\Framework\Controller\Result\Json;
+use Magento\Framework\Controller\Result\JsonFactory;
+use T2N\BannerManager\Api\Data\ItemInterfaceFactory;
 use T2N\BannerManager\Model\Banner\ItemFactory;
+use T2N\BannerManager\Model\BannerRepository;
 use T2N\BannerManager\Model\BannerItemRepository;
-use Exception;
+use Psr\Log\LoggerInterface;
 use Magento\Backend\App\Action\Context;
-use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
@@ -19,6 +22,10 @@ use T2N\BannerManager\Model\System\Config\Status;
  */
 class Save extends BannerItem
 {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     /**
      * @var DataPersistorInterface
@@ -30,64 +37,116 @@ class Save extends BannerItem
      */
     protected $bannerItemRepository;
 
+    /**
+     * @var \Magento\Framework\Api\DataObjectHelper
+     */
+    private $dataObjectHelper;
+
+    /**
+     * @var ItemInterfaceFactory
+     */
+    private $bannerItemDataFactory;
+
+    /**
+     * @var JsonFactory
+     */
+    private $resultJsonFactory;
+
+    /**
+     * @var BannerRepository
+     */
+    private $bannerRepository;
+
+    /**
+     * Save constructor.
+     *
+     * @param Context                $context
+     * @param ItemFactory            $itemFactory
+     * @param Registry               $coreRegistry
+     * @param PageFactory            $resultPageFactory
+     * @param BannerRepository       $bannerRepository
+     * @param DataPersistorInterface $dataPersistor
+     * @param BannerItemRepository   $bannerItemRepository
+     * @param JsonFactory            $resultJsonFactory
+     */
     public function __construct(
         Context $context,
+        LoggerInterface $logger,
         ItemFactory $itemFactory,
         Registry $coreRegistry,
         PageFactory $resultPageFactory,
+        BannerRepository $bannerRepository,
+        DataObjectHelper $dataObjectHelper,
         DataPersistorInterface $dataPersistor,
-        BannerItemRepository $bannerItemRepository
+        BannerItemRepository $bannerItemRepository,
+        ItemInterfaceFactory $bannerItemDataFactory,
+        JsonFactory $resultJsonFactory
     ) {
-        $this->dataPersistor     = $dataPersistor;
-        $this->bannerItemRepository = $bannerItemRepository;
+        $this->logger                = $logger;
+        $this->dataPersistor         = $dataPersistor;
+        $this->dataObjectHelper      = $dataObjectHelper;
+        $this->bannerRepository      = $bannerRepository;
+        $this->resultJsonFactory     = $resultJsonFactory;
+        $this->bannerItemRepository  = $bannerItemRepository;
+        $this->bannerItemDataFactory = $bannerItemDataFactory;
         parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
     }
 
     /**
-     * Save action
-     *
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @return ResultInterface
+     * @return Json
      */
-    public function execute()
+    public function execute(): Json
     {
-        $data = $this->getRequest()->getPostValue();
-        /** @var Redirect $resultRedirect */
-        $resultRedirect = $this->resultRedirectFactory->create();
-        if ($data) {
-            if (isset($data['is_active']) && $data['is_active'] === 'true') {
-                $data['is_active'] = Status::STATUS_ENABLED;
+        $error          = false;
+        $bannerItemData = $this->getRequest()->getPostValue();
+        $bannerId       = $this->getRequest()->getParam('banner_id', false);
+        $bannerItemId   = $this->getRequest()->getParam('entity_id', false);
+        $message = __('We can\'t change banner item right now.');
+        if ($bannerItemData && $bannerId) {
+            $bannerItemData['banner_id'] = $bannerId;
+            if (isset($bannerItemData['is_active']) && $bannerItemData['is_active'] === 'true') {
+                $bannerItemData['is_active'] = Status::STATUS_ENABLED;
             }
 
-            if (empty($data['entity_id'])) {
-                $data['entity_id'] = null;
+            if (empty($bannerItemData['entity_id'])) {
+                $bannerItemData['entity_id'] = null;
             }
 
-            /** @var \T2N\BannerManager\Model\Banner $model */
+            /** @var \T2N\BannerManager\Model\Banner\Item $model */
             $model = $this->_itemFactory->create();
-            $id    = $this->getRequest()->getParam('id');
-            if ($id) {
-                $model = $this->bannerItemRepository->getById($id);
+            if ($bannerItemId) {
+                $model = $this->bannerItemRepository->getById($bannerItemId);
             }
 
-            $model->setData($data);
+            $model->setData($bannerItemData);
             try {
-                $this->bannerItemRepository->save($model);
-                $this->messageManager->addSuccess(__('You saved the thing.'));
-                $this->dataPersistor->clear('banner_item');
-                if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId(), '_current' => true]);
+                $savedBannerItem = $this->bannerItemRepository->save($model);
+                if ($bannerItemId) {
+                    $message = __('Banner Item has been updated.');
+                } else {
+                    $bannerItemId = $savedBannerItem->getId();
+                    $message      = __('New banner item has been added.');
                 }
-                return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
-                $this->messageManager->addError($e->getMessage());
+                $error   = true;
+                $message = __($e->getMessage());
             } catch (Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the data.'));
+                $error   = true;
+                $message = __('We can\'t change banner item right now.');
             }
-
-            $this->dataPersistor->set('banner_item', $data);
-            return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
         }
-        return $resultRedirect->setPath('*/*/');
+        $bannerItemId = empty($bannerItemId) ? null : $bannerItemId;
+        $resultJson   = $this->resultJsonFactory->create();
+        $resultJson->setData(
+            [
+                'message' => $message,
+                'error'   => $error,
+                'data'    => [
+                    'entity_id' => $bannerItemId
+                ]
+            ]
+        );
+
+        return $resultJson;
     }
 }

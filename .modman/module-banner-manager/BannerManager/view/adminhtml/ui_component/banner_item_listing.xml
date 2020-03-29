@@ -11,7 +11,7 @@
                 <item name="name" xsi:type="string">add</item>
                 <item name="label" xsi:type="string">Add New</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/Banner_Item/new</item>
+                <item name="url" xsi:type="string">banner/item/new</item>
             </item>
         </item>
     </argument>
@@ -45,57 +45,69 @@
     </listingToolbar>
     <columns name="banner_item_listing_columns">
         <selectionsColumn name="ids">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="resizeEnabled" xsi:type="boolean">false</item>
-                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                    <item name="sortOrder" xsi:type="number">10</item>
-                </item>
-            </argument>
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
         </selectionsColumn>
-        <column name="entity_id">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">textRange</item>
-                    <item name="sorting" xsi:type="string">asc</item>
-                    <item name="label" xsi:type="string" translate="true">ID</item>
-                </item>
-            </argument>
+        <column name="position">
+            <settings>
+                <sorting>asc</sorting>
+                <visible>false</visible>
+                <label translate="true">Position</label>
+            </settings>
         </column>
-        <column name="image" class="Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
-                    <item name="add_field" xsi:type="boolean">true</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="altField" xsi:type="string">image</item>
-                    <item name="has_preview" xsi:type="string">1</item>
-                    <item name="label" xsi:type="string" translate="true">Thumbnail</item>
-                    <item name="sortOrder" xsi:type="number">20</item>
-                </item>
-            </argument>
+        <column name="entity_id">
+            <settings>
+                <visible>true</visible>
+                <sortable>false</sortable>
+                <label translate="true">ID</label>
+            </settings>
+        </column>
+        <column name="image" class="Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">
+            <settings>
+                <altField>title</altField>
+                <hasPreview>1</hasPreview>
+                <addField>true</addField>
+                <label translate="true">Thumbnail</label>
+                <sortable>false</sortable>
+            </settings>
         </column>
         <column name="title">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="add_field" xsi:type="boolean">true</item>
-                    <item name="label" xsi:type="string" translate="true">Title</item>
-                    <item name="sortOrder" xsi:type="number">40</item>
-                </item>
-            </argument>
+            <settings>
+                <filter>text</filter>
+                <sortable>false</sortable>
+                <label translate="true">Title</label>
+            </settings>
+        </column>
+        <column name="media_type" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="T2N\BannerManager\Model\System\Config\MediaType"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Media Type</label>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="T2N\BannerManager\Model\System\Config\Status"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <column name="update_time" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <dataType>date</dataType>
+                <sortable>false</sortable>
+                <label translate="true">Modified</label>
+            </settings>
         </column>
         <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\Item\Actions">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="resizeEnabled" xsi:type="boolean">false</item>
-                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                    <item name="urlEdit" xsi:type="string">banner/item/edit</item>
-                    <item name="sortOrder" xsi:type="number">200</item>
-                </item>
-            </argument>
+            <settings>
+                <indexField>entity_id</indexField>
+            </settings>
         </actionsColumn>
     </columns>
 </listing>

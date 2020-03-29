@@ -56,12 +56,15 @@
         <column xsi:type="smallint" name="banner_id" padding="6" unsigned="false" nullable="false" identity="false"
             comment="Banner ID"/>
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Title"/>
+        <column xsi:type="varchar" name="media_type" nullable="true" length="15" comment="Media entity type"/>
         <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image"/>
+        <column xsi:type="varchar" name="video" nullable="true" length="255" comment="Video url"/>
         <column xsi:type="varchar" name="link" nullable="true" length="255" comment="Link"/>
         <column xsi:type="varchar" name="description" nullable="true" length="255" comment="Description"/>
         <column xsi:type="varchar" name="action" nullable="true" length="50" comment="Action"/>
         <column xsi:type="varchar" name="class_action" nullable="true" length="50" comment="Class Action"/>
         <column xsi:type="varchar" name="class_content" nullable="true" length="50" comment="Class Content"/>
+        <column xsi:type="smallint" name="position" padding="5" unsigned="true" nullable="true" identity="false"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
             comment="Created At"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"

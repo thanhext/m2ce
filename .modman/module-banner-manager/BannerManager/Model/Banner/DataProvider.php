@@ -1,5 +1,6 @@
 <?php
 namespace T2N\BannerManager\Model\Banner;
+use Magento\Framework\Session\SessionManagerInterface;
 use T2N\BannerManager\Model\ResourceModel\Banner\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
 
@@ -8,18 +9,25 @@ use Magento\Framework\App\Request\DataPersistorInterface;
  */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
+    /**
+     * @var array
+     */
+    private $loadedData = [];
 
+    /**
+     * @var SessionManagerInterface
+     */
+    private $session;
+
+    /**
+     * @var
+     */
     protected $collection;
 
     /**
      * @var DataPersistorInterface
      */
     protected $dataPersistor;
-
-    /**
-     * @var array
-     */
-    protected $loadedData;
 
     /**
      * @param string $name
@@ -36,11 +44,13 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $requestFieldName,
         CollectionFactory $collectionFactory,
         DataPersistorInterface $dataPersistor,
+        SessionManagerInterface $session,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $collectionFactory->create();
+        $this->session = $session;
         $this->dataPersistor = $dataPersistor;
+        $this->collection = $collectionFactory->create();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
         $this->meta = $this->prepareMeta($this->meta);
     }
@@ -61,24 +71,30 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
-        if (isset($this->loadedData)) {
+        if (!empty($this->loadedData)) {
             return $this->loadedData;
         }
+
         $banners = $this->collection->getItems();
         /** @var \T2N\BannerManager\Model\Banner $item */
         foreach ($banners as $banner) {
             $data = $this->_prepareData($banner, ['options', 'banner_items']);
-            $this->loadedData[$banner->getId()] = $data;
+            $result['banner'] = $data;
+            $result['options'] = $data['options'];
+            unset($data['options']);
+            $result['banner_id'] = $banner->getId();
+            $this->loadedData[$banner->getId()] = $result;
         }
-
+        //$data = $this->session->getBannerFormData();
         $data = $this->dataPersistor->get('banner_entity');
         if (!empty($data)) {
             $banner = $this->collection->getNewEmptyItem();
             $banner->setData($data);
             $this->loadedData[$banner->getId()] = $banner->getData();
             $this->dataPersistor->clear('banner_entity');
+            //$this->session->unsBannerFormData();
         }
 
         return $this->loadedData;

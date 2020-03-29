@@ -6,11 +6,11 @@ use Magento\Framework\Api\SearchResultsInterfaceFactory;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-
+use Magento\Framework\Api\SortOrder;
 use T2N\BannerManager\Api\BannerItemRepositoryInterface;
 use T2N\BannerManager\Api\Data\ItemInterface;
-use T2N\BannerManager\Model\BannerFactory;
-use T2N\BannerManager\Model\ResourceModel\Banner as BannerResourceModel;
+use T2N\BannerManager\Model\Banner\ItemFactory;
+use T2N\BannerManager\Model\ResourceModel\Banner\Item as ItemResourceModel;
 use T2N\BannerManager\Model\ResourceModel\Banner\CollectionFactory;
 
 /**
@@ -26,14 +26,14 @@ class BannerItemRepository implements BannerItemRepositoryInterface
     /**
      * BannerRepository constructor.
      *
-     * @param BannerFactory $bannerItemFactory
-     * @param BannerResourceModel $bannerItemResourceModel
+     * @param ItemFactory $bannerItemFactory
+     * @param ItemResourceModel $bannerItemResourceModel
      * @param CollectionFactory $collectionFactory
      * @param SearchResultsInterfaceFactory $searchResultsFactory
      */
     public function __construct(
-        BannerFactory $bannerItemFactory,
-        BannerResourceModel $bannerItemResourceModel,
+        ItemFactory $bannerItemFactory,
+        ItemResourceModel $bannerItemResourceModel,
         CollectionFactory $collectionFactory,
         SearchResultsInterfaceFactory $searchResultsFactory
     ) {

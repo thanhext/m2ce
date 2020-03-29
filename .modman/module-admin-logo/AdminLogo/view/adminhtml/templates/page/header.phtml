@@ -14,7 +14,7 @@
         <?php if ($block->getCurrentHandle() == "adminhtml_auth_login"): ?>
             <?php $logoSrc = ($block->getLogoConfig()) ? $block->escapeHtml($block->getLogoUrl($block->getLogoConfig())) : $block->getViewFileUrl('T2N_AdminLogo::images/stvn-logo.png') ?>
         <?php else: ?>
-            <?php $logoSrc = ($block->getIconConfig()) ? $block->escapeHtml($block->getIconUrl($block->getIconConfig())) : $block->getViewFileUrl('T2N_AdminLogo::images/logo.svg') ?>
+            <?php $logoSrc = ($block->getIconConfig()) ? $block->escapeHtml($block->getIconUrl($block->getIconConfig())) : $block->getViewFileUrl('T2N_AdminLogo::images/logo.png') ?>
         <?php endif; ?>
         <a
             href="<?= /* @escapeNotVerified */ $block->getHomeLink() ?>"

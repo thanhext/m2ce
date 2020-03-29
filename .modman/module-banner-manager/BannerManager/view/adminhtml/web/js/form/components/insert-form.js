@@ -38,36 +38,21 @@ console.log(responseData);
         },
 
         /**
-         * Save customer address to customer form data source
+         * Save banner item to banner form data source
          *
          * @param {Object} responseData
          * @param {Object} data - customer address
          */
         saveBannerItem: function (responseData, data) {
             data['entity_id'] = responseData.data['entity_id'];
-
-            if (parseFloat(data['default_billing'])) {
-                this.source.set('data.default_billing_address', data);
-            } else if (
-                parseFloat(this.source.get('data.default_billing_address')['entity_id']) === data['entity_id']
-            ) {
-                this.source.set('data.default_billing_address', []);
-            }
-
-            if (parseFloat(data['default_shipping'])) {
-                this.source.set('data.default_shipping_address', data);
-            } else if (
-                parseFloat(this.source.get('data.default_shipping_address')['entity_id']) === data['entity_id']
-            ) {
-                this.source.set('data.default_shipping_address', []);
-            }
+            console.log(data);
         },
 
         /**
          * Event method that closes "Edit customer address" modal and refreshes grid after customer address
          * was removed through "Delete" button on the "Edit customer address" modal
          *
-         * @param {String} id - customer address ID to delete
+         * @param {String} id - banner item ID to delete
          */
         onBannerItemDelete: function (id) {
             this.bannerItemModal().closeModal();

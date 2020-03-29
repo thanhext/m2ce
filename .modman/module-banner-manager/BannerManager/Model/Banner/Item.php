@@ -112,7 +112,7 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
      */
     public function validate()
     {
-        return parent::_createValidatorBeforeSave();
+        return parent::_getValidatorBeforeSave();
     }
 
     /**
@@ -122,4 +122,203 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     {
         $this->_init(\T2N\BannerManager\Model\ResourceModel\Banner\Item::class);
     }
+
+    /**
+     * @return int|null
+     */
+    public function getBannerId()
+    {
+        return $this->getData(self::BANNER_ID);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTitle()
+    {
+        return $this->getData(self::TITLE);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImage()
+    {
+        return $this->getData(self::IMAGE);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLink()
+    {
+        return $this->getData(self::LINK);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->getData(self::DESCRIPTION);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAction()
+    {
+        return $this->getData(self::ACTION);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getClassAction()
+    {
+        return $this->getData(self::CLASS_ACTION);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getClassContent()
+    {
+        return $this->getData(self::CLASS_CONTENT);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCreationTime()
+    {
+        return $this->getData(self::CREATION_TIME);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUpdateTime()
+    {
+        return $this->getData(self::UPDATE_TIME);
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isActive()
+    {
+        return (bool)$this->getData(self::IS_ACTIVE);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return mixed|\T2N\BannerManager\Api\Data\BannerInterface
+     */
+    public function setBannerId($id)
+    {
+        return $this->getData(self::BANNER_ID, $id);
+    }
+
+    /**
+     * @param string $title
+     *
+     * @return ItemInterface
+     */
+    public function setTitle($title)
+    {
+        return $this->getData(self::TITLE, $title);
+    }
+
+    /**
+     * @param string $image
+     *
+     * @return ItemInterface|Item
+     */
+    public function setImage($image)
+    {
+        return $this->setData(self::IMAGE, $image);
+    }
+
+    /**
+     * @param string $link
+     *
+     * @return ItemInterface|Item
+     */
+    public function setLink($link)
+    {
+        return $this->setData(self::LINK, $link);
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return ItemInterface|Item
+     */
+    public function setDescription($description)
+    {
+        return $this->setData(self::DESCRIPTION, $description);
+    }
+
+    /**
+     * @param string $action
+     *
+     * @return ItemInterface|Item
+     */
+    public function setAction($action)
+    {
+        return $this->setData(self::ACTION, $action);
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return ItemInterface|Item
+     */
+    public function setClassAction($class)
+    {
+        return $this->setData(self::CLASS_ACTION, $class);
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return ItemInterface|Item
+     */
+    public function setClassContent($class)
+    {
+        return $this->setData(self::CLASS_CONTENT, $class);
+    }
+
+    /**
+     * @param string $creationTime
+     *
+     * @return ItemInterface|Item
+     */
+    public function setCreationTime($creationTime)
+    {
+        return $this->setData(self::CREATION_TIME, $creationTime);
+    }
+
+    /**
+     * @param string $updateTime
+     *
+     * @return ItemInterface|Item
+     */
+    public function setUpdateTime($updateTime)
+    {
+        return $this->setData(self::CREATION_TIME, $updateTime);
+    }
+
+    /**
+     * @param bool|int $isActive
+     *
+     * @return ItemInterface|Item
+     */
+    public function setIsActive($isActive)
+    {
+        return $this->setData(self::IS_ACTIVE, $isActive);
+    }
+
 }

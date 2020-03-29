@@ -109,24 +109,6 @@
                 </imageUploader>
             </formElements>
         </field>
-<!--        <field name="image" formElement="imageUploader">-->
-<!--            <settings>-->
-<!--                <notice translate="true">Not all browsers support all these formats!</notice>-->
-<!--                <label translate="true">Image</label>-->
-<!--                <componentType>imageUploader</componentType>-->
-<!--            </settings>-->
-<!--            <formElements>-->
-<!--                <imageUploader>-->
-<!--                    <settings>-->
-<!--                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>-->
-<!--                        <maxFileSize>2097152</maxFileSize>-->
-<!--                        <uploaderConfig>-->
-<!--                            <param xsi:type="string" name="url">banner/item/upload</param>-->
-<!--                        </uploaderConfig>-->
-<!--                    </settings>-->
-<!--                </imageUploader>-->
-<!--            </formElements>-->
-<!--        </field>-->
         <field name="is_active" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -236,6 +218,21 @@
                 <label translate="true">Class Content</label>
                 <notice translate="true">For example: bg-white, ..</notice>
                 <dataScope>class_content</dataScope>
+            </settings>
+        </field>
+        <field name="position" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>number</dataType>
+                <label translate="true">Position</label>
+                <dataScope>position</dataScope>
             </settings>
         </field>
     </fieldset>

@@ -12,7 +12,7 @@ define([
     return Button.extend({
         defaults: {
             entityId: null,
-            parentId: null,
+            bannerId: null,
             listens: {
                 entity: 'changeVisibility'
             }
@@ -29,11 +29,11 @@ define([
             console.log(this);
             if (action.params && action.params[0]) {
                 action.params[0]['entity_id'] = this.entityId;
-                action.params[0]['parent_id'] = this.parentId;
+                action.params[0]['banner_id'] = this.bannerId;
             } else {
                 action.params = [{
                     'entity_id': this.entityId,
-                    'parent_id': this.parentId
+                    'banner_id': this.bannerId
                 }];
             }
 

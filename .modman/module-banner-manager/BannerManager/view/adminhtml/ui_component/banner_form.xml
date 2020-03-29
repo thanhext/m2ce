@@ -41,9 +41,9 @@
             </item>
         </argument>
     </dataSource>
-    <fieldset name="general">
+    <fieldset name="banner">
         <settings>
-            <dataScope>data</dataScope>
+<!--            <dataScope>data</dataScope>-->
             <label translate="true">Banner Information</label>
         </settings>
         <field name="entity_id" formElement="input">
@@ -434,7 +434,7 @@
             </field>
         </container>
     </fieldset>
-    <fieldset name="banner_items">
+    <fieldset name="banner_items" class="T2N\BannerManager\Ui\Component\Form\BannerItemsFieldset">
         <settings>
             <label translate="true">Banner Items</label>
         </settings>
@@ -460,11 +460,9 @@
                 </item>
             </argument>
             <settings>
-<!--                <visible>false</visible>-->
                 <title translate="true">Add New Banner Item</title>
                 <imports>
-<!--                    <link name="visible">${ $.provider}:data.banner_id</link>-->
-                    <link name="parentId">${ $.provider}:data.banner_id</link>
+                    <link name="bannerId">${ $.provider}:data.banner_id</link>
                 </imports>
             </settings>
         </button>
@@ -492,10 +490,10 @@
                     <externalProvider>${ $.ns }.banner_item_form_data_source</externalProvider>
                     <ns>banner_item_form</ns>
                     <exports>
-                        <link name="parentId">${ $.externalProvider }:data.parent_id</link>
+                        <link name="bannerId">${ $.externalProvider }:data.banner_id</link>
                     </exports>
                     <imports>
-                        <link name="parentId">${ $.provider}:data.banner_id</link>
+                        <link name="bannerId">${ $.provider}:data.banner_id</link>
                         <link name="onBannerItemDelete">${ $.ns }.${ $.ns }:deleteAddressAction</link>
                     </imports>
                 </settings>
@@ -513,11 +511,11 @@
                 <dataScope>banner_item_listing</dataScope>
                 <ns>banner_item_listing</ns>
                 <exports>
-                    <link name="parent_id">${ $.externalProvider }:params.parent_id</link>
+                    <link name="banner_id">${ $.externalProvider }:params.banner_id</link>
                     <link name="id">${ $.externalProvider }:params.id</link>
                 </exports>
                 <imports>
-                    <link name="parent_id">${ $.provider }:data.entity_id</link>
+                    <link name="banner_id">${ $.provider }:data.entity_id</link>
                     <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
                     <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>
                 </imports>

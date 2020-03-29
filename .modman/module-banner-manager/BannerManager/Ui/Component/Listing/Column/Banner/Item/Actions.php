@@ -82,7 +82,7 @@ class Actions extends Column
                     $item[$name]['delete'] = [
                         'href' => $this->urlBuilder->getUrl(
                             self::BANNER_ITEM_PATH_DELETE,
-                            ['parent_id' => $item['parent_id'], 'id' => $item['entity_id']]
+                            ['banner_id' => $item['banner_id'], 'id' => $item['entity_id']]
                         ),
                         'label' => __('Delete'),
                         'isAjax' => true,

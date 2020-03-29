@@ -75,12 +75,12 @@
                 <sortable>false</sortable>
             </settings>
         </column>
-        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+        <column name="type_id" component="Magento_Ui/js/grid/columns/select">
             <settings>
                 <options class="T2N\BannerManager\Model\System\Config\Type"/>
                 <filter>select</filter>
                 <dataType>select</dataType>
-                <label translate="true">Status</label>
+                <label translate="true">Type</label>
             </settings>
         </column>
         <column name="is_active" component="Magento_Ui/js/grid/columns/select">
