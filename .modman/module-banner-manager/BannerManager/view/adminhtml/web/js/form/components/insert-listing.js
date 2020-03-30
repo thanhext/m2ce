@@ -47,7 +47,7 @@ define([
          * @param {Object} data - banner item
          */
         deleteAction: function (data) {
-            this._delete([parseFloat(data[data['id_field_name']])]);
+            this._delete([parseFloat(data['entity_id'])]);
         },
 
         /**

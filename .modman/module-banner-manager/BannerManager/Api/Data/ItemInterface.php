@@ -24,6 +24,7 @@ interface ItemInterface
     const CREATION_TIME  = 'creation_time';
     const UPDATE_TIME    = 'update_time';
     const IS_ACTIVE      = 'is_active';
+    const POSITION       = 'position';
     /**#@-*/
 
     /**
@@ -109,6 +110,11 @@ interface ItemInterface
      * @return bool|null
      */
     public function isActive();
+
+    /**
+     * @return int
+     */
+    public function getPosition();
 
     /**
      * Set ID
@@ -205,4 +211,12 @@ interface ItemInterface
      * @return ItemInterface
      */
     public function setIsActive($isActive);
+
+    /**
+     * Set position
+     *
+     * @param int $position
+     * @return ItemInterface
+     */
+    public function setPosition($position);
 }

@@ -46,6 +46,7 @@
     <columns name="banner_item_listing_columns">
         <selectionsColumn name="ids">
             <settings>
+                <visible>false</visible>
                 <indexField>entity_id</indexField>
             </settings>
         </selectionsColumn>
@@ -58,16 +59,15 @@
         </column>
         <column name="entity_id">
             <settings>
-                <visible>true</visible>
+                <visible>false</visible>
                 <sortable>false</sortable>
                 <label translate="true">ID</label>
             </settings>
         </column>
-        <column name="image" class="Magento\Catalog\Ui\Component\Listing\Columns\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">
+        <column name="image" class="T2N\BannerManager\Ui\Component\Listing\Column\Thumbnail" component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">
             <settings>
                 <altField>title</altField>
                 <hasPreview>1</hasPreview>
-                <addField>true</addField>
                 <label translate="true">Thumbnail</label>
                 <sortable>false</sortable>
             </settings>
@@ -104,7 +104,7 @@
                 <label translate="true">Modified</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\Item\Actions">
+        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\Item\Actions" component="Magento_Customer/js/grid/columns/actions">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>

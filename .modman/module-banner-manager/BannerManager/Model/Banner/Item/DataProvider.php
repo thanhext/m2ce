@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright © Thomas Nguyen, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
 namespace T2N\BannerManager\Model\Banner\Item;
 
 use Magento\Framework\Filesystem;

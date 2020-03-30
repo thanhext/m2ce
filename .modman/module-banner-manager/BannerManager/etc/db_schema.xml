@@ -65,10 +65,10 @@
         <column xsi:type="varchar" name="class_action" nullable="true" length="50" comment="Class Action"/>
         <column xsi:type="varchar" name="class_content" nullable="true" length="50" comment="Class Content"/>
         <column xsi:type="smallint" name="position" padding="5" unsigned="true" nullable="true" identity="false"/>
-        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
-            comment="Created At"/>
-        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
-            comment="Updated At"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+            comment="Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+            comment="Modification Time"/>
         <column xsi:type="smallint" name="is_active" padding="5" unsigned="true" nullable="false" identity="false"
             default="1" comment="Is Active"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

@@ -56,17 +56,17 @@ class Actions extends Column
                     $item[$name]['edit'] = [
                         'callback' => [
                             [
-                                'provider' => 'banner_form.areas.item.item'
+                                'provider' => 'banner_form.areas.banner_items.banner_items'
                                     . '.banner_items_update_modal.update_banner_item_form_loader',
                                 'target' => 'destroyInserted',
                             ],
                             [
-                                'provider' => 'banner_form.areas.item.item'
+                                'provider' => 'banner_form.areas.banner_items.banner_items'
                                     . '.banner_items_update_modal',
                                 'target' => 'openModal',
                             ],
                             [
-                                'provider' => 'banner_form.areas.item.item'
+                                'provider' => 'banner_form.areas.banner_items.banner_items'
                                     . '.banner_items_update_modal.update_banner_item_form_loader',
                                 'target' => 'render',
                                 'params' => [

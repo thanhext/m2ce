@@ -212,6 +212,14 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     }
 
     /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return (int)$this->getData(self::POSITION);
+    }
+
+    /**
      * @param int $id
      *
      * @return mixed|\T2N\BannerManager\Api\Data\BannerInterface
@@ -319,6 +327,16 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     public function setIsActive($isActive)
     {
         return $this->setData(self::IS_ACTIVE, $isActive);
+    }
+
+    /**
+     * @param int $position
+     *
+     * @return ItemInterface|Item
+     */
+    public function setPosition($position)
+    {
+        return $this->setData(self::POSITION, $position);
     }
 
 }

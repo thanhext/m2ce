@@ -2,31 +2,83 @@
 
 namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
-use Exception;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\Controller\Result\Json;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\PageFactory;
+use Psr\Log\LoggerInterface;
+use T2N\BannerManager\Model\Banner\ItemFactory;
 
 /**
  * Class Delete
  */
-class Delete extends BannerItem
+class Delete extends BannerItem implements HttpPostActionInterface
 {
-    public function execute()
+    /**
+     * @var JsonFactory
+     */
+    private $resultJsonFactory;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * Delete constructor.
+     *
+     * @param Context         $context
+     * @param ItemFactory     $itemFactory
+     * @param Registry        $coreRegistry
+     * @param PageFactory     $resultPageFactory
+     * @param JsonFactory     $resultJsonFactory
+     * @param LoggerInterface $logger
+     */
+    public function __construct(
+        Context $context,
+        ItemFactory $itemFactory,
+        Registry $coreRegistry,
+        PageFactory $resultPageFactory,
+        JsonFactory $resultJsonFactory,
+        LoggerInterface $logger
+    ) {
+        parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
+        $this->resultJsonFactory = $resultJsonFactory;
+        $this->logger            = $logger;
+    }
+
+    /**
+     * @return Json
+     */
+    public function execute(): Json
     {
-        $id = $this->getRequest()->getParam('id');
+        $error   = false;
+        $message = __('Banner Item is no longer exist');
+        $id      = $this->getRequest()->getParam('id');
         if ($id) {
             $model = $this->_itemFactory->create();
             $model->load($id);
-            if (!$model->getId()) {
-                $this->messageManager->addError(__('Banner Item is no longer exist'));
-            } else {
+            if ($model->getId()) {
                 try {
                     $model->delete();
-                    $this->messageManager->addSuccess(__('Deleted Successfully!'));
-                    $this->_redirect('*/*/');
-                } catch (Exception $e) {
-                    $this->messageManager->addError($e->getMessage());
-                    $this->_redirect('*/*/edit', ['id' => $model->getId()]);
+                    $message = __('You deleted the banner item.');
+                } catch (\Exception $e) {
+                    $error = true;
+                    $this->logger->critical($e);
+                    $message = __('We can\'t delete the address right now.');
                 }
             }
         }
+
+        $resultJson = $this->resultJsonFactory->create();
+        $resultJson->setData(
+            [
+                'message' => $message,
+                'error'   => $error,
+            ]
+        );
+
+        return $resultJson;
     }
 }

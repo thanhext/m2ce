@@ -220,7 +220,7 @@
                 <dataScope>class_content</dataScope>
             </settings>
         </field>
-        <field name="position" sortOrder="20" formElement="input">
+        <field name="position" sortOrder="200" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">item</item>

@@ -56,6 +56,10 @@ class Save extends BannerItem
      * @var BannerRepository
      */
     private $bannerRepository;
+    /**
+     * @var
+     */
+    private $imageUploader;
 
     /**
      * Save constructor.
@@ -98,18 +102,22 @@ class Save extends BannerItem
     public function execute(): Json
     {
         $error          = false;
-        $bannerItemData = $this->getRequest()->getPostValue();
+        $data = $this->getRequest()->getPostValue();
         $bannerId       = $this->getRequest()->getParam('banner_id', false);
         $bannerItemId   = $this->getRequest()->getParam('entity_id', false);
-        $message = __('We can\'t change banner item right now.');
-        if ($bannerItemData && $bannerId) {
-            $bannerItemData['banner_id'] = $bannerId;
-            if (isset($bannerItemData['is_active']) && $bannerItemData['is_active'] === 'true') {
-                $bannerItemData['is_active'] = Status::STATUS_ENABLED;
+        $message        = __('We can\'t change banner item right now.');
+        if ($data && $bannerId) {
+            $data['banner_id'] = $bannerId;
+            if (isset($data['is_active']) && $data['is_active'] === 'true') {
+                $data['is_active'] = Status::STATUS_ENABLED;
             }
 
-            if (empty($bannerItemData['entity_id'])) {
-                $bannerItemData['entity_id'] = null;
+            if (empty($data['entity_id'])) {
+                $data['entity_id'] = null;
+            }
+
+            if (!empty($data['image'])) {
+                $data['image'] = $this->moveFileFromTmp($data['image']);
             }
 
             /** @var \T2N\BannerManager\Model\Banner\Item $model */
@@ -118,7 +126,7 @@ class Save extends BannerItem
                 $model = $this->bannerItemRepository->getById($bannerItemId);
             }
 
-            $model->setData($bannerItemData);
+            $model->setData($data);
             try {
                 $savedBannerItem = $this->bannerItemRepository->save($model);
                 if ($bannerItemId) {
@@ -148,5 +156,24 @@ class Save extends BannerItem
         );
 
         return $resultJson;
+    }
+
+    /**
+     * @param $image
+     *
+     * @return mixed
+     */
+    protected function moveFileFromTmp($image)
+    {
+        if (isset($image[0]['name']) && isset($image[0]['tmp_name'])) {
+            $image = $image[0]['name'];
+            /** @var \T2N\BannerManager\Model\ImageUploader imageUploader */
+            $this->imageUploader = $this->_objectManager->get(
+                'T2N\BannerManager\BannerImageUpload'
+            );
+            $this->imageUploader->moveFileFromTmp($image);
+        }
+
+        return $image;
     }
 }

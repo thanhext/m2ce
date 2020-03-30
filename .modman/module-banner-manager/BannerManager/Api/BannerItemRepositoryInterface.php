@@ -12,7 +12,7 @@ use Magento\Framework\Api\SearchCriteriaInterface;
 interface BannerItemRepositoryInterface
 {
     /**
-     * Create or update a Banner.
+     * Create or update a Banner item.
      *
      * @param ItemInterface $page
      * @return ItemInterface
@@ -20,7 +20,7 @@ interface BannerItemRepositoryInterface
     public function save(ItemInterface $page);
 
     /**
-     * Get a Banner by Id
+     * Get a Banner item by Id
      *
      * @param int $id
      * @return ItemInterface
@@ -30,14 +30,14 @@ interface BannerItemRepositoryInterface
     public function getById($id);
 
     /**
-     * Retrieve Banners which match a specified criteria.
+     * Retrieve Banners items which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
      */
     public function getList(SearchCriteriaInterface $criteria);
 
     /**
-     * Delete a Banner
+     * Delete a Banner item
      *
      * @param ItemInterface $page
      * @return ItemInterface
@@ -47,7 +47,7 @@ interface BannerItemRepositoryInterface
     public function delete(ItemInterface $page);
 
     /**
-     * Delete a Banner by Id
+     * Delete a Banner item by Id
      *
      * @param int $id
      * @return ItemInterface
