@@ -25,8 +25,6 @@ define([
          * @param {Object} action - action configuration
          */
         applyAction: function (action) {
-            console.log(action);
-            console.log(this);
             if (action.params && action.params[0]) {
                 action.params[0]['entity_id'] = this.entityId;
                 action.params[0]['banner_id'] = this.bannerId;

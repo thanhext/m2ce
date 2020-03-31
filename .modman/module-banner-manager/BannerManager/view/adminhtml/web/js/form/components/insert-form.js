@@ -26,7 +26,6 @@ define([
          */
         onResponse: function (responseData) {
             var data;
-console.log(responseData);
             if (!responseData.error) {
                 this.bannerItemModal().closeModal();
                 this.bannerItemListing().reload({
@@ -45,7 +44,6 @@ console.log(responseData);
          */
         saveBannerItem: function (responseData, data) {
             data['entity_id'] = responseData.data['entity_id'];
-            console.log(data);
         },
 
         /**

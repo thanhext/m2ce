@@ -15,7 +15,6 @@ define([
          * contains initialization logic
          */
         initialize: function () {
-            console.log(this);
             this._super();
             _.bindAll(this, 'updateValue', 'updateExternalValueByEditableData');
 
@@ -28,7 +27,6 @@ define([
          * @param {Object} data - banner item and actions
          */
         onAction: function (data) {
-            console.log(data);
             this[data.action + 'Action'].call(this, data.data);
         },
 
