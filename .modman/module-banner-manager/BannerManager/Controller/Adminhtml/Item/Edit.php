@@ -11,7 +11,8 @@ class Edit extends BannerItem
 {
     public function execute()
     {
-        $id    = $this->getRequest()->getParam('id');
+        $id    = $this->getRequest()->getParam('entity_id');
+        var_dump($id); die;
         $model = $this->_itemFactory->create();
         if ($id) {
             $model->load($id);

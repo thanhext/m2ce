@@ -51,6 +51,8 @@ define([
          * @param {Object} action - Action's data.
          */
         defaultCallback: function (actionIndex, recordId, action) {
+            console.log(recordId);
+            console.log(action);
             if (action.isAjax) {
                 this.request(action.href).done(function (response) {
                     var data;

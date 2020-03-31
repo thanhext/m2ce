@@ -57,17 +57,17 @@ class Actions extends Column
                         'callback' => [
                             [
                                 'provider' => 'banner_form.areas.banner_items.banner_items'
-                                    . '.banner_items_update_modal.update_banner_item_form_loader',
+                                    . '.banner_item_update_modal.update_banner_item_form_loader',
                                 'target' => 'destroyInserted',
                             ],
                             [
                                 'provider' => 'banner_form.areas.banner_items.banner_items'
-                                    . '.banner_items_update_modal',
+                                    . '.banner_item_update_modal',
                                 'target' => 'openModal',
                             ],
                             [
                                 'provider' => 'banner_form.areas.banner_items.banner_items'
-                                    . '.banner_items_update_modal.update_banner_item_form_loader',
+                                    . '.banner_item_update_modal.update_banner_item_form_loader',
                                 'target' => 'render',
                                 'params' => [
                                     'entity_id' => $item['entity_id'],

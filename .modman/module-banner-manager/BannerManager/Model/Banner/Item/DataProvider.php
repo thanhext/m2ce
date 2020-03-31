@@ -3,9 +3,11 @@
  * Copyright © Thomas Nguyen, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace T2N\BannerManager\Model\Banner\Item;
 
 use Magento\Framework\Filesystem;
+use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use T2N\BannerManager\Model\Banner\FileInfo;
 use Magento\Framework\App\ObjectManager;
@@ -39,6 +41,11 @@ class DataProvider extends AbstractDataProvider
     private $fileInfo;
 
     /**
+     * @var ContextInterface
+     */
+    private $context;
+
+    /**
      * @param string                 $name
      * @param string                 $primaryFieldName
      * @param string                 $requestFieldName
@@ -53,9 +60,11 @@ class DataProvider extends AbstractDataProvider
         $requestFieldName,
         CollectionFactory $collectionFactory,
         DataPersistorInterface $dataPersistor,
+        ContextInterface $context,
         array $meta = [],
         array $data = []
     ) {
+        $this->context       = $context;
         $this->collection    = $collectionFactory->create();
         $this->dataPersistor = $dataPersistor;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
@@ -87,6 +96,7 @@ class DataProvider extends AbstractDataProvider
 
         $items = $this->collection->getItems();
         foreach ($items as $item) {
+            $this->getInfo($item, 'image');
             $this->loadedData[$item->getId()] = $item->getData();
         }
 
@@ -109,24 +119,24 @@ class DataProvider extends AbstractDataProvider
      */
     protected function getInfo($item, $attributeCode)
     {
-        $result = [];
+        $result   = [];
         $fileInfo = $this->getFileInfo();
         $fileName = $item->getData($attributeCode);
-        if ($fileInfo->isExist($fileName)) {
+        if (!empty($fileName) && $fileInfo->isExist($fileName)) {
             $stat = $fileInfo->getStat($fileName);
             $mime = $fileInfo->getMimeType($fileName);
             // phpcs:ignore Magento2.Functions.DiscouragedFunction
-            $result[$attributeCode][0]['name'] = basename($fileName);
+            $result[0]['name'] = basename($fileName);
             if ($fileInfo->isBeginsWithMediaDirectoryPath($fileName)) {
-                $result[$attributeCode][0]['url'] = $fileName;
+                $result[0]['url'] = $fileName;
             } else {
-                $result[$attributeCode][0]['url'] = $item->getImageUrl($attributeCode);
+                $result[0]['url'] = $item->getImageUrl($attributeCode);
             }
 
-            $result[$attributeCode][0]['size'] = isset($stat) ? $stat['size'] : 0;
-            $result[$attributeCode][0]['type'] = $mime;
+            $result[0]['size'] = isset($stat) ? $stat['size'] : 0;
+            $result[0]['type'] = $mime;
         }
-
+        $item->setData($attributeCode, $result);
         return $result;
     }
 

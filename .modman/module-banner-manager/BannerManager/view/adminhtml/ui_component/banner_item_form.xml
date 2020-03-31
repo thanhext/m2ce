@@ -38,7 +38,7 @@
         <aclResource>T2N_BannerManager::banner</aclResource>
         <dataProvider class="T2N\BannerManager\Model\Banner\Item\DataProvider" name="banner_item_form_data_source">
             <settings>
-                <requestFieldName>id</requestFieldName>
+                <requestFieldName>entity_id</requestFieldName>
                 <primaryFieldName>entity_id</primaryFieldName>
             </settings>
         </dataProvider>

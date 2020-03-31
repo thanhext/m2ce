@@ -154,9 +154,9 @@
             </formElements>
         </field>
     </fieldset>
-    <fieldset name="options">
+    <fieldset name="options" class="T2N\BannerManager\Ui\Component\Form\SliderOptionsFieldset">
         <settings>
-            <label translate="true">Banner Options</label>
+            <label translate="true">Slider Options</label>
         </settings>
         <field name="autoplay" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">

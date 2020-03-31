@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © Thomas Nguyen, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -9,18 +10,19 @@ namespace T2N\BannerManager\Ui\Component\Form;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\ComponentVisibilityInterface;
+use T2N\BannerManager\Model\System\Config\Type;
 
 /**
- * Class BannerItemsFieldset
+ * Class SliderOptionsFieldset
  *
  * @package T2N\BannerManager\Ui\Component\Form
  */
-class BannerItemsFieldset extends \Magento\Ui\Component\Form\Fieldset implements ComponentVisibilityInterface
+class SliderOptionsFieldset extends \Magento\Ui\Component\Form\Fieldset implements ComponentVisibilityInterface
 {
     /**
      * @param ContextInterface $context
-     * @param array $components
-     * @param array $data
+     * @param array            $components
+     * @param array            $data
      */
     public function __construct(
         ContextInterface $context,
@@ -43,6 +45,18 @@ class BannerItemsFieldset extends \Magento\Ui\Component\Form\Fieldset implements
     public function isComponentVisible(): bool
     {
         $bannerId = $this->context->getRequestParam('id');
-        return (bool)$bannerId;
+        if ($bannerId) {
+            $data = $this->context->getDataProvider()->getData();
+            if (isset($data[$bannerId]) && !empty($data)) {
+                if (isset($data[$bannerId]['banner']) && isset($data[$bannerId]['banner']['type_id'])) {
+                    $typeId = $data[$bannerId]['banner']['type_id'];
+                    if ($typeId == Type::TYPE_SLIDER) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }

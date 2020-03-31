@@ -201,7 +201,7 @@ class FileInfo
      * @param string $path
      * @return string
      */
-    private function removeStorePath(string $path): string
+    private function removeStorePath($path = null): string
     {
         $result = $path;
         try {
