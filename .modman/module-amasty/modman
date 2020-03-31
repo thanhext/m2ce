@@ -1,0 +1,14 @@
+base app/code/Amasty/Base
+blog app/code/Amasty/Blog
+cron-schedule-list app/code/Amasty/CronScheduleList
+geoip app/code/Amasty/Geoip
+module-elastic-search app/code/Amasty/ElasticSearch
+module-improved-layered-navigation-page app/code/Amasty/ShopbyPage
+module-page-speed-optimizer app/code/Amasty/PageSpeedOptimizer
+module-shop-by-base app/code/Amasty/ShopbyBase
+module-shop-by-brand app/code/Amasty/ShopbyBrand
+module-single-step-checkout app/code/Amasty/Checkout
+shopby app/code/Amasty/Shopby
+shopby-seo app/code/Amasty/ShopbySeo
+smtp app/code/Amasty/Smtp
+xsearch app/code/Amasty/Xsearch
