@@ -338,5 +338,4 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     {
         return $this->setData(self::POSITION, $position);
     }
-
 }

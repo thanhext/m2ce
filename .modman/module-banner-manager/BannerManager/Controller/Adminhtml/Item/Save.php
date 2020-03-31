@@ -172,6 +172,8 @@ class Save extends BannerItem
                 'T2N\BannerManager\BannerImageUpload'
             );
             $this->imageUploader->moveFileFromTmp($image);
+        } elseif (isset($image[0]['name']) && !isset($image[0]['tmp_name'])) {
+            $image = $image[0]['name'];
         }
 
         return $image;
