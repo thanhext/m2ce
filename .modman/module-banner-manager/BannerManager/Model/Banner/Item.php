@@ -12,6 +12,7 @@ use Magento\Framework\Registry;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use T2N\BannerManager\Api\Data\ItemInterface;
+use T2N\BannerManager\Model\BannerFactory;
 
 /**
  * Class Item
@@ -37,6 +38,16 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
      * @var StoreManagerInterface
      */
     protected $_storeManager;
+    /**
+     * @var BannerFactory
+     */
+    protected $_bannerFactory;
+    /**
+     * Banner instance
+     *
+     * @var \T2N\BannerManager\Model\Banner
+     */
+    protected $_banner = null;
 
     /**
      * Item constructor.
@@ -51,12 +62,14 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     public function __construct(
         Context $context,
         Registry $registry,
+        BannerFactory $bannerFactory,
         StoreManagerInterface $storeManager,
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null,
         array $data = []
     ) {
-        $this->_storeManager = $storeManager;
+        $this->_storeManager  = $storeManager;
+        $this->_bannerFactory = $bannerFactory;
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
     }
 
@@ -337,5 +350,31 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     public function setPosition($position)
     {
         return $this->setData(self::POSITION, $position);
+    }
+
+    /**
+     * Retrieve banner model object
+     *
+     * @return \T2N\BannerManager\Model\Banner
+     */
+    public function getBanner()
+    {
+        if ($this->_banner === null && ($bannerId = $this->getBannerId())) {
+            $banner = $this->_bannerFactory->create();
+            $banner->load($bannerId);
+            $this->setBanner($banner);
+        }
+        return $this->_banner;
+    }
+
+    /**
+     * @param $banner
+     *
+     * @return $this
+     */
+    public function setBanner($banner)
+    {
+        $this->_banner = $banner;
+        return $this;
     }
 }

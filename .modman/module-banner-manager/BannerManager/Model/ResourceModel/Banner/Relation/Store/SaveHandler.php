@@ -47,9 +47,7 @@ class SaveHandler implements ExtensionInterface
     {
         $entityMetadata = $this->metadataPool->getMetadata(BannerInterface::class);
         $linkField = $entityMetadata->getLinkField();
-
         $connection = $entityMetadata->getEntityConnection();
-
         $oldStores = $this->resourceBanner->lookupStoreIds((int)$entity->getId());
         $newStores = (array)$entity->getStores();
 

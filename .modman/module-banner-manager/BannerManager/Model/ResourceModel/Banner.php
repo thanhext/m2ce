@@ -3,6 +3,7 @@ namespace T2N\BannerManager\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
 use T2N\BannerManager\Api\Data\BannerInterface;
+use T2N\BannerManager\Api\Data\ItemInterface;
 use Magento\Framework\EntityManager\EntityManager;
 use Magento\Framework\EntityManager\MetadataPool;
 use Magento\Framework\Exception\LocalizedException;
@@ -126,6 +127,7 @@ class Banner extends AbstractDb
         } elseif (!$field) {
             $field = $entityMetadata->getIdentifierField();
         }
+
         $entityId = $value;
         if ($field != $entityMetadata->getIdentifierField() || $object->getStoreId()) {
             $select = $this->_getLoadSelect($field, $value, $object);
@@ -135,6 +137,7 @@ class Banner extends AbstractDb
             $result = $this->getConnection()->fetchCol($select);
             $entityId = count($result) ? $result[0] : false;
         }
+
         return $entityId;
     }
 
@@ -148,9 +151,9 @@ class Banner extends AbstractDb
      */
     public function load(AbstractModel $object, $value, $field = null)
     {
-        $blockId = $this->getBannerId($object, $value, $field);
-        if ($blockId) {
-            $this->entityManager->load($object, $blockId);
+        $bannerId = $this->getBannerId($object, $value, $field);
+        if ($bannerId) {
+            $this->entityManager->load($object, $bannerId);
         }
         return $this;
     }
@@ -187,7 +190,7 @@ class Banner extends AbstractDb
         return $select;
     }
     /**
-     * Check for unique of identifier of block to selected store(s).
+     * Check for unique of identifier of banner to selected store(s).
      *
      * @param AbstractModel $object
      * @return bool
@@ -263,7 +266,10 @@ class Banner extends AbstractDb
      */
     public function save(AbstractModel $object)
     {
-        return parent::save($object);
+        $this->beforeSave($object);
+        $this->entityManager->save($object);
+        $this->afterSave($object);
+        return $this;
     }
 
     /**
@@ -273,5 +279,17 @@ class Banner extends AbstractDb
     {
         $this->entityManager->delete($object);
         return $this;
+    }
+
+    /**
+     * @param AbstractModel $object
+     */
+    public function getBannerItemsCollection(AbstractModel $object)
+    {
+        /** @var \Magento\Framework\EntityManager\EntityMetadata $entityMetadata */
+        $entityMetadata = $this->metadataPool->getMetadata(ItemInterface::class);
+
+
+        var_dump($entityMetadata->ge()); die;
     }
 }
