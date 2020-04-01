@@ -9,7 +9,7 @@ if ($banner && $banner->getId()):
         <div class="blocks-promo">
             <?php foreach ($items as $i => $item): ?>
             <?php if ($i == 0): ?>
-                <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
                     <img src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>">
                     <span class="content <?= /* @noEscape */ $item->getClassContent(); ?>">
                        <span class="info"><?= /* @noEscape */ $item->getDescription(); ?></span>
@@ -19,8 +19,10 @@ if ($banner && $banner->getId()):
                 </a>
             <div class="block-promo-wrapper block-promo-hp">
             <?php else: ?>
-                <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                    <?= /** @noEscape */ ($item->getClassItem() == 'home-t-shirts') ? '<span class="image">' : null ?>
                     <img src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>">
+                    <?= /** @noEscape */ ($item->getClassItem() == 'home-t-shirts') ? '</span>' : null ?>
                     <span class="content <?= /* @noEscape */ $item->getClassContent(); ?>">
                    <span class="info"><?= /* @noEscape */ $item->getDescription(); ?></span>
                    <strong class="title"><?= /* @noEscape */ $item->getTitle(); ?></strong>
@@ -30,7 +32,8 @@ if ($banner && $banner->getId()):
             <?php endif; ?>
             <?= (count($items) - 1 == $i) ? '<div>':null ?>
             <?php endforeach; ?>
+            </div>
         </div>
     </div>
+    </div>
 <?php endif; ?>
-<h1>This is my template, there are many like it, but this one is mine.</h1>

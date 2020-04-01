@@ -135,13 +135,13 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
     {
         $identities = [];
         if ($banner = $this->getBanner()) {
-            $identities[] = $banner->getIdentifier();
+            $identities = $banner->getIdentities();
         }
 
         $items = $this->getBannerItems();
         /** @var Item $item */
         foreach ($items as $item) {
-            $identities[] = $item->getIdentities();
+            $identities = array_merge($identities,$item->getIdentities());
         }
 
         return $identities;
