@@ -1,0 +1,39 @@
+<?php
+/** @var \T2N\BannerManager\Model\Banner\Item $item */
+/** @var \T2N\BannerManager\Block\Banner $block */
+$banner = $block->getBanner();
+if ($banner && $banner->getId()):
+    $items = $block->getBannerItems();
+    ?>
+    <div class="widget block block-static-block">
+        <div class="blocks-promo">
+            <?php foreach ($items as $i => $item): ?>
+            <?php if ($i == 0): ?>
+                <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                    <img src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>">
+                    <span class="content <?= /* @noEscape */ $item->getClassContent(); ?>">
+                       <span class="info"><?= /* @noEscape */ $item->getDescription(); ?></span>
+                       <strong class="title"><?= /* @noEscape */ $item->getTitle(); ?></strong>
+                       <span class="action more <?= /* @noEscape */ $item->getClassAction(); ?>"><?= /* @noEscape */ $item->getAction(); ?></span>
+                    </span>
+                </a>
+            <div class="block-promo-wrapper block-promo-hp">
+            <?php else: ?>
+                <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                    <?= /** @noEscape */ ($item->getClassItem() == 'home-t-shirts') ? '<span class="image">' : null ?>
+                    <img src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>">
+                    <?= /** @noEscape */ ($item->getClassItem() == 'home-t-shirts') ? '</span>' : null ?>
+                    <span class="content <?= /* @noEscape */ $item->getClassContent(); ?>">
+                   <span class="info"><?= /* @noEscape */ $item->getDescription(); ?></span>
+                   <strong class="title"><?= /* @noEscape */ $item->getTitle(); ?></strong>
+                   <span class="action more <?= /* @noEscape */ $item->getClassAction(); ?>"><?= /* @noEscape */ $item->getAction(); ?></span>
+                </span>
+                </a>
+            <?php endif; ?>
+            <?= (count($items) - 1 == $i) ? '<div>':null ?>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    </div>
+<?php endif; ?>

@@ -7,6 +7,7 @@ use Magento\Framework\Model\AbstractModel;
 use T2N\BannerManager\Api\Data\BannerInterface;
 use T2N\BannerManager\Model\ResourceModel\Banner\Item\Collection;
 use T2N\BannerManager\Model\System\Config\Status;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class Banner
@@ -42,14 +43,14 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      * @param $data
      *
      * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     protected function jsonEncode($data)
     {
         if (is_array($data)) {
             $result = json_encode($data);
             if (false === $result) {
-                throw new \Magento\Framework\Exception\LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
+                throw new LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
             }
             return $result;
         }
@@ -57,12 +58,18 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
         return $data;
     }
 
+    /**
+     * @param $data
+     *
+     * @return mixed
+     * @throws LocalizedException
+     */
     protected function jsonDecode($data)
     {
         if (is_string($data)) {
             $result = json_decode($data, true);
             if (false === $result) {
-                throw new \Magento\Framework\Exception\LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
+                throw new LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
             }
             return $result;
         }
@@ -74,7 +81,7 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      * Prevent banners recursion
      *
      * @return AbstractModel
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function beforeSave()
     {
@@ -96,13 +103,13 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     }
 
     /**
-     * Retrieve banner id
+     * Retrieve banner type id
      *
      * @return int
      */
-    public function getId()
+    public function getTypeId()
     {
-        return $this->getData(self::BANNER_ID);
+        return $this->getData(self::TYPE_ID);
     }
 
     /**
@@ -202,15 +209,15 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     }
 
     /**
-     * Set ID
+     * Set Type ID
      *
      * @param int $id
      *
      * @return BannerInterface
      */
-    public function setId($id)
+    public function setTypeId($id)
     {
-        return $this->setData(self::BANNER_ID, $id);
+        return $this->setData(self::TYPE_ID, $id);
     }
 
     /**

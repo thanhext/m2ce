@@ -1,4 +1,5 @@
 <?php
+
 namespace T2N\BannerManager\Api\Data;
 
 /**
@@ -11,9 +12,10 @@ interface BannerInterface
     /**#@+
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
-    const BANNER_ID      = 'entity_id';
+    const BANNER_ID     = 'entity_id';
     const IDENTIFIER    = 'identifier';
     const TITLE         = 'title';
+    const TYPE_ID       = 'type_id';
     const OPTIONS       = 'options';
     const BANNER_ITEMS  = 'banner_items';
     const CREATION_TIME = 'creation_time';
@@ -27,6 +29,14 @@ interface BannerInterface
      * @return int|null
      */
     public function getId();
+
+
+    /**
+     * Get Type ID
+     *
+     * @return int
+     */
+    public function getTypeId();
 
     /**
      * Get identifier
@@ -81,14 +91,25 @@ interface BannerInterface
      * Set ID
      *
      * @param int $id
+     *
      * @return BannerInterface
      */
     public function setId($id);
 
     /**
+     * Set Type ID
+     *
+     * @param int $id
+     *
+     * @return BannerInterface
+     */
+    public function setTypeId($id);
+
+    /**
      * Set identifier
      *
      * @param string $identifier
+     *
      * @return BannerInterface
      */
     public function setIdentifier($identifier);
@@ -97,6 +118,7 @@ interface BannerInterface
      * Set title
      *
      * @param string $title
+     *
      * @return BannerInterface
      */
     public function setTitle($title);
@@ -105,6 +127,7 @@ interface BannerInterface
      * Set options
      *
      * @param null|array $options
+     *
      * @return BannerInterface
      */
     public function setOptions(array $options = null);
@@ -113,6 +136,7 @@ interface BannerInterface
      * Set banner items
      *
      * @param null|array $items
+     *
      * @return BannerInterface
      */
     public function setBannerItems(array $items = null);
@@ -121,6 +145,7 @@ interface BannerInterface
      * Set creation time
      *
      * @param string $creationTime
+     *
      * @return BannerInterface
      */
     public function setCreationTime($creationTime);
@@ -129,6 +154,7 @@ interface BannerInterface
      * Set update time
      *
      * @param string $updateTime
+     *
      * @return BannerInterface
      */
     public function setUpdateTime($updateTime);
@@ -137,6 +163,7 @@ interface BannerInterface
      * Set is active
      *
      * @param bool|int $isActive
+     *
      * @return BannerInterface
      */
     public function setIsActive($isActive);
