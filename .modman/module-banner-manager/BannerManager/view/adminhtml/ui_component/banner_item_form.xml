@@ -220,6 +220,22 @@
                 <dataScope>class_content</dataScope>
             </settings>
         </field>
+        <field name="class_item" sortOrder="80" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">item</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="validate-identifier" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Class Item</label>
+                <notice translate="true">For example: home-main, home-pants, home-t-shirts, home-erin, home-performance, home-eco, ..</notice>
+                <dataScope>class_item</dataScope>
+            </settings>
+        </field>
         <field name="position" sortOrder="200" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

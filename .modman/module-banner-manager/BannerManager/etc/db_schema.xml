@@ -64,6 +64,7 @@
         <column xsi:type="varchar" name="action" nullable="true" length="50" comment="Action"/>
         <column xsi:type="varchar" name="class_action" nullable="true" length="50" comment="Class Action"/>
         <column xsi:type="varchar" name="class_content" nullable="true" length="50" comment="Class Content"/>
+        <column xsi:type="varchar" name="class_item" nullable="true" length="50" comment="Class banner Item"/>
         <column xsi:type="smallint" name="position" padding="5" unsigned="true" nullable="true" identity="false"/>
         <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
             comment="Creation Time"/>

@@ -21,6 +21,7 @@ interface ItemInterface
     const ACTION         = 'action';
     const CLASS_ACTION   = 'class_action';
     const CLASS_CONTENT  = 'class_content';
+    const CLASS_ITEM     = 'class_item';
     const CREATION_TIME  = 'creation_time';
     const UPDATE_TIME    = 'update_time';
     const IS_ACTIVE      = 'is_active';
@@ -91,6 +92,13 @@ interface ItemInterface
     public function getClassContent();
 
     /**
+     * Get class item
+     *
+     * @return string|null
+     */
+    public function getClassItem();
+
+    /**
      * Get creation time
      *
      * @return string|null
@@ -120,6 +128,7 @@ interface ItemInterface
      * Set ID
      *
      * @param int $id
+     *
      * @return ItemInterface
      */
     public function setId($id);
@@ -128,6 +137,7 @@ interface ItemInterface
      * Set Banner ID
      *
      * @param int $id
+     *
      * @return ItemInterface
      */
     public function setBannerId($id);
@@ -136,6 +146,7 @@ interface ItemInterface
      * Set Title
      *
      * @param string $title
+     *
      * @return ItemInterface
      */
     public function setTitle($title);
@@ -144,6 +155,7 @@ interface ItemInterface
      * Set Image
      *
      * @param string $image
+     *
      * @return ItemInterface
      */
     public function setImage($image);
@@ -152,6 +164,7 @@ interface ItemInterface
      * Set Link
      *
      * @param string $link
+     *
      * @return ItemInterface
      */
     public function setLink($link);
@@ -160,6 +173,7 @@ interface ItemInterface
      * Set Description
      *
      * @param string $description
+     *
      * @return ItemInterface
      */
     public function setDescription($description);
@@ -168,6 +182,7 @@ interface ItemInterface
      * Set Action
      *
      * @param string $action
+     *
      * @return ItemInterface
      */
     public function setAction($action);
@@ -176,6 +191,7 @@ interface ItemInterface
      * Set Class Action
      *
      * @param string $class
+     *
      * @return ItemInterface
      */
     public function setClassAction($class);
@@ -184,14 +200,25 @@ interface ItemInterface
      * Set Class Content
      *
      * @param string $class
+     *
      * @return ItemInterface
      */
     public function setClassContent($class);
 
     /**
+     * Set Class item
+     *
+     * @param string $class
+     *
+     * @return ItemInterface
+     */
+    public function setClassItem($class);
+
+    /**
      * Set creation time
      *
      * @param string $creationTime
+     *
      * @return ItemInterface
      */
     public function setCreationTime($creationTime);
@@ -200,6 +227,7 @@ interface ItemInterface
      * Set update time
      *
      * @param string $updateTime
+     *
      * @return ItemInterface
      */
     public function setUpdateTime($updateTime);
@@ -208,6 +236,7 @@ interface ItemInterface
      * Set is active
      *
      * @param bool|int $isActive
+     *
      * @return ItemInterface
      */
     public function setIsActive($isActive);
@@ -216,6 +245,7 @@ interface ItemInterface
      * Set position
      *
      * @param int $position
+     *
      * @return ItemInterface
      */
     public function setPosition($position);

@@ -203,6 +203,14 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     /**
      * @return string|null
      */
+    public function getClassItem()
+    {
+        return $this->getData(self::CLASS_ITEM);
+    }
+
+    /**
+     * @return string|null
+     */
     public function getCreationTime()
     {
         return $this->getData(self::CREATION_TIME);
@@ -310,6 +318,16 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
     public function setClassContent($class)
     {
         return $this->setData(self::CLASS_CONTENT, $class);
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return ItemInterface|Item
+     */
+    public function setClassItem($class)
+    {
+        return $this->setData(self::CLASS_ITEM, $class);
     }
 
     /**

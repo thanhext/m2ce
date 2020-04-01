@@ -1,74 +1,129 @@
 <?php
+
 namespace T2N\BannerManager\Block;
 
-use Magento\Framework\View\Element\AbstractBlock;
+use Magento\Framework\View\Element\Template;
+use T2N\BannerManager\Model\Banner\Item;
 
 /**
  * Banner content block
  */
-class Banner extends AbstractBlock implements \Magento\Framework\DataObject\IdentityInterface
+class Banner extends Template implements \Magento\Framework\DataObject\IdentityInterface
 {
-
     /**
-     * @var \Magento\Cms\Model\Template\FilterProvider
-     */
-    protected $_filterProvider;
-
-    /**
-     * Store manager
+     * Banner item factory
      *
-     * @var \Magento\Store\Model\StoreManagerInterface
+     * @var \T2N\BannerManager\Model\Banner\ItemFactory
      */
-    protected $_storeManager;
-
+    protected $_bannerItemFactory;
     /**
-     * Block factory
+     * Banner factory
      *
      * @var \T2N\BannerManager\Model\BannerFactory
      */
     protected $_bannerFactory;
+    /**
+     * @var string
+     */
+    protected $_template = 'T2N_BannerManager::banner.phtml';
 
     /**
      * Construct
      *
-     * @param \Magento\Framework\View\Element\Context $context
+     * @param \Magento\Framework\View\Element\Context    $context
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \T2N\BannerManager\Model\BannerFactory $bannerFactory
-     * @param array $data
+     * @param \T2N\BannerManager\Model\BannerFactory     $bannerFactory
+     * @param array                                      $data
      */
     public function __construct(
-        \Magento\Framework\View\Element\Context $context,
-        \Magento\Cms\Model\Template\FilterProvider $filterProvider,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         \T2N\BannerManager\Model\BannerFactory $bannerFactory,
+        \Magento\Framework\View\Element\Template\Context $context,
+        \T2N\BannerManager\Model\Banner\ItemFactory $bannerItemFactory,
         array $data = []
     ) {
+        $this->_bannerItemFactory = $bannerItemFactory;
+        $this->_bannerFactory     = $bannerFactory;
         parent::__construct($context, $data);
-        $this->_filterProvider = $filterProvider;
-        $this->_storeManager = $storeManager;
-        $this->_bannerFactory = $bannerFactory;
     }
 
     /**
-     * Prepare Content HTML
+     * @return \T2N\BannerManager\Model\Banner|null
+     */
+    public function getBanner()
+    {
+        $bannerId = $this->getBannerId();
+        try {
+            if ($bannerId) {
+                $storeId = $this->_storeManager->getStore()->getId();
+                /** @var \T2N\BannerManager\Model\Banner $block */
+                $banner = $this->_bannerFactory->create();
+                $banner->setStoreId($storeId)->load($bannerId);
+                return $banner;
+            }
+        } catch (\Exception $e) {
+            $this->_logger->log($e->getMessage());
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $bannerItem
+     *
+     * @return string|null
+     */
+    public function getImageUrl($bannerItem)
+    {
+        try {
+            return $bannerItem->getImageUrl();
+        } catch (\Exception $e) {
+            $this->_logger->log($e->getMessage());
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getBannerItems()
+    {
+        $items  = [];
+        $banner = $this->getBanner();
+        if ($banner) {
+            foreach ($banner->getBannerItems() as $item) {
+                $items[] = $this->convertBannerItem($item);
+            }
+        }
+
+        return $items;
+    }
+
+    /**
+     * @param $data
+     *
+     * @return Item
+     */
+    protected function convertBannerItem($data)
+    {
+        if (is_array($data)) {
+            $model = $this->_bannerItemFactory->create();
+            $model->setData($data);
+            return $model;
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param $link
      *
      * @return string
      */
-    protected function _toHtml()
+    public function getLink($link)
     {
-        $bannerId = $this->getBannerId();
-        $html = '';
-        if ($bannerId) {
-            $storeId = $this->_storeManager->getStore()->getId();
-            /** @var \Magento\Cms\Model\Block $block */
-            $banner = $this->_bannerFactory->create();
-            $banner->setStoreId($storeId)->load($bannerId);
-            if ($banner->isActive()) {
-                $html = $this->_filterProvider->getBlockFilter()->setStoreId($storeId)->filter($banner->getContent());
-            }
-        }
-        return $html;
+        return $this->getBaseUrl() . $link;
     }
 
     /**
@@ -78,7 +133,18 @@ class Banner extends AbstractBlock implements \Magento\Framework\DataObject\Iden
      */
     public function getIdentities()
     {
-        return [\T2N\BannerManager\Model\Banner::CACHE_TAG . '_' . $this->getId()];
+        $identities = [];
+        if ($banner = $this->getBanner()) {
+            $identities[] = $banner->getIdentifier();
+        }
+
+        $items = $this->getBannerItems();
+        /** @var Item $item */
+        foreach ($items as $item) {
+            $identities[] = $item->getIdentities();
+        }
+
+        return $identities;
     }
 
     /**
@@ -86,7 +152,7 @@ class Banner extends AbstractBlock implements \Magento\Framework\DataObject\Iden
      */
     public function getCacheKeyInfo()
     {
-        $cacheKeyInfo = parent::getCacheKeyInfo();
+        $cacheKeyInfo   = parent::getCacheKeyInfo();
         $cacheKeyInfo[] = $this->_storeManager->getStore()->getId();
         return $cacheKeyInfo;
     }

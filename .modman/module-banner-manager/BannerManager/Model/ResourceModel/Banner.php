@@ -1,9 +1,8 @@
 <?php
+
 namespace T2N\BannerManager\Model\ResourceModel;
 
 use Magento\Framework\DB\Select;
-use T2N\BannerManager\Api\Data\BannerInterface;
-use T2N\BannerManager\Api\Data\ItemInterface;
 use Magento\Framework\EntityManager\EntityManager;
 use Magento\Framework\EntityManager\MetadataPool;
 use Magento\Framework\Exception\LocalizedException;
@@ -12,6 +11,9 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
+use T2N\BannerManager\Api\Data\BannerInterface;
+use T2N\BannerManager\Api\Data\ItemInterface;
+use T2N\BannerManager\Model\ResourceModel\Banner\Item\CollectionFactory;
 
 /**
  * Class Banner
@@ -36,22 +38,33 @@ class Banner extends AbstractDb
     protected $metadataPool;
 
     /**
-     * @param Context $context
+     * @var CollectionFactory
+     */
+    protected $itemCollectionFactory;
+
+    /**
+     * Banner constructor.
+     *
+     * @param Context               $context
+     * @param CollectionFactory     $itemCollectionFactory
      * @param StoreManagerInterface $storeManager
-     * @param EntityManager $entityManager
-     * @param MetadataPool $metadataPool
-     * @param string $connectionName
+     * @param EntityManager         $entityManager
+     * @param MetadataPool          $metadataPool
+     * @param null                  $connectionName
      */
     public function __construct(
         Context $context,
+        CollectionFactory $itemCollectionFactory,
         StoreManagerInterface $storeManager,
         EntityManager $entityManager,
         MetadataPool $metadataPool,
         $connectionName = null
     ) {
-        $this->_storeManager = $storeManager;
-        $this->entityManager = $entityManager;
-        $this->metadataPool = $metadataPool;
+
+        $this->_storeManager         = $storeManager;
+        $this->entityManager         = $entityManager;
+        $this->metadataPool          = $metadataPool;
+        $this->itemCollectionFactory = $itemCollectionFactory;
         parent::__construct($context, $connectionName);
     }
 
@@ -75,6 +88,7 @@ class Banner extends AbstractDb
      * Perform actions before object save
      *
      * @param \Magento\Framework\Model\AbstractModel|\Magento\Framework\DataObject $object
+     *
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
@@ -113,8 +127,9 @@ class Banner extends AbstractDb
      * Get block id.
      *
      * @param AbstractModel $object
-     * @param mixed $value
-     * @param string $field
+     * @param mixed         $value
+     * @param string        $field
+     *
      * @return bool|int|string
      * @throws LocalizedException
      * @throws \Exception
@@ -134,7 +149,7 @@ class Banner extends AbstractDb
             $select->reset(Select::COLUMNS)
                    ->columns($this->getMainTable() . '.' . $entityMetadata->getIdentifierField())
                    ->limit(1);
-            $result = $this->getConnection()->fetchCol($select);
+            $result   = $this->getConnection()->fetchCol($select);
             $entityId = count($result) ? $result[0] : false;
         }
 
@@ -145,8 +160,9 @@ class Banner extends AbstractDb
      * Load an object
      *
      * @param \T2N\BannerManager\Model\Banner|AbstractModel $object
-     * @param mixed $value
-     * @param string $field field to load by (defaults to model id)
+     * @param mixed                                         $value
+     * @param string                                        $field field to load by (defaults to model id)
+     *
      * @return $this
      */
     public function load(AbstractModel $object, $value, $field = null)
@@ -161,15 +177,16 @@ class Banner extends AbstractDb
     /**
      * Retrieve select object for load object data
      *
-     * @param string $field
-     * @param mixed $value
+     * @param string                                        $field
+     * @param mixed                                         $value
      * @param \T2N\BannerManager\Model\Banner|AbstractModel $object
+     *
      * @return Select
      */
     protected function _getLoadSelect($field, $value, $object)
     {
         $entityMetadata = $this->metadataPool->getMetadata(BannerInterface::class);
-        $linkField = $entityMetadata->getLinkField();
+        $linkField      = $entityMetadata->getLinkField();
 
         $select = parent::_getLoadSelect($field, $value, $object);
 
@@ -189,19 +206,21 @@ class Banner extends AbstractDb
 
         return $select;
     }
+
     /**
      * Check for unique of identifier of banner to selected store(s).
      *
      * @param AbstractModel $object
+     *
      * @return bool
      * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getIsUniqueBannerToStores(AbstractModel $object)
     {
         $entityMetadata = $this->metadataPool->getMetadata(BannerInterface::class);
-        $linkField = $entityMetadata->getLinkField();
+        $linkField      = $entityMetadata->getLinkField();
 
-        $stores = (array)$object->getData('store_id');
+        $stores         = (array)$object->getData('store_id');
         $isDefaultStore = $this->_storeManager->isSingleStoreMode()
                           || array_search(Store::DEFAULT_STORE_ID, $stores) !== false;
 
@@ -237,6 +256,7 @@ class Banner extends AbstractDb
      * Get store ids to which specified item is assigned
      *
      * @param int $id
+     *
      * @return array
      */
     public function lookupStoreIds($id)
@@ -244,7 +264,7 @@ class Banner extends AbstractDb
         $connection = $this->getConnection();
 
         $entityMetadata = $this->metadataPool->getMetadata(BannerInterface::class);
-        $linkField = $entityMetadata->getLinkField();
+        $linkField      = $entityMetadata->getLinkField();
 
         $select = $connection->select()
                              ->from(['bes' => $this->getTable('banner_entity_store')], 'store_id')
@@ -257,10 +277,12 @@ class Banner extends AbstractDb
 
         return $connection->fetchCol($select, ['entity_id' => (int)$id]);
     }
+
     /**
      * Save an object.
      *
      * @param AbstractModel $object
+     *
      * @return $this
      * @throws \Exception
      */
@@ -283,13 +305,22 @@ class Banner extends AbstractDb
 
     /**
      * @param AbstractModel $object
+     *
+     * @return Banner\Item\Collection|null
+     * @throws \Exception
      */
-    public function getBannerItemsCollection(AbstractModel $object)
+    public function getBannerItems(AbstractModel $object)
     {
-        /** @var \Magento\Framework\EntityManager\EntityMetadata $entityMetadata */
-        $entityMetadata = $this->metadataPool->getMetadata(ItemInterface::class);
+        $value = $object->getId();
+        if ($value) {
+            /** @var \Magento\Framework\EntityManager\EntityMetadata $entityMetadata */
+            $entityMetadata = $this->metadataPool->getMetadata(ItemInterface::class);
+            $field          = $entityMetadata->getIdentifierField();
+            $collection = $this->itemCollectionFactory->create();
+            $collection->addFieldToFilter($field, $value);
+            return $collection;
+        }
 
-
-        var_dump($entityMetadata->ge()); die;
+        return null;
     }
 }

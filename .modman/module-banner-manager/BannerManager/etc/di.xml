@@ -20,7 +20,7 @@
                 </item>
                 <item name="T2N\BannerManager\Api\Data\ItemInterface" xsi:type="array">
                     <item name="entityTableName" xsi:type="string">banner_item</item>
-                    <item name="identifierField" xsi:type="string">entity_id</item>
+                    <item name="identifierField" xsi:type="string">banner_id</item>
                 </item>
             </argument>
         </arguments>

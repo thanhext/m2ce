@@ -3,7 +3,7 @@
     <referenceContainer name="content">
         <block template="banner.phtml" class="T2N\BannerManager\Block\Banner" name="block.banner.homepage">
             <arguments>
-                <argument name="banner_id" xsi:type="string">homepage-slider</argument>
+                <argument name="banner_id" xsi:type="string">homepage-banner</argument>
             </arguments>
         </block>
     </referenceContainer>

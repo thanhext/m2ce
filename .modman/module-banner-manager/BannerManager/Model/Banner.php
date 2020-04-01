@@ -2,13 +2,17 @@
 
 namespace T2N\BannerManager\Model;
 
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 use T2N\BannerManager\Api\Data\BannerInterface;
-use Magento\Framework\DataObject\IdentityInterface;
+use T2N\BannerManager\Model\ResourceModel\Banner\Item\Collection;
 use T2N\BannerManager\Model\System\Config\Status;
 
 /**
  * Class Banner
+ *
+ * @method Banner setStoreId(int $storeId)
+ * @method int getStoreId()
  */
 class Banner extends AbstractModel implements BannerInterface, IdentityInterface
 {
@@ -148,7 +152,23 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
             return $this->jsonDecode($data);
         }
 
+        if (empty($data)) {
+            $items = $this->getBannerItemsCollection();
+            if ($items instanceof Collection) {
+                $data = $items->getData();
+            }
+            $this->setBannerItems($data);
+        }
+
         return $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBannerItemsCollection()
+    {
+        return $this->getResource()->getBannerItems($this);
     }
 
     /**
