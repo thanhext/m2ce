@@ -90,7 +90,7 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
     {
         $items  = [];
         $banner = $this->getBanner();
-        if ($banner) {
+        if ($banner && $banner->getBannerItems()) {
             foreach ($banner->getBannerItems() as $item) {
                 $items[] = $this->convertBannerItem($item);
             }
