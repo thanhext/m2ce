@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Magento, Inc. All rights reserved.
+ * Copyright © Thomas Nguyen, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -16,8 +16,9 @@
         </referenceContainer>
         <referenceBlock name="logo">
             <arguments>
-                <argument name="logo_img_width" xsi:type="number">148</argument>
-                <argument name="logo_img_height" xsi:type="number">43</argument>
+                <argument name="logo_img_width" xsi:type="number">151</argument>
+                <argument name="logo_img_height" xsi:type="number">116</argument>
+                <argument name="logo_file" xsi:type="string">images/logo.png</argument>
             </arguments>
         </referenceBlock>
         <referenceContainer name="footer">

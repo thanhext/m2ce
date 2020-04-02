@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <referenceContainer name="content">
+        <block class="T2N\BannerManager\Block\Banner" name="block.slider.homepage">
+            <arguments>
+                <argument name="banner_id" xsi:type="string">homepage-slider</argument>
+            </arguments>
+        </block>
         <block class="T2N\BannerManager\Block\Banner" name="block.banner.homepage">
             <arguments>
                 <argument name="banner_id" xsi:type="string">homepage-banner</argument>
