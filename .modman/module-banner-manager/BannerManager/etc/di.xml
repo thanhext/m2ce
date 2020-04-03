@@ -49,6 +49,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="banner_item_listing_data_source" xsi:type="string">T2N\BannerManager\Model\ResourceModel\Banner\Item\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 
     <virtualType name="T2N\BannerManager\BannerImageUpload" type="T2N\BannerManager\Model\ImageUploader">
         <arguments>

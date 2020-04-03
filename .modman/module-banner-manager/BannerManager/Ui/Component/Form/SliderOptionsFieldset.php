@@ -44,18 +44,18 @@ class SliderOptionsFieldset extends \Magento\Ui\Component\Form\Fieldset implemen
      */
     public function isComponentVisible(): bool
     {
-        $bannerId = $this->context->getRequestParam('id');
-        if ($bannerId) {
-            $data = $this->context->getDataProvider()->getData();
-            if (isset($data[$bannerId]) && !empty($data)) {
-                if (isset($data[$bannerId]['banner']) && isset($data[$bannerId]['banner']['type_id'])) {
-                    $typeId = $data[$bannerId]['banner']['type_id'];
-                    if ($typeId == Type::TYPE_SLIDER) {
-                        return true;
-                    }
-                }
-            }
-        }
+//        $bannerId = $this->context->getRequestParam('id');
+//        if ($bannerId) {
+//            $data = $this->context->getDataProvider()->getData();
+//            if (isset($data[$bannerId]) && !empty($data)) {
+//                if (isset($data[$bannerId]['banner']) && isset($data[$bannerId]['banner']['type_id'])) {
+//                    $typeId = $data[$bannerId]['banner']['type_id'];
+//                    if ($typeId == Type::TYPE_SLIDER) {
+//                        return true;
+//                    }
+//                }
+//            }
+//        }
 
         return false;
     }

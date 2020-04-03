@@ -3,42 +3,70 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">banner_item_listing.banner_item_listing_data_source</item>
-            <item name="deps" xsi:type="string">banner_item_listing.banner_item_listing_data_source</item>
-        </item>
-        <item name="spinner" xsi:type="string">banner_item_listing_columns</item>
-        <item name="buttons" xsi:type="array">
-            <item name="add" xsi:type="array">
-                <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string">Add New</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">banner/item/new</item>
-            </item>
         </item>
     </argument>
-
-
-    <dataSource name="banner_item_listing_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">T2N\BannerManager\Ui\Component\Listing\DataProviders\BannerItem</argument>
-            <argument name="name" xsi:type="string">banner_item_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
-            <argument name="requestFieldName" xsi:type="string">id</argument>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">entity_id</item>
-                    </item>
-                </item>
-            </argument>
-        </argument>
-        <argument name="data" xsi:type="array">
-            <item name="js_config" xsi:type="array">
-                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
-            </item>
-        </argument>
+    <settings>
+        <spinner>banner_item_listing_columns</spinner>
+        <deps>
+            <dep>banner_item_listing.banner_item_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="banner_item_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <filterUrlParams>
+                <param name="id">*</param>
+            </filterUrlParams>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">entity_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>T2N_BannerManager::banner</aclResource>
+        <dataProvider class="T2N\BannerManager\Ui\Component\DataProvider" name="banner_item_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
-
+<!--    <listingToolbar name="listing_top">-->
+<!--        <bookmark name="bookmarks"/>-->
+<!--        <columnsControls name="columns_controls"/>-->
+<!--        <filterSearch name="fulltext"/>-->
+<!--        <filters name="listing_filters" component="T2N_BannerManager/js/grid/filters/filters">-->
+<!--            <settings>-->
+<!--                <storageConfig>-->
+<!--                    <param name="provider" xsi:type="string">banner_item_listing.banner_item_listing.listing_top.bookmarks</param>-->
+<!--                    <param name="namespace" xsi:type="string">current.filters</param>-->
+<!--                </storageConfig>-->
+<!--                <childDefaults>-->
+<!--                    <param name="provider" xsi:type="string">banner_item_listing.banner_item_listing.listing_top.listing_filters</param>-->
+<!--                    <param name="imports" xsi:type="array">-->
+<!--                        <item name="visible" xsi:type="string">banner_item_listing.banner_item_listing.listing_top.bookmarks:current.columns.${ $.index }.visible</item>-->
+<!--                    </param>-->
+<!--                </childDefaults>-->
+<!--            </settings>-->
+<!--        </filters>-->
+<!--        <massaction name="listing_massaction" component="T2N_BannerManager/js/grid/massactions">-->
+<!--            <action name="delete">-->
+<!--                <argument name="data" xsi:type="array">-->
+<!--                    <item name="config" xsi:type="array">-->
+<!--                        <item name="isAjax" xsi:type="boolean">true</item>-->
+<!--                    </item>-->
+<!--                </argument>-->
+<!--                <settings>-->
+<!--                    <url path="banner/item/massDelete"/>-->
+<!--                    <type>delete</type>-->
+<!--                    <label translate="true">Delete</label>-->
+<!--                    <confirm>-->
+<!--                        <message translate="true">Are you sure to delete selected banner?</message>-->
+<!--                        <title translate="true">Delete items</title>-->
+<!--                    </confirm>-->
+<!--                </settings>-->
+<!--            </action>-->
+<!--        </massaction>-->
+<!--        <paging name="listing_paging"/>-->
+<!--    </listingToolbar>-->
     <columns name="banner_item_listing_columns">
         <selectionsColumn name="ids">
             <settings>

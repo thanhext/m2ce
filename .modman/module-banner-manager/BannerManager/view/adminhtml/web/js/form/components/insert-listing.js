@@ -27,6 +27,7 @@ define([
          * @param {Object} data - banner item and actions
          */
         onAction: function (data) {
+            console.log(data);
             this[data.action + 'Action'].call(this, data.data);
         },
 

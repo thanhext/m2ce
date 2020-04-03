@@ -107,6 +107,7 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
     protected function convertBannerItem($data)
     {
         if (is_array($data)) {
+            /** @var \T2N\BannerManager\Model\Banner\Item $model */
             $model = $this->_bannerItemFactory->create();
             $model->setData($data);
             return $model;
