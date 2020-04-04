@@ -12,7 +12,7 @@ interface BannerInterface
     /**#@+
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
-    const BANNER_ID     = 'entity_id';
+    const BANNER_ID     = 'banner_id';
     const IDENTIFIER    = 'identifier';
     const TITLE         = 'title';
     const TYPE_ID       = 'type_id';
@@ -21,6 +21,9 @@ interface BannerInterface
     const CREATION_TIME = 'creation_time';
     const UPDATE_TIME   = 'update_time';
     const IS_ACTIVE     = 'is_active';
+
+    const FORM_GENERAL = 'banner';
+    const FORM_OPTIONS = 'options';
     /**#@-*/
 
     /**
@@ -29,13 +32,6 @@ interface BannerInterface
      * @return int|null
      */
     public function getId();
-
-    /**
-     * Get ID
-     *
-     * @return int|null
-     */
-    public function getBannerId();
 
     /**
      * Get Type ID
@@ -101,15 +97,6 @@ interface BannerInterface
      * @return BannerInterface
      */
     public function setId($id);
-
-    /**
-     * Set ID
-     *
-     * @param int $id
-     *
-     * @return BannerInterface
-     */
-    public function setBannerId($id);
 
     /**
      * Set Type ID

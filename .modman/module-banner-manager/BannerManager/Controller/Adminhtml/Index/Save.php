@@ -10,7 +10,7 @@ use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Registry;
+use T2N\BannerManager\Api\Data\BannerInterface as BN;
 use Magento\Framework\View\Result\PageFactory;
 use T2N\BannerManager\Model\System\Config\Status;
 
@@ -58,23 +58,23 @@ class Save extends Banner
     public function execute()
     {
         $data          = $this->getRequest()->getPostValue();
-        $banner        = $this->getRequest()->getParam('banner');
-        $bannerOptions = $this->getRequest()->getParam('options');
+        $banner        = $this->getRequest()->getParam(BN::FORM_GENERAL);
+        $bannerOptions = $this->getRequest()->getParam(BN::FORM_OPTIONS);
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($banner) {
             $banner['options'] = $bannerOptions;
-            if (isset($banner['is_active']) && $banner['is_active'] === 'true') {
-                $banner['is_active'] = Status::STATUS_ENABLED;
+            if (isset($banner[BN::IS_ACTIVE]) && $banner[BN::IS_ACTIVE] === 'true') {
+                $banner[BN::IS_ACTIVE] = Status::STATUS_ENABLED;
             }
 
-            if (empty($banner['entity_id'])) {
-                $banner['entity_id'] = null;
+            if (empty($banner[BN::BANNER_ID])) {
+                $banner[BN::BANNER_ID] = null;
             }
 
             /** @var \T2N\BannerManager\Model\Banner $model */
             $model = $this->_bannerFactory->create();
-            $id    = $this->getRequest()->getParam('id');
+            $id    = $this->getRequest()->getParam(BN::BANNER_ID);
             if ($id) {
                 $model = $this->bannerRepository->getById($id);
             }
@@ -85,7 +85,7 @@ class Save extends Banner
                 $this->messageManager->addSuccess(__('You saved the thing.'));
                 $this->dataPersistor->clear('banner_entity');
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId(), '_current' => true]);
+                    return $resultRedirect->setPath('*/*/edit', [BN::BANNER_ID => $model->getId(), '_current' => true]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
@@ -95,7 +95,7 @@ class Save extends Banner
             }
 
             $this->dataPersistor->set('banner_entity', $banner);
-            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
+            return $resultRedirect->setPath('*/*/edit', [BN::BANNER_ID => $id]);
         }
         return $resultRedirect->setPath('*/*/');
     }

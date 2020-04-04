@@ -3,6 +3,7 @@
 namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
@@ -28,21 +29,22 @@ class Upload extends BannerItem
     /**
      * Upload constructor.
      *
-     * @param Context       $context
-     * @param Registry      $coreRegistry
-     * @param FileProcessor $fileProcessor
-     * @param ItemFactory   $itemFactory
-     * @param PageFactory   $resultPageFactory
+     * @param Context                $context
+     * @param DataPersistorInterface $dataPersistor
+     * @param FileProcessor          $fileProcessor
+     * @param ItemFactory            $itemFactory
+     * @param PageFactory            $resultPageFactory
+     * @param ImageUploader          $imageUploader
      */
     public function __construct(
         Context $context,
-        Registry $coreRegistry,
+        DataPersistorInterface $dataPersistor,
         FileProcessor $fileProcessor,
         ItemFactory $itemFactory,
         PageFactory $resultPageFactory,
         ImageUploader $imageUploader
     ) {
-        parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
+        parent::__construct($context, $itemFactory, $dataPersistor, $resultPageFactory);
         $this->imageUploader = $imageUploader;
     }
 

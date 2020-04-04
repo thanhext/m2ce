@@ -73,7 +73,7 @@ class Banner extends AbstractDb
      */
     protected function _construct() // phpcs:ignore PSR2.Methods.MethodDeclaration
     {
-        $this->_init('banner_entity', 'entity_id');
+        $this->_init('banner_entity', BannerInterface::BANNER_ID);
     }
 
     /**
@@ -273,9 +273,9 @@ class Banner extends AbstractDb
                                  'bes.' . $linkField . ' = cb.' . $linkField,
                                  []
                              )
-                             ->where('cb.' . $entityMetadata->getIdentifierField() . ' = :entity_id');
+                             ->where('cb.' . $entityMetadata->getIdentifierField() . ' = :banner_id');
 
-        return $connection->fetchCol($select, ['entity_id' => (int)$id]);
+        return $connection->fetchCol($select, [BannerInterface::BANNER_ID => (int)$id]);
     }
 
     /**

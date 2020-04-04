@@ -27,8 +27,8 @@
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">T2N\BannerManager\Model\Banner\DataProvider</argument>
             <argument name="name" xsi:type="string">banner_form_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
-            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="primaryFieldName" xsi:type="string">banner_id</argument>
+            <argument name="requestFieldName" xsi:type="string">banner_id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="submit_url" xsi:type="url" path="*/*/save"/>
@@ -46,7 +46,7 @@
 <!--            <dataScope>data</dataScope>-->
             <label translate="true">Banner Information</label>
         </settings>
-        <field name="entity_id" formElement="input">
+        <field name="banner_id" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">banner</item>
@@ -55,7 +55,7 @@
             <settings>
                 <dataType>text</dataType>
                 <visible>false</visible>
-                <dataScope>entity_id</dataScope>
+                <dataScope>banner_id</dataScope>
             </settings>
         </field>
         <field name="is_active" sortOrder="10" formElement="checkbox">
@@ -462,7 +462,7 @@
             <settings>
                 <title translate="true">Add New Banner Item</title>
                 <imports>
-                    <link name="bannerId">${ $.provider}:data.banner_id</link>
+                    <link name="bannerId">${ $.provider}:data.banner.banner_id</link>
                 </imports>
             </settings>
         </button>
@@ -493,7 +493,7 @@
                         <link name="bannerId">${ $.externalProvider }:data.banner_id</link>
                     </exports>
                     <imports>
-                        <link name="bannerId">${ $.provider}:data.banner_id</link>
+                        <link name="bannerId">${ $.provider}:data.banner.banner_id</link>
                         <link name="onBannerItemDelete">${ $.ns }.${ $.ns }:deleteBannerItemAction</link>
                     </imports>
                 </settings>
@@ -515,7 +515,7 @@
                     <link name="id">${ $.externalProvider }:params.id</link>
                 </exports>
                 <imports>
-                    <link name="banner_id">${ $.provider }:data.banner.entity_id</link>
+                    <link name="banner_id">${ $.provider }:data.banner.banner_id</link>
                     <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
                     <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>
                 </imports>

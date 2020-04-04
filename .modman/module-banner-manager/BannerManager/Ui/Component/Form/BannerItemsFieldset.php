@@ -9,7 +9,7 @@ namespace T2N\BannerManager\Ui\Component\Form;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\ComponentVisibilityInterface;
-
+use T2N\BannerManager\Model\Banner;
 /**
  * Class BannerItemsFieldset
  *
@@ -42,7 +42,7 @@ class BannerItemsFieldset extends \Magento\Ui\Component\Form\Fieldset implements
      */
     public function isComponentVisible(): bool
     {
-        $bannerId = $this->context->getRequestParam('id');
+        $bannerId = $this->context->getRequestParam(Banner::BANNER_ID);
         return (bool)$bannerId;
     }
 }

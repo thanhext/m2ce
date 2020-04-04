@@ -4,6 +4,7 @@ namespace T2N\BannerManager\Controller\Adminhtml\Item;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Registry;
@@ -28,22 +29,22 @@ class Delete extends BannerItem implements HttpPostActionInterface
     /**
      * Delete constructor.
      *
-     * @param Context         $context
-     * @param ItemFactory     $itemFactory
-     * @param Registry        $coreRegistry
-     * @param PageFactory     $resultPageFactory
-     * @param JsonFactory     $resultJsonFactory
-     * @param LoggerInterface $logger
+     * @param Context                $context
+     * @param ItemFactory            $itemFactory
+     * @param DataPersistorInterface $dataPersistor
+     * @param PageFactory            $resultPageFactory
+     * @param JsonFactory            $resultJsonFactory
+     * @param LoggerInterface        $logger
      */
     public function __construct(
         Context $context,
         ItemFactory $itemFactory,
-        Registry $coreRegistry,
+        DataPersistorInterface $dataPersistor,
         PageFactory $resultPageFactory,
         JsonFactory $resultJsonFactory,
         LoggerInterface $logger
     ) {
-        parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
+        parent::__construct($context, $itemFactory, $dataPersistor, $resultPageFactory);
         $this->resultJsonFactory = $resultJsonFactory;
         $this->logger            = $logger;
     }

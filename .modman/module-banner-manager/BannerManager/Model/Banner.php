@@ -61,20 +61,25 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     /**
      * @param $data
      *
-     * @return mixed
-     * @throws LocalizedException
+     * @return array
      */
     protected function jsonDecode($data)
     {
-        if (is_string($data)) {
-            $result = json_decode($data, true);
-            if (false === $result) {
-                throw new LocalizedException("Unable to serialize value. Error: " . json_last_error_msg());
+        if (is_array($data)) {
+            return $data;
+        }
+        trY {
+            if (is_string($data)) {
+                $result = json_decode($data, true);
+                if (is_array($result)) {
+                    return $result;
+                }
             }
-            return $result;
+        } catch (\Exception $e) {
+            $this->_logger->log($e->getMessage());
         }
 
-        return $data;
+        return [];
     }
 
     /**
@@ -100,16 +105,6 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     public function getIdentities()
     {
         return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG . '_' . $this->getIdentifier()];
-    }
-
-    /**
-     * Retrieve banner id
-     *
-     * @return int
-     */
-    public function getBannerId()
-    {
-        return $this->getData(self::BANNER_ID);
     }
 
     /**
@@ -143,18 +138,12 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     }
 
     /**
-     * Retrieve banner options
-     *
-     * @return array|null
+     * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
-        $data = $this->getData(self::OPTIONS);
-        if (is_string($data)) {
-            return $this->jsonDecode($data);
-        }
-
-        return $data;
+        $options = $this->getData(self::OPTIONS);
+        return $this->jsonDecode($options);
     }
 
     /**
@@ -165,18 +154,15 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     public function getBannerItems()
     {
         $data = $this->getData(self::BANNER_ITEMS);
-        if (is_string($data)) {
+        if (!empty($data)) {
             return $this->jsonDecode($data);
         }
 
-        if (empty($data)) {
-            $items = $this->getBannerItemsCollection();
-            if ($items instanceof Collection) {
-                $data = $items->getData();
-            }
-            $this->setBannerItems($data);
+        $items = $this->getBannerItemsCollection();
+        if ($items instanceof Collection) {
+            $data = $items->getData();
         }
-
+        $this->setBannerItems($data);
         return $data;
     }
 
@@ -216,18 +202,6 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     public function isActive()
     {
         return (bool)$this->getData(self::IS_ACTIVE);
-    }
-
-    /**
-     * Set Banner ID
-     *
-     * @param int $id
-     *
-     * @return BannerInterface
-     */
-    public function setBannerId($id)
-    {
-        return $this->setData(self::BANNER_ID, $id);
     }
 
     /**

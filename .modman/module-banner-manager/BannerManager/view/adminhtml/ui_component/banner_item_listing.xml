@@ -128,7 +128,7 @@
                 <label translate="true">Modified</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\Item\Actions" component="T2N_BannerManager/js/grid/columns/actions">
+        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\Item\ItemActions" component="T2N_BannerManager/js/grid/columns/actions">
             <settings>
                 <indexField>entity_id</indexField>
             </settings>

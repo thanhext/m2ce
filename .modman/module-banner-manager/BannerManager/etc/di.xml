@@ -16,7 +16,7 @@
             <argument name="metadata" xsi:type="array">
                 <item name="T2N\BannerManager\Api\Data\BannerInterface" xsi:type="array">
                     <item name="entityTableName" xsi:type="string">banner_entity</item>
-                    <item name="identifierField" xsi:type="string">entity_id</item>
+                    <item name="identifierField" xsi:type="string">banner_id</item>
                 </item>
                 <item name="T2N\BannerManager\Api\Data\ItemInterface" xsi:type="array">
                     <item name="entityTableName" xsi:type="string">banner_item</item>
@@ -49,6 +49,25 @@
             </argument>
         </arguments>
     </type>
+    <virtualType name="T2N\BannerManager\Model\Api\SearchCriteria\BannerCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">T2N\BannerManager\Model\Api\SearchCriteria\CollectionProcessor\BannerFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="T2N\BannerManager\Model\BannerRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">T2N\BannerManager\Model\Api\SearchCriteria\BannerCollectionProcessor</argument>
+        </arguments>
+    </type>
+
+
+
+
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

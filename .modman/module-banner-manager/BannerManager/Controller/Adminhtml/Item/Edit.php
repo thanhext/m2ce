@@ -11,8 +11,7 @@ class Edit extends BannerItem
 {
     public function execute()
     {
-        $id    = $this->getRequest()->getParam('entity_id');
-        var_dump($id); die;
+        $id    = $this->getRequest()->getParam('id');
         $model = $this->_itemFactory->create();
         if ($id) {
             $model->load($id);
@@ -22,13 +21,8 @@ class Edit extends BannerItem
                 return;
             }
         }
-        // Restore previously entered form data from session
-        $data = $this->_session->getBannerData(true);
-        if (!empty($data)) {
-            $model->setData($data);
-        }
-        $this->_coreRegistry->register('banner_item', $model);
 
+        $this->dataPersistor->set('banner_item', $model->getData());
         /** @var Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
         $resultPage->setActiveMenu(self::ADMIN_RESOURCE);

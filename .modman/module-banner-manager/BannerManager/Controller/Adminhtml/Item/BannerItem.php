@@ -7,6 +7,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use T2N\BannerManager\Model\Banner\ItemFactory;
+use Magento\Framework\App\Request\DataPersistorInterface;
 
 abstract class BannerItem extends Action
 {
@@ -16,31 +17,30 @@ abstract class BannerItem extends Action
      */
     protected $_itemFactory;
     /**
-     * @var Registry
+     * @var DataPersistorInterface
      */
-    protected $_coreRegistry;
+    protected $dataPersistor;
     /**
      * @var PageFactory
      */
     protected $_resultPageFactory;
 
     /**
-     * Banner constructor.
+     * BannerItem constructor.
      *
-     * @param Context        $context
-     * @param ItemFactory $itemFactory
-     * @param Registry       $coreRegistry
-     * @param PageFactory    $resultPageFactory
+     * @param Context                $context
+     * @param ItemFactory            $itemFactory
+     * @param DataPersistorInterface $dataPersistor
+     * @param PageFactory            $resultPageFactory
      */
     public function __construct(
         Context $context,
         ItemFactory $itemFactory,
-        Registry $coreRegistry,
+        DataPersistorInterface $dataPersistor,
         PageFactory $resultPageFactory
     ) {
-
-        $this->_itemFactory    = $itemFactory;
-        $this->_coreRegistry      = $coreRegistry;
+        $this->dataPersistor      = $dataPersistor;
+        $this->_itemFactory       = $itemFactory;
         $this->_resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }

@@ -5,7 +5,6 @@ namespace T2N\BannerManager\Controller\Adminhtml\Index;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use T2N\BannerManager\Model\BannerFactory;
 

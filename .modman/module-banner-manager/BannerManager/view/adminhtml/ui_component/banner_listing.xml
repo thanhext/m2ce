@@ -19,13 +19,13 @@
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">T2N\BannerManager\Ui\Component\Listing\DataProviders\Banner</argument>
             <argument name="name" xsi:type="string">banner_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="primaryFieldName" xsi:type="string">banner_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="update_url" xsi:type="url" path="mui/index/render"/>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">entity_id</item>
+                        <item name="indexField" xsi:type="string">banner_id</item>
                     </item>
                 </item>
             </argument>
@@ -46,10 +46,10 @@
     <columns name="banner_listing_columns">
         <selectionsColumn name="ids">
             <settings>
-                <indexField>entity_id</indexField>
+                <indexField>banner_id</indexField>
             </settings>
         </selectionsColumn>
-        <column name="entity_id">
+        <column name="banner_id">
             <settings>
                 <filter>textRange</filter>
                 <label translate="true">ID</label>
@@ -98,9 +98,9 @@
                 <label translate="true">Modified</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\PageActions">
+        <actionsColumn name="actions" class="T2N\BannerManager\Ui\Component\Listing\Column\Banner\BannerActions">
             <settings>
-                <indexField>entity_id</indexField>
+                <indexField>banner_id</indexField>
             </settings>
         </actionsColumn>
     </columns>

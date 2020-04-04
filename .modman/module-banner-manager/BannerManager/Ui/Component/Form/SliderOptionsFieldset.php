@@ -11,6 +11,7 @@ namespace T2N\BannerManager\Ui\Component\Form;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\ComponentVisibilityInterface;
 use T2N\BannerManager\Model\System\Config\Type;
+use T2N\BannerManager\Model\Banner;
 
 /**
  * Class SliderOptionsFieldset
@@ -44,18 +45,18 @@ class SliderOptionsFieldset extends \Magento\Ui\Component\Form\Fieldset implemen
      */
     public function isComponentVisible(): bool
     {
-//        $bannerId = $this->context->getRequestParam('id');
-//        if ($bannerId) {
-//            $data = $this->context->getDataProvider()->getData();
-//            if (isset($data[$bannerId]) && !empty($data)) {
-//                if (isset($data[$bannerId]['banner']) && isset($data[$bannerId]['banner']['type_id'])) {
-//                    $typeId = $data[$bannerId]['banner']['type_id'];
-//                    if ($typeId == Type::TYPE_SLIDER) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
+        $bannerId = $this->context->getRequestParam(Banner::BANNER_ID);
+        if ($bannerId) {
+            $data = $this->context->getDataProvider()->getData();
+            if (isset($data[$bannerId]) && !empty($data)) {
+                if (isset($data[$bannerId][Banner::FORM_GENERAL]) && isset($data[$bannerId][Banner::FORM_GENERAL][Banner::TYPE_ID])) {
+                    $typeId = $data[$bannerId][Banner::FORM_GENERAL][Banner::TYPE_ID];
+                    if ($typeId == Type::TYPE_SLIDER) {
+                        return true;
+                    }
+                }
+            }
+        }
 
         return false;
     }

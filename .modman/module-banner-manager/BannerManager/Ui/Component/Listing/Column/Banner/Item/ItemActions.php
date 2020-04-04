@@ -14,9 +14,13 @@ use Magento\Framework\UrlInterface;
 /**
  * Prepare actions column for customer addresses grid
  */
-class Actions extends Column
+class ItemActions extends Column
 {
-    const BANNER_ITEM_PATH_DELETE = 'banner/item/delete';
+
+    /**
+     * Url path
+     */
+    const URL_PATH_DELETE = 'banner/item/delete';
 
     /**
      * @var UrlInterface
@@ -81,7 +85,7 @@ class Actions extends Column
 
                     $item[$name]['delete'] = [
                         'href' => $this->urlBuilder->getUrl(
-                            self::BANNER_ITEM_PATH_DELETE,
+                            self::URL_PATH_DELETE,
                             ['banner_id' => $item['banner_id'], 'id' => $item['entity_id']]
                         ),
                         'label' => __('Delete'),

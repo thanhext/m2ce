@@ -13,7 +13,6 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use T2N\BannerManager\Model\System\Config\Status;
 
@@ -65,19 +64,20 @@ class Save extends BannerItem
      * Save constructor.
      *
      * @param Context                $context
+     * @param LoggerInterface        $logger
      * @param ItemFactory            $itemFactory
-     * @param Registry               $coreRegistry
      * @param PageFactory            $resultPageFactory
      * @param BannerRepository       $bannerRepository
+     * @param DataObjectHelper       $dataObjectHelper
      * @param DataPersistorInterface $dataPersistor
      * @param BannerItemRepository   $bannerItemRepository
+     * @param ItemInterfaceFactory   $bannerItemDataFactory
      * @param JsonFactory            $resultJsonFactory
      */
     public function __construct(
         Context $context,
         LoggerInterface $logger,
         ItemFactory $itemFactory,
-        Registry $coreRegistry,
         PageFactory $resultPageFactory,
         BannerRepository $bannerRepository,
         DataObjectHelper $dataObjectHelper,
@@ -93,7 +93,7 @@ class Save extends BannerItem
         $this->resultJsonFactory     = $resultJsonFactory;
         $this->bannerItemRepository  = $bannerItemRepository;
         $this->bannerItemDataFactory = $bannerItemDataFactory;
-        parent::__construct($context, $itemFactory, $coreRegistry, $resultPageFactory);
+        parent::__construct($context, $itemFactory, $dataPersistor, $resultPageFactory);
     }
 
     /**
@@ -101,11 +101,11 @@ class Save extends BannerItem
      */
     public function execute(): Json
     {
-        $error          = false;
-        $data = $this->getRequest()->getPostValue();
-        $bannerId       = $this->getRequest()->getParam('banner_id', false);
-        $bannerItemId   = $this->getRequest()->getParam('entity_id', false);
-        $message        = __('We can\'t change banner item right now.');
+        $error        = false;
+        $data         = $this->getRequest()->getPostValue();
+        $bannerId     = (int)$this->getRequest()->getParam('banner_id',0);
+        $bannerItemId = (int)$this->getRequest()->getParam('entity_id',0);
+        $message      = __('We can\'t change banner item right now.');
         if ($data && $bannerId) {
             $data['banner_id'] = $bannerId;
             if (isset($data['is_active']) && $data['is_active'] === 'true') {
@@ -138,7 +138,7 @@ class Save extends BannerItem
             } catch (LocalizedException $e) {
                 $error   = true;
                 $message = __($e->getMessage());
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $error   = true;
                 $message = __('We can\'t change banner item right now.');
             }
