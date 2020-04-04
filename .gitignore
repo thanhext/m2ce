@@ -99,5 +99,6 @@ atlassian*
 /grunt-config.json.sample
 /db_default.sql
 /pestle.phar
-
+/DATA
+db_m2ce.sql
 
