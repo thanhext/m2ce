@@ -9,6 +9,9 @@ use Magento\Backend\Model\View\Result\Page;
  */
 class Edit extends Banner
 {
+    /**
+     * @return Page|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         $id    = $this->getRequest()->getParam('id');
@@ -21,13 +24,8 @@ class Edit extends Banner
                 return;
             }
         }
-        // Restore previously entered form data from session
-        $data = $this->_session->getBannerData(true);
-        if (!empty($data)) {
-            $model->setData($data);
-        }
-        $this->_coreRegistry->register('banner', $model);
 
+        $this->dataPersistor->set('banner_entity', $model->getData());
         /** @var Page $resultPage */
         $resultPage = $this->_resultPageFactory->create();
         $resultPage->setActiveMenu(self::ADMIN_RESOURCE);

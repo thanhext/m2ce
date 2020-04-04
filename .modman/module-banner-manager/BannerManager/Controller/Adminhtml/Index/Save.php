@@ -29,17 +29,24 @@ class Save extends Banner
      */
     protected $bannerRepository;
 
+    /**
+     * Save constructor.
+     *
+     * @param Context                $context
+     * @param BannerFactory          $bannerFactory
+     * @param BannerRepository       $bannerRepository
+     * @param DataPersistorInterface $dataPersistor
+     * @param PageFactory            $resultPageFactory
+     */
     public function __construct(
         Context $context,
         BannerFactory $bannerFactory,
-        Registry $coreRegistry,
-        PageFactory $resultPageFactory,
+        BannerRepository $bannerRepository,
         DataPersistorInterface $dataPersistor,
-        BannerRepository $bannerRepository
+        PageFactory $resultPageFactory
     ) {
-        $this->dataPersistor     = $dataPersistor;
         $this->bannerRepository = $bannerRepository;
-        parent::__construct($context, $bannerFactory, $coreRegistry, $resultPageFactory);
+        parent::__construct($context, $bannerFactory, $dataPersistor, $resultPageFactory);
     }
 
     /**
@@ -50,8 +57,8 @@ class Save extends Banner
      */
     public function execute()
     {
-        $data = $this->getRequest()->getPostValue();
-        $banner = $this->getRequest()->getParam('banner');
+        $data          = $this->getRequest()->getPostValue();
+        $banner        = $this->getRequest()->getParam('banner');
         $bannerOptions = $this->getRequest()->getParam('options');
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();

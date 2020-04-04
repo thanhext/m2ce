@@ -4,6 +4,7 @@ namespace T2N\BannerManager\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 use T2N\BannerManager\Model\BannerFactory;
@@ -12,13 +13,13 @@ abstract class Banner extends Action
 {
     const ADMIN_RESOURCE = 'Ecommage_BannerManager::banner';
     /**
+     * @var DataPersistorInterface
+     */
+    protected $dataPersistor;
+    /**
      * @var BannerFactory
      */
     protected $_bannerFactory;
-    /**
-     * @var Registry
-     */
-    protected $_coreRegistry;
     /**
      * @var PageFactory
      */
@@ -27,20 +28,19 @@ abstract class Banner extends Action
     /**
      * Banner constructor.
      *
-     * @param Context        $context
-     * @param BannerFactory $bannerFactory
-     * @param Registry       $coreRegistry
-     * @param PageFactory    $resultPageFactory
+     * @param Context                $context
+     * @param BannerFactory          $bannerFactory
+     * @param DataPersistorInterface $dataPersistor
+     * @param PageFactory            $resultPageFactory
      */
     public function __construct(
         Context $context,
         BannerFactory $bannerFactory,
-        Registry $coreRegistry,
+        DataPersistorInterface $dataPersistor,
         PageFactory $resultPageFactory
     ) {
-
-        $this->_bannerFactory    = $bannerFactory;
-        $this->_coreRegistry      = $coreRegistry;
+        $this->dataPersistor      = $dataPersistor;
+        $this->_bannerFactory     = $bannerFactory;
         $this->_resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }
