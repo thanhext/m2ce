@@ -30,6 +30,12 @@ interface BannerInterface
      */
     public function getId();
 
+    /**
+     * Get ID
+     *
+     * @return int|null
+     */
+    public function getBannerId();
 
     /**
      * Get Type ID
@@ -95,6 +101,15 @@ interface BannerInterface
      * @return BannerInterface
      */
     public function setId($id);
+
+    /**
+     * Set ID
+     *
+     * @param int $id
+     *
+     * @return BannerInterface
+     */
+    public function setBannerId($id);
 
     /**
      * Set Type ID

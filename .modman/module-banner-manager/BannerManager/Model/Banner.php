@@ -29,7 +29,7 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     /**
      * @var string
      */
-    protected $_idFieldName = 'entity_id';
+    protected $_idFieldName = self::BANNER_ID;
 
     /**
      * Init
@@ -100,6 +100,16 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     public function getIdentities()
     {
         return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG . '_' . $this->getIdentifier()];
+    }
+
+    /**
+     * Retrieve banner id
+     *
+     * @return int
+     */
+    public function getBannerId()
+    {
+        return $this->getData(self::BANNER_ID);
     }
 
     /**
@@ -206,6 +216,18 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
     public function isActive()
     {
         return (bool)$this->getData(self::IS_ACTIVE);
+    }
+
+    /**
+     * Set Banner ID
+     *
+     * @param int $id
+     *
+     * @return BannerInterface
+     */
+    public function setBannerId($id)
+    {
+        return $this->setData(self::BANNER_ID, $id);
     }
 
     /**
