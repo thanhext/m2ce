@@ -10,6 +10,60 @@
         <t2n>
             <banner>
                 <image_path>benefit/icon</image_path>
+                <options>
+                    <items>3</items>
+                    <margin>0</margin>
+                    <loop>false</loop>
+                    <center>false</center>
+                    <mouseDrag>true</mouseDrag>
+                    <touchDrag>true</touchDrag>
+                    <pullDrag>true</pullDrag>
+                    <freeDrag>false</freeDrag>
+                    <stagePadding>0</stagePadding>
+                    <merge>false</merge>
+                    <merge>false</merge>
+                    <mergeFit>true</mergeFit>
+                    <autoWidth>false</autoWidth>
+                    <startPosition>0</startPosition>
+                    <URLhashListener>false</URLhashListener>
+                    <nav>false</nav>
+                    <rewind>true</rewind>
+                    <navText><![CDATA[[&#x27;next&#x27;,&#x27;prev&#x27;]]]></navText>
+                    <navElement>div</navElement>
+                    <slideBy>1</slideBy>
+                    <slideTransition><![CDATA[``]]></slideTransition>
+                    <dots>true</dots>
+                    <dotsEach>false</dotsEach>
+                    <dotsData>false</dotsData>
+                    <lazyLoad>false</lazyLoad>
+                    <lazyLoadEager>0</lazyLoadEager>
+                    <autoplay>false</autoplay>
+                    <autoplayTimeout>5000</autoplayTimeout>
+                    <autoplayHoverPause>false</autoplayHoverPause>
+                    <smartSpeed>250</smartSpeed>
+                    <fluidSpeed>false</fluidSpeed>
+                    <autoplaySpeed>false</autoplaySpeed>
+                    <navSpeed>false</navSpeed>
+                    <dotsSpeed>false</dotsSpeed>
+                    <dragEndSpeed>false</dragEndSpeed>
+                    <callbacks>true</callbacks>
+                    <responsive><![CDATA[{}}]]></responsive>
+                    <responsiveRefreshRate>200</responsiveRefreshRate>
+                    <responsiveBaseElement>window</responsiveBaseElement>
+                    <video>false</video>
+                    <videoHeight>false</videoHeight>
+                    <videoWidth>false</videoWidth>
+                    <animateOut>false</animateOut>
+                    <animateIn>false</animateIn>
+                    <fallbackEasing>swing</fallbackEasing>
+                    <info>false</info>
+                    <nestedItemSelector>false</nestedItemSelector>
+                    <itemElement>div</itemElement>
+                    <stageElement>div</stageElement>
+                    <navContainer>false</navContainer>
+                    <dotsContainer>false</dotsContainer>
+                    <checkVisible>true</checkVisible>
+                </options>
             </banner>
         </t2n>
     </default>

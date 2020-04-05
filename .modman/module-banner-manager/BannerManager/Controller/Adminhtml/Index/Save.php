@@ -13,6 +13,7 @@ use Magento\Framework\Exception\LocalizedException;
 use T2N\BannerManager\Api\Data\BannerInterface as BN;
 use Magento\Framework\View\Result\PageFactory;
 use T2N\BannerManager\Model\System\Config\Status;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  * Class Save
@@ -20,10 +21,13 @@ use T2N\BannerManager\Model\System\Config\Status;
 class Save extends Banner
 {
     /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
+    /**
      * @var DataPersistorInterface
      */
     protected $dataPersistor;
-
     /**
      * @var BannerRepository
      */
@@ -43,8 +47,10 @@ class Save extends Banner
         BannerFactory $bannerFactory,
         BannerRepository $bannerRepository,
         DataPersistorInterface $dataPersistor,
+        ScopeConfigInterface $scopeConfig,
         PageFactory $resultPageFactory
     ) {
+        $this->scopeConfig      = $scopeConfig;
         $this->bannerRepository = $bannerRepository;
         parent::__construct($context, $bannerFactory, $dataPersistor, $resultPageFactory);
     }
@@ -57,13 +63,13 @@ class Save extends Banner
      */
     public function execute()
     {
-        $data          = $this->getRequest()->getPostValue();
+        //$data          = $this->getRequest()->getPostValue();
         $banner        = $this->getRequest()->getParam(BN::FORM_GENERAL);
         $bannerOptions = $this->getRequest()->getParam(BN::FORM_OPTIONS);
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($banner) {
-            $banner['options'] = $bannerOptions;
+            $banner['options'] = $this->prepareOptions();
             if (isset($banner[BN::IS_ACTIVE]) && $banner[BN::IS_ACTIVE] === 'true') {
                 $banner[BN::IS_ACTIVE] = Status::STATUS_ENABLED;
             }
@@ -98,5 +104,22 @@ class Save extends Banner
             return $resultRedirect->setPath('*/*/edit', [BN::BANNER_ID => $id]);
         }
         return $resultRedirect->setPath('*/*/');
+    }
+
+    /**
+     * @return array
+     */
+    protected function prepareOptions()
+    {
+        $options        = [];
+        $bannerOptions  = $this->getRequest()->getParam(BN::FORM_OPTIONS);
+        $defaultOptions = $this->scopeConfig->getValue('t2n/banner/options');
+        foreach ($bannerOptions as $optionKey => $optionValue) {
+            if (isset($defaultOptions[$optionKey]) && $defaultOptions[$optionKey] != $optionValue) {
+                $options[$optionKey] = $optionValue;
+            }
+        }
+
+        return $options;
     }
 }

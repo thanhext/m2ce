@@ -1,0 +1,52 @@
+<?php
+/** @var \T2N\BannerManager\Model\Banner\Item $item */
+/** @var \T2N\BannerManager\Block\Banner $block */
+/** @var \T2N\BannerManager\Model\Banner $banner */
+$banner = $block->getBanner();
+if ($banner && $banner->getId()):
+    $items = $block->getBannerItems();
+    $options = $banner->getOptions();
+    var_dump($options); die;
+    ?>
+    <div class="owl-carousel owl-theme owl-loaded">
+        <div class="owl-stage-outer">
+            <div class="owl-stage">
+                <?php foreach ($items as $i => $item): ?>
+                <div class="owl-item <?= /* @noEscape */ $item->getClassItem(); ?>">
+                    <?php if ($item->getLink()): ?>
+                        <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                    <?php endif; ?>
+                            <img class="owl-lazy" src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>">
+                            <?php if ($item->getAction() || $item->getDescription()): ?>
+                                <span class="content <?= /* @noEscape */ $item->getClassContent(); ?>">
+                                    <?php if ($item->getDescription()): ?>
+                                        <span class="info"><?= /* @noEscape */ $item->getDescription(); ?></span>
+                                    <?php endif; ?>
+                                    <?php if ($item->getAction()): ?>
+                                        <span class="action more <?= /* @noEscape */ $item->getClassAction(); ?>"><?= /* @noEscape */ $item->getAction(); ?></span>
+                                    <?php endif; ?>
+                                </span>
+                            <?php endif; ?>
+                    <?php if ($item->getLink()): ?>
+                        </a>
+                <?php endif; ?>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="owl-nav">
+            <div class="owl-prev"><?= /* @noEscape */ __('Prev'); ?></div>
+            <div class="owl-next"><?= /* @noEscape */ __('Next'); ?></div>
+        </div>
+        <div class="owl-dots">
+            <div class="owl-dot active"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+            <div class="owl-dot"><span></span></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require(['jquery', 'owlcarousel'], function($) {
+            $('.home-slider').owlCarousel(<?= $block->escapeJs($banner->jsonEncode($options)); ?>);
+        });
+    </script>
+<?php endif; ?>

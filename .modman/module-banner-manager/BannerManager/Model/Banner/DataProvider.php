@@ -4,6 +4,7 @@ namespace T2N\BannerManager\Model\Banner;
 
 use T2N\BannerManager\Model\ResourceModel\Banner\CollectionFactory;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use T2N\BannerManager\Model\Banner;
 
 /**
@@ -11,14 +12,18 @@ use T2N\BannerManager\Model\Banner;
  */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
-
+    /**
+     * @var
+     */
     protected $collection;
-
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
     /**
      * @var DataPersistorInterface
      */
     protected $dataPersistor;
-
     /**
      * @var array
      */
@@ -39,11 +44,13 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $requestFieldName,
         CollectionFactory $collectionFactory,
         DataPersistorInterface $dataPersistor,
+        ScopeConfigInterface $scopeConfig,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection    = $collectionFactory->create();
+        $this->scopeConfig   = $scopeConfig;
         $this->dataPersistor = $dataPersistor;
+        $this->collection    = $collectionFactory->create();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -54,6 +61,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      */
     public function getData(): array
     {
+
         if (!empty($this->loadedData)) {
             return $this->loadedData;
         }
@@ -75,6 +83,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     /**
      *  Prepares Data
+     *
      * @param $data
      *
      * @return array
@@ -87,8 +96,21 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $bannerData->setData($data);
         }
 
+        $options = $bannerData->getOptions();
+        if (empty($options)) {
+            $options = $this->getDefaultOptions();
+        }
+
         $result[Banner::FORM_GENERAL] = $bannerData->getData();
-        $result[Banner::FORM_OPTIONS] = $bannerData->getOptions();
+        $result[Banner::FORM_OPTIONS] = $options;
         return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getDefaultOptions()
+    {
+        return $this->scopeConfig->getValue('t2n/banner/options');
     }
 }
