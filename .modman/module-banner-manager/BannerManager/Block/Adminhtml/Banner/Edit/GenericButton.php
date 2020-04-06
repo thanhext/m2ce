@@ -3,6 +3,7 @@
 namespace T2N\BannerManager\Block\Adminhtml\Banner\Edit;
 
 use Magento\Backend\Block\Widget\Context;
+use T2N\BannerManager\Model\Banner;
 
 /**
  * Class GenericButton
@@ -49,7 +50,7 @@ class GenericButton
      */
     public function getDeleteUrl()
     {
-        return $this->getUrl('*/*/delete', ['id' => $this->getId()]);
+        return $this->getUrl('*/*/delete', [Banner::BANNER_ID => $this->getId()]);
     }
 
     /**
@@ -57,6 +58,6 @@ class GenericButton
      */
     public function getId()
     {
-        return $this->context->getRequest()->getParam('id');
+        return $this->context->getRequest()->getParam(Banner::BANNER_ID);
     }
 }

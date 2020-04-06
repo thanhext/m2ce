@@ -114,9 +114,11 @@ class Save extends Banner
         $options        = [];
         $bannerOptions  = $this->getRequest()->getParam(BN::FORM_OPTIONS);
         $defaultOptions = $this->scopeConfig->getValue('t2n/banner/options');
-        foreach ($bannerOptions as $optionKey => $optionValue) {
-            if (isset($defaultOptions[$optionKey]) && $defaultOptions[$optionKey] != $optionValue) {
-                $options[$optionKey] = $optionValue;
+        if (is_array($bannerOptions) && !empty($bannerOptions)) {
+            foreach ($bannerOptions as $optionKey => $optionValue) {
+                if (isset($defaultOptions[$optionKey]) && $defaultOptions[$optionKey] != $optionValue) {
+                    $options[$optionKey] = $optionValue;
+                }
             }
         }
 

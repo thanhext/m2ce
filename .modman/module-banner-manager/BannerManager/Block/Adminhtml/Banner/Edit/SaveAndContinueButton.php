@@ -11,6 +11,10 @@ class SaveAndContinueButton extends GenericButton implements ButtonProviderInter
 {
     public function getButtonData()
     {
+        if ($this->getId()) {
+            return [];
+        }
+        
         return [
             'label'          => __('Save and add banner item'),
             'class'          => 'save',
