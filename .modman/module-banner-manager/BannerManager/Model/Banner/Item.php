@@ -95,22 +95,9 @@ class Item extends AbstractModel implements ItemInterface, IdentityInterface
         $image = $this->getData($attributeCode);
         if ($image) {
             if (is_string($image)) {
-                $store = $this->_storeManager->getStore();
-
-                $isRelativeUrl = substr($image, 0, 1) === '/';
-
-                $mediaBaseUrl = $store->getBaseUrl(
-                    UrlInterface::URL_TYPE_MEDIA
-                );
-
-                if ($isRelativeUrl) {
-                    $url = $image;
-                } else {
-                    $url = $mediaBaseUrl
-                           . ltrim(FileInfo::ENTITY_MEDIA_PATH, '/')
-                           . '/'
-                           . $image;
-                }
+                $store        = $this->_storeManager->getStore();
+                $mediaBaseUrl = $store->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
+                $url          = $mediaBaseUrl . $image;
             } else {
                 throw new LocalizedException(
                     __('Something went wrong while getting the image url.')

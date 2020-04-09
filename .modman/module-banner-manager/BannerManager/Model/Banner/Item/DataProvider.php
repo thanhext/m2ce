@@ -136,6 +136,7 @@ class DataProvider extends AbstractDataProvider
             $result[0]['size'] = isset($stat) ? $stat['size'] : 0;
             $result[0]['type'] = $mime;
         }
+
         $item->setData($attributeCode, $result);
         return $result;
     }

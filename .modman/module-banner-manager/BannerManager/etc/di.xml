@@ -78,7 +78,7 @@
 
     <virtualType name="T2N\BannerManager\BannerImageUpload" type="T2N\BannerManager\Model\ImageUploader">
         <arguments>
-            <argument name="baseTmpPath" xsi:type="string">banner/tmp/item</argument>
+            <argument name="baseTmpPath" xsi:type="string">tmp/banner/item</argument>
             <argument name="basePath" xsi:type="string">banner/item</argument>
             <argument name="allowedExtensions" xsi:type="array">
                 <item name="jpg" xsi:type="string">jpg</item>

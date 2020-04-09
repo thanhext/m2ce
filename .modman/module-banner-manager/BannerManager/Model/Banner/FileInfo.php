@@ -147,7 +147,6 @@ class FileInfo
     public function isExist($fileName)
     {
         $filePath = $this->getFilePath($fileName);
-
         $result = $this->getMediaDirectory()->isExist($filePath);
         return $result;
     }
@@ -168,10 +167,7 @@ class FileInfo
 
         // if the file is not using a relative path, it resides in the catalog/category media directory
         $fileIsInCategoryMediaDir = !$isFileNameBeginsWithMediaDirectoryPath;
-
-        if ($fileIsInCategoryMediaDir) {
-            $filePath = self::ENTITY_MEDIA_PATH . '/' . $filePath;
-        } else {
+        if (!$fileIsInCategoryMediaDir) {
             $filePath = substr($filePath, strlen($mediaDirectoryRelativeSubpath));
         }
 

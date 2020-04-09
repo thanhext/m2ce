@@ -117,7 +117,7 @@ class Save extends BannerItem
             }
 
             if (!empty($data['image'])) {
-                $data['image'] = $this->moveFileFromTmp($data['image']);
+                $this->moveFileFromTmp($data);
             }
 
             /** @var \T2N\BannerManager\Model\Banner\Item $model */
@@ -163,19 +163,29 @@ class Save extends BannerItem
      *
      * @return mixed
      */
-    protected function moveFileFromTmp($image)
+    protected function moveFileFromTmp(&$data)
     {
-        if (isset($image[0]['name']) && isset($image[0]['tmp_name'])) {
-            $image = $image[0]['name'];
+        if (!isset($data['image'][0])) {
+            return $data;
+        }
+
+        $image = $data['image'][0];
+        if (isset($image['name']) && isset($image['tmp_name'])) {
             /** @var \T2N\BannerManager\Model\ImageUploader imageUploader */
             $this->imageUploader = $this->_objectManager->get(
                 'T2N\BannerManager\BannerImageUpload'
             );
-            $this->imageUploader->moveFileFromTmp($image);
-        } elseif (isset($image[0]['name']) && !isset($image[0]['tmp_name'])) {
-            $image = $image[0]['name'];
+            $basePath = $this->imageUploader->getBasePath();
+            $data['image'] = $basePath . DIRECTORY_SEPARATOR . $image['name'];
+            $data['media_type'] = $image['type'];
+            $this->imageUploader->moveFileFromTmp($data['image']);
+        } elseif (isset($image['name']) && !isset($image['tmp_name'])) {
+            $p = strpos($image['url'], 'pub/media');
+            $data['media_type'] = $image['type'];
+            if ($p != -1) {
+                $data['image'] = substr($image['url'], $p + 10);
+            }
         }
-
-        return $image;
+        return $data;
     }
 }
