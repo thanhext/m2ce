@@ -176,9 +176,9 @@ class Save extends BannerItem
                 'T2N\BannerManager\BannerImageUpload'
             );
             $basePath            = $this->imageUploader->getBasePath();
+            $this->imageUploader->moveFileFromTmp($image['name']);
             $data['image']       = $basePath . DIRECTORY_SEPARATOR . $image['name'];
             $data['media_type']  = $image['type'];
-            $this->imageUploader->moveFileFromTmp($data['image']);
         } elseif (isset($image['name']) && !isset($image['tmp_name'])) {
             $p                  = strpos($image['url'], 'pub/media');
             $data['media_type'] = $image['type'];
@@ -186,7 +186,7 @@ class Save extends BannerItem
                 $data['image'] = substr($image['url'], $p + 10);
             }
         }
-
+        
         return $data;
     }
 }
