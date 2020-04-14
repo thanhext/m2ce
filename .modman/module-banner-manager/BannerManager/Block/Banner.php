@@ -24,20 +24,25 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
      */
     protected $_bannerFactory;
     /**
+     * @var \Magento\Framework\DataObjectFactory
+     */
+    protected $objectFactory;
+    /**
      * @var string
      */
-    protected $_template = 'T2N_BannerManager::banner.phtml';
+    protected $_template = 'T2N_BannerManager::slider.phtml';
 
     /**
-     * Construct
+     * Banner constructor.
      *
-     * @param \Magento\Framework\View\Element\Context    $context
-     * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-     * @param \T2N\BannerManager\Model\BannerFactory     $bannerFactory
-     * @param array                                      $data
+     * @param \Magento\Framework\DataObjectFactory        $objectFactory
+     * @param \T2N\BannerManager\Model\BannerFactory      $bannerFactory
+     * @param Template\Context                            $context
+     * @param \T2N\BannerManager\Model\Banner\ItemFactory $bannerItemFactory
+     * @param array                                       $data
      */
     public function __construct(
+        \Magento\Framework\DataObjectFactory $objectFactory,
         \T2N\BannerManager\Model\BannerFactory $bannerFactory,
         \Magento\Framework\View\Element\Template\Context $context,
         \T2N\BannerManager\Model\Banner\ItemFactory $bannerItemFactory,
@@ -45,6 +50,7 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
     ) {
         $this->_bannerItemFactory = $bannerItemFactory;
         $this->_bannerFactory     = $bannerFactory;
+        $this->objectFactory      = $objectFactory;
         parent::__construct($context, $data);
     }
 
@@ -104,6 +110,37 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
     }
 
     /**
+     * @return \Magento\Framework\DataObject
+     */
+    public function getBannerOptions()
+    {
+        $banner = $this->getBanner();
+        $obj    = $this->objectFactory->create();
+        if ($banner && $banner->getOptions()) {
+            $obj->setData($banner->getOptions());
+            return $obj;
+        }
+
+        return $obj;
+    }
+
+    /**
+     * @return string|null
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getBannerConfigOptions()
+    {
+        $banner = $this->getBanner();
+        if ($banner && $banner->getOptions()) {
+            $options = $banner->getOptions();
+            $json    = $banner->jsonEncode($options);
+            return str_replace('"', '', $json);
+        }
+
+        return null;
+    }
+
+    /**
      * @param $data
      *
      * @return Item
@@ -145,7 +182,7 @@ class Banner extends Template implements \Magento\Framework\DataObject\IdentityI
         $items = $this->getBannerItems();
         /** @var Item $item */
         foreach ($items as $item) {
-            $identities = array_merge($identities,$item->getIdentities());
+            $identities = array_merge($identities, $item->getIdentities());
         }
 
         return $identities;

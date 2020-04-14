@@ -1,0 +1,41 @@
+<?php
+/** @var \T2N\BannerManager\Model\Banner\Item $item */
+/** @var \T2N\BannerManager\Block\Banner $block */
+/** @var \T2N\BannerManager\Model\Banner $banner */
+$banner = $block->getBanner();
+if ($banner && $banner->getId()):
+$items = $block->getBannerItems();
+$options = $block->getBannerOptions();
+?>
+    <div class="owl-carousel home-slider" id="slider-<?= $block->escapeHtml($banner->getIdentifier())?>">
+         <?php foreach ($items as $i => $item): ?>
+            <div class="item <?= /* @noEscape */ $item->getClassItem(); ?>">
+                <?php if ($item->getLink()): ?>
+                    <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="<?= /* @noEscape */ $item->getClassItem(); ?>">
+                <?php endif; ?>
+
+                        <img src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>" width="100%">
+
+                        <?php if ($item->getAction() || $item->getDescription()): ?>
+                            <span class="content <?= /* @noEscape */ $item->getClassContent(); ?>">
+                                    <?php if ($item->getDescription()): ?>
+                                        <span class="info"><?= /* @noEscape */ $item->getDescription(); ?></span>
+                                    <?php endif; ?>
+                                <?php if ($item->getAction()): ?>
+                                    <span class="action more <?= /* @noEscape */ $item->getClassAction(); ?>"><?= /* @noEscape */ $item->getAction(); ?></span>
+                                <?php endif; ?>
+                                </span>
+                        <?php endif; ?>
+
+                <?php if ($item->getLink()): ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+         <?php endforeach; ?>
+    </div>
+    <script type="text/javascript">
+        require(['jquery', 'owlcarousel'], function($) {
+            $('#slider-<?= $block->escapeHtml($banner->getIdentifier())?>').owlCarousel(<?= $block->getBannerConfigOptions() ?>);
+        });
+    </script>
+<?php endif; ?>

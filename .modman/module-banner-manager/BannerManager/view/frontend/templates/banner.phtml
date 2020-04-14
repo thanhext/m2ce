@@ -5,16 +5,15 @@
 $banner = $block->getBanner();
 if ($banner && $banner->getId()):
     $items = $block->getBannerItems();
-    $options = $banner->getOptions();
-    var_dump($options); die;
+    $options = $block->getBannerOptions();
     ?>
-    <div class="owl-carousel owl-theme owl-loaded">
-        <div class="owl-stage-outer">
-            <div class="owl-stage">
+<!--    <div  class="owl-carousel owl-theme owl-loaded">-->
+<!--        <div class="owl-stage-outer">-->
+            <div class="owl-carousel" id="banner-<?= $block->escapeHtml($banner->getIdentifier())?>">
                 <?php foreach ($items as $i => $item): ?>
                 <div class="owl-item <?= /* @noEscape */ $item->getClassItem(); ?>">
                     <?php if ($item->getLink()): ?>
-                        <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="block-promo <?= /* @noEscape */ $item->getClassItem(); ?>">
+                        <a href="<?= $block->escapeUrl($block->getLink($item->getLink())); ?>" class="<?= /* @noEscape */ $item->getClassItem(); ?>">
                     <?php endif; ?>
                             <img class="owl-lazy" src="<?= /* @noEscape */ $block->getImageUrl($item); ?>" alt="<?= /* @noEscape */ $item->getTitle() ?>">
                             <?php if ($item->getAction() || $item->getDescription()): ?>
@@ -33,20 +32,31 @@ if ($banner && $banner->getId()):
                 </div>
                 <?php endforeach; ?>
             </div>
-        </div>
+<!--        </div>-->
+        <?php if ($options->getNav() === 'true'): ?>
         <div class="owl-nav">
             <div class="owl-prev"><?= /* @noEscape */ __('Prev'); ?></div>
             <div class="owl-next"><?= /* @noEscape */ __('Next'); ?></div>
         </div>
+        <?php endif; ?>
+        <?php if ($options->getDots() !== 'false'): ?>
         <div class="owl-dots">
             <div class="owl-dot active"><span></span></div>
             <div class="owl-dot"><span></span></div>
             <div class="owl-dot"><span></span></div>
         </div>
-    </div>
+        <?php endif; ?>
+<!--    </div>-->
     <script type="text/javascript">
         require(['jquery', 'owlcarousel'], function($) {
-            $('.home-slider').owlCarousel(<?= $block->escapeJs($banner->jsonEncode($options)); ?>);
+            $('#banner-<?= $block->escapeHtml($banner->getIdentifier())?>').owlCarousel({
+                items:4,
+                loop:true,
+                margin:10,
+                autoplay:true,
+                autoplayTimeout:1000,
+                autoplayHoverPause:true
+            });
         });
     </script>
 <?php endif; ?>

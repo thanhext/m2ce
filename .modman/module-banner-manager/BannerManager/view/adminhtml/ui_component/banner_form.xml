@@ -158,31 +158,7 @@
         <settings>
             <label translate="true">Slider Options</label>
         </settings>
-        <field name="autoplay" sortOrder="10" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner</item>
-                    <item name="default" xsi:type="string">true</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Autoplay</label>
-                <dataScope>autoplay</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="string">false</map>
-                            <map name="true" xsi:type="string">true</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
-        <field name="nav" sortOrder="30" formElement="checkbox">
+        <field name="nav" sortOrder="10" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">banner</item>
@@ -206,103 +182,7 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="dots" sortOrder="40" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner</item>
-                    <item name="default" xsi:type="string">false</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Paging navigation</label>
-                <dataScope>dots</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="string">false</map>
-                            <map name="true" xsi:type="string">true</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
-        <field name="control_nav_thumbs" sortOrder="50" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner</item>
-                    <item name="default" xsi:type="string">false</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Show Thumbnails</label>
-                <dataScope>control_nav_thumbs</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="string">false</map>
-                            <map name="true" xsi:type="string">true</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
-        <field name="lazy_load" sortOrder="60" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner</item>
-                    <item name="default" xsi:type="string">true</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Lazy Load</label>
-                <dataScope>lazy_load</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="string">false</map>
-                            <map name="true" xsi:type="string">true</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
-        <field name="autoplay_hover_pause" sortOrder="70" formElement="checkbox">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">banner</item>
-                    <item name="default" xsi:type="string">true</item>
-                </item>
-            </argument>
-            <settings>
-                <dataType>boolean</dataType>
-                <label translate="true">Pause on mouse over</label>
-                <dataScope>autoplay_hover_pause</dataScope>
-            </settings>
-            <formElements>
-                <checkbox>
-                    <settings>
-                        <valueMap>
-                            <map name="false" xsi:type="string">false</map>
-                            <map name="true" xsi:type="string">true</map>
-                        </valueMap>
-                        <prefer>toggle</prefer>
-                    </settings>
-                </checkbox>
-            </formElements>
-        </field>
-        <field name="loop" sortOrder="75" formElement="checkbox">
+        <field name="loop" sortOrder="20" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">banner</item>
@@ -327,49 +207,128 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="autoplay_speed" sortOrder="80" formElement="input">
+        <field name="dots" sortOrder="30" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="default" xsi:type="string">false</item>
+                </item>
+            </argument>
             <settings>
-                <validation>
-                    <rule name="validate-number" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <addAfter>ms</addAfter>
-                <label translate="true">Autoplay Speed</label>
-                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
-                <dataScope>autoplay_speed</dataScope>
-            </settings>
-        </field>
-        <field name="animate_in" sortOrder="120" formElement="select">
-            <settings>
-                <dataType>text</dataType>
-                <label translate="true">Animate In</label>
-                <notice translate="true">The CSS3 animation type applied when the background animates into view.</notice>
-                <dataScope>animate_in</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Paging navigation</label>
+                <dataScope>dots</dataScope>
             </settings>
             <formElements>
-                <select>
+                <checkbox>
                     <settings>
-                        <options class="T2N\BannerManager\Model\System\Config\Effects"/>
+                        <valueMap>
+                            <map name="false" xsi:type="string">false</map>
+                            <map name="true" xsi:type="string">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
                     </settings>
-                </select>
+                </checkbox>
             </formElements>
         </field>
-        <field name="animate_out" sortOrder="130" formElement="select">
+        <field name="center" sortOrder="40" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="default" xsi:type="string">false</item>
+                </item>
+            </argument>
             <settings>
-                <dataType>text</dataType>
-                <label translate="true">Animate Out</label>
-                <notice translate="true">The CSS3 animation type applied when the background animates out of view.</notice>
-                <dataScope>animate_out</dataScope>
+                <dataType>boolean</dataType>
+                <label translate="true">Center</label>
+                <dataScope>center</dataScope>
             </settings>
             <formElements>
-                <select>
+                <checkbox>
                     <settings>
-                        <options class="T2N\BannerManager\Model\System\Config\Effects"/>
+                        <valueMap>
+                            <map name="false" xsi:type="string">false</map>
+                            <map name="true" xsi:type="string">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
                     </settings>
-                </select>
+                </checkbox>
             </formElements>
         </field>
-        <field name="start_position" sortOrder="140" formElement="input">
+        <field name="autoplay" sortOrder="50" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="default" xsi:type="string">true</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Autoplay</label>
+                <dataScope>autoplay</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">false</map>
+                            <map name="true" xsi:type="string">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="mouseDrag" sortOrder="60" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="default" xsi:type="string">true</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Mouse Drag</label>
+                <dataScope>mouseDrag</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">false</map>
+                            <map name="true" xsi:type="string">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="autoplayHoverPause" sortOrder="70" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="default" xsi:type="string">true</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Pause on mouse over</label>
+                <dataScope>autoplayHoverPause</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="string">false</map>
+                            <map name="true" xsi:type="string">true</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="margin" sortOrder="80" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">banner</item>
@@ -381,58 +340,113 @@
                     <rule name="validate-number" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Start Position</label>
-                <notice translate="true">Start position. For example: value 0 starts first slide, value 1 starts second slide.</notice>
-                <dataScope>start_position</dataScope>
+                <label translate="true">Margin</label>
+                <addAfter>px</addAfter>
+                <dataScope>margin</dataScope>
             </settings>
         </field>
-        <container name="custom_group" component="Magento_Ui/js/form/components/group" sortOrder="220">
+        <field name="slideBy" sortOrder="90" formElement="input">
             <argument name="data" xsi:type="array">
-                <item name="type" xsi:type="string">group</item>
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string" translate="true">Banner Size</item>
-                    <item name="breakLine" xsi:type="boolean">false</item>
-                    <item name="showLabel" xsi:type="boolean">true</item>
-                    <item name="dataScope" xsi:type="boolean">false</item>
+                    <item name="source" xsi:type="string">banner</item>
                 </item>
             </argument>
-            <field name="width" sortOrder="90" formElement="input">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="source" xsi:type="string">banner</item>
-                    </item>
-                </argument>
-                <settings>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">false</rule>
-                        <rule name="validate-number" xsi:type="boolean">true</rule>
-                    </validation>
-                    <dataType>text</dataType>
-                    <label />
-                    <addBefore>Width</addBefore>
-                    <addAfter>px</addAfter>
-                    <dataScope>width</dataScope>
-                </settings>
-            </field>
-            <field name="height" sortOrder="100" formElement="input">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="source" xsi:type="string">banner</item>
-                    </item>
-                </argument>
-                <settings>
-                    <validation>
-                        <rule name="required-entry" xsi:type="boolean">false</rule>
-                        <rule name="validate-number" xsi:type="boolean">true</rule>
-                    </validation>
-                    <dataType>text</dataType>
-                    <label />
-                    <addBefore>Height</addBefore>
-                    <addAfter>px</addAfter>
-                    <dataScope>height</dataScope>
-                </settings>
-            </field>
-        </container>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Slide By</label>
+                <addAfter>px</addAfter>
+                <dataScope>slideBy</dataScope>
+            </settings>
+        </field>
+        <field name="navSpeed" sortOrder="100" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <addAfter>ms</addAfter>
+                <label translate="true">Nav Speed</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
+                <dataScope>navSpeed</dataScope>
+            </settings>
+        </field>
+        <field name="dotsSpeed" sortOrder="110" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <addAfter>ms</addAfter>
+                <label translate="true">Dots Speed</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
+                <dataScope>dotsSpeed</dataScope>
+            </settings>
+        </field>
+        <field name="startPosition" sortOrder="120" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <addAfter>ms</addAfter>
+                <label translate="true">Start Position</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
+                <dataScope>startPosition</dataScope>
+            </settings>
+        </field>
+        <field name="autoplaySpeed" sortOrder="130" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <addAfter>ms</addAfter>
+                <label translate="true">Auto Play Speed</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
+                <dataScope>autoplaySpeed</dataScope>
+            </settings>
+        </field>
+        <field name="autoplayTimeout" sortOrder="140" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <addAfter>ms</addAfter>
+                <label translate="true">Autoplay Timeout</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
+                <dataScope>autoplayTimeout</dataScope>
+            </settings>
+        </field>
+        <field name="responsiveRefreshRate" sortOrder="150" formElement="input">
+            <settings>
+                <validation>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <addAfter>ms</addAfter>
+                <label translate="true">Responsive Refresh Rate</label>
+                <notice translate="true">Autoplay speed is in milliseconds. 1000 ms = 1 second.</notice>
+                <dataScope>responsiveRefreshRate</dataScope>
+            </settings>
+        </field>
+        <field name="responsive" sortOrder="240" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">banner</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Responsive</label>
+                <dataScope>responsive</dataScope>
+            </settings>
+        </field>
+
     </fieldset>
     <fieldset name="banner_items" class="T2N\BannerManager\Ui\Component\Form\BannerItemsFieldset">
         <settings>

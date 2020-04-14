@@ -98,7 +98,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
         $options = $bannerData->getOptions();
         if (empty($options)) {
-            $options = $this->getDefaultOptions();
+            $options = [];//$this->getDefaultOptions();
         }
 
         $result[Banner::FORM_GENERAL] = $bannerData->getData();

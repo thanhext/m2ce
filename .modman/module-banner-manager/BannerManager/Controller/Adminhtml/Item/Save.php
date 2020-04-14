@@ -103,8 +103,8 @@ class Save extends BannerItem
     {
         $error        = false;
         $data         = $this->getRequest()->getPostValue();
-        $bannerId     = (int)$this->getRequest()->getParam('banner_id',0);
-        $bannerItemId = (int)$this->getRequest()->getParam('entity_id',0);
+        $bannerId     = (int)$this->getRequest()->getParam('banner_id', 0);
+        $bannerItemId = (int)$this->getRequest()->getParam('entity_id', 0);
         $message      = __('We can\'t change banner item right now.');
         if ($data && $bannerId) {
             $data['banner_id'] = $bannerId;
@@ -175,17 +175,18 @@ class Save extends BannerItem
             $this->imageUploader = $this->_objectManager->get(
                 'T2N\BannerManager\BannerImageUpload'
             );
-            $basePath = $this->imageUploader->getBasePath();
-            $data['image'] = $basePath . DIRECTORY_SEPARATOR . $image['name'];
-            $data['media_type'] = $image['type'];
+            $basePath            = $this->imageUploader->getBasePath();
+            $data['image']       = $basePath . DIRECTORY_SEPARATOR . $image['name'];
+            $data['media_type']  = $image['type'];
             $this->imageUploader->moveFileFromTmp($data['image']);
         } elseif (isset($image['name']) && !isset($image['tmp_name'])) {
-            $p = strpos($image['url'], 'pub/media');
+            $p                  = strpos($image['url'], 'pub/media');
             $data['media_type'] = $image['type'];
             if ($p != -1) {
                 $data['image'] = substr($image['url'], $p + 10);
             }
         }
+
         return $data;
     }
 }

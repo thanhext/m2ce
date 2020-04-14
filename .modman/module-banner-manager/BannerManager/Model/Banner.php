@@ -45,7 +45,7 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      * @return string
      * @throws LocalizedException
      */
-    protected function jsonEncode($data)
+    public function jsonEncode($data)
     {
         if (is_array($data)) {
             $result = json_encode($data);
@@ -63,7 +63,7 @@ class Banner extends AbstractModel implements BannerInterface, IdentityInterface
      *
      * @return array
      */
-    protected function jsonDecode($data)
+    public function jsonDecode($data)
     {
         if (is_array($data)) {
             return $data;
